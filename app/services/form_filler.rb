@@ -16,7 +16,7 @@ class FormFiller
         Capybara::Selenium::Driver.new(
           app,
           browser: :chrome,
-          options: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+          desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
           )
       else
         options = Selenium::WebDriver::Chrome::Options.new
