@@ -16,15 +16,12 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-    # job.company = Company.find(params[:company_id])
     if @job.save
-      redirect_to job_path(job)
+      redirect_to job_path(@job)
+    else
+      @jobs = Job.all
+      render 'jobs/index', status: :unprocessable_entity
     end
-    # if job.save
-    #   redirect_to company_path(job.company)
-    # else
-    #   render :new
-    # end
   end
 
   private
