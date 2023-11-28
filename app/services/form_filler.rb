@@ -8,8 +8,8 @@ class FormFiller
   def initialize
     Capybara.run_server = false
 
-    Capybara.register_driver :selenium do |app|
-      if Rails.env.production?
+    if Rails.env.production?
+      Capybara.register_driver :selenium do |app|
         chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
         p chrome_bin
         chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
@@ -20,7 +20,11 @@ class FormFiller
           browser: :chrome,
           options: Selenium::WebDriver::Options.chrome
           )
-      else
+      end
+      Capybara.javascript_driver = :selenium
+      Capybara.default_driver = :selenium
+    else
+      Capybara.register_driver :selenium do |app|
         options = Selenium::WebDriver::Chrome::Options.new
         # options.add_argument("--headless")
         options.add_argument("--no-sandbox")
@@ -30,21 +34,23 @@ class FormFiller
         options.add_argument("--remote-debugging-port=9225")
         Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
       end
+      Capybara.default_driver = :selenium
+      Capybara.javascript_driver = :selenium
     end
-    Capybara.javascript_driver = :selenium
 
-    Capybara.default_driver = :selenium
   end
 
   def fill_out_form
     puts "Before Page"
-    visit("https://apply.workable.com/benevolentai/j/28334DF927/apply/")
+    # visit("https://apply.workable.com/benevolentai/j/28334DF927/apply/")
+    visit("https://schematiqs.herokuapp.com/users/sign_up")
     # fill_in(‘Username’, with: ‘your_username’)
     puts "After Page"
     puts page.html
-    fill_in('firstname', with: 'Ilya')
-    fill_in('lastname', with: 'Obretetskiy')
-    click_button "Submit application"
+    fill_in('user[email]', with: 'test1@userabdbufdu.com')
+    fill_in('user[password]', with: 'password')
+    fill_in('user[password_confirmation]', with: 'password')
+    click_button "Sign up"
   end
 end
 
