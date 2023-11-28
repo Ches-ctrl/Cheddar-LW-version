@@ -7,16 +7,17 @@ class FormFiller
 
   def initialize
     Capybara.run_server = false
-    Capybara.register_driver :selenium do |app|
-      if Rails.env.production?
 
+    Capybara.register_driver :selenium do |app|
+      if Rails.env.production? || Rails.env.development?
         chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
         p chrome_bin
-        chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+        chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+        p chrome_opts
         Capybara::Selenium::Driver.new(
           app,
           browser: :chrome,
-          desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+          options: Selenium::WebDriver::Options.chrome(chrome_opts)
           )
       else
         options = Selenium::WebDriver::Chrome::Options.new
