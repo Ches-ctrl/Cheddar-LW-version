@@ -17,7 +17,7 @@ class JobsController < ApplicationController
   def create
     @job = Job.new(job_params)
     if @job.save
-      redirect_to job_path(@job)
+      redirect_to job_path(@job), notice: 'Job was successfully added'
     else
       @jobs = Job.all
       render 'jobs/index', status: :unprocessable_entity
