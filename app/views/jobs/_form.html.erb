@@ -1,0 +1,15 @@
+<div data-controller="new-job-form">
+  <button data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
+  <div class="d-none" data-new-job-form-target="form">
+    <%= simple_form_for [@job] do |f| %>
+      <%= f.association :company, collection: Company.all, :label_method => lambda { |company| "#{company.company_name}"}, prompt: "Choose a company" %>
+      <%= f.input :job_title %>
+      <%= f.input :job_description %>
+      <%= f.input :salary %>
+      <%= f.input :job_posting_url %>
+      <%= f.input :application_deadline %>
+      <%= f.input :date_created %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
