@@ -5,3 +5,16 @@
   for
   <%= job.company.company_name %></p>
 <% end %>
+
+
+<h5>Add a Job</h5>
+<%= simple_form_for [@job] do |f| %>
+  <%= f.association :company, collection: Company.all, :label_method => lambda { |company| "#{company.company_name}"}, prompt: "Choose a company" %>
+  <%= f.input :job_title %>
+  <%= f.input :job_description %>
+  <%= f.input :salary %>
+  <%= f.input :job_posting_url %>
+  <%= f.input :application_deadline %>
+  <%= f.input :date_created %>
+  <%= f.button :submit %>
+<% end %>
