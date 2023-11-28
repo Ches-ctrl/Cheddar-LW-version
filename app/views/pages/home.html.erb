@@ -1,2 +1,6 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<p><%= link_to 'Edit your information', edit_user_registration_path(current_user) %></p>
+
+<p><%= link_to 'All jobs', jobs_path %></p>
