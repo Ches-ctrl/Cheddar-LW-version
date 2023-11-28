@@ -56,6 +56,10 @@ gem "sassc-rails"
 gem "ruby-openai"
 gem "faker"
 
+gem "capybara"
+gem "selenium-webdriver", "4.0"
+gem "watir"
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -77,6 +81,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  # gem "capybara"
+  # gem "selenium-webdriver"
 end
