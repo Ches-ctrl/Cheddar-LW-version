@@ -1,9 +1,10 @@
-<h3>All Jobs</h3>
-
-<% @jobs.each do |job| %>
-  <p><%= link_to job.job_title, job_path(job) %>
-  for
-  <%= job.company.company_name %></p>
-<% end %>
-
-<%= render 'form', job: @job %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>All Jobs</h3>
+      <% @jobs.each do |job| %>
+        <p><%= link_to job.job_title, job_path(job) %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

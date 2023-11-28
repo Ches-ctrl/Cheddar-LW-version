@@ -1,6 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="background" id="landing-page-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 d-flex flex-column justify-content-center align-items-center mx-auto" style="height: 650px">
+        <div id="punchline" class="d-flex flex-column align-items-center landing-page-container text-center ">
+          <h1>Tired of applying to jobs one-by-one?</h1>
+          <p></p>
+          <%#  Of not knowing when the deadline is? Or putting in your details over and over? %>
+          <h2>Apply to jobs in <strong>just one click</strong> with Cheddar</h2>
+          <%= link_to "Apply to jobs now", jobs_path, class: "btn-main mt-4 text-center" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p><%= link_to 'Edit your information', edit_user_registration_path(current_user) %></p>
-
-<p><%= link_to 'All jobs', jobs_path %></p>
+<%# TODO: Import Fonts, Update Background Image, Add Navbar Buttons, Update Links %>
