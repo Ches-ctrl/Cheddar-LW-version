@@ -11,7 +11,13 @@ class FormFiller
       if Rails.env.production?
 
         chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
-        options = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+        p chrome_bin
+        chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+          )
       else
         options = Selenium::WebDriver::Chrome::Options.new
         # options.add_argument("--headless")
@@ -20,10 +26,10 @@ class FormFiller
         # options.add_argument("--disable-gpu")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--remote-debugging-port=9225")
+        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
       end
-      Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-      # Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_opts)
     end
+    Capybara.javascript_driver = :selenium
 
     Capybara.default_driver = :selenium
   end
