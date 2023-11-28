@@ -57,7 +57,7 @@ gem "ruby-openai"
 gem "faker"
 
 gem "capybara"
-gem "selenium-webdriver"
+gem "selenium-webdriver", "4.0"
 gem "watir"
 
 group :development, :test do
