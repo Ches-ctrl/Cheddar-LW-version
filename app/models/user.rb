@@ -3,4 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  validates :first_name, :last_name, :address_first, :address_second, :post_code, :city, presence: true
+  validates :email, uniqueness: true
+  validates :password, presence: true, on: :create
 end
