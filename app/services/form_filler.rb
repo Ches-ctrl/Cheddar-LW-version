@@ -4,17 +4,21 @@ require 'capybara/dsl'
 class FormFiller
   include Capybara::DSL
 
+  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil) if Rails.env.production?
+
   def initialize
     Capybara.run_server = false
     Capybara.register_driver :selenium do |app|
-      options = Selenium::WebDriver::Chrome::Options.new
-      # options.add_argument("--headless")
-      options.add_argument("--no-sandbox")
-      options.add_argument("--window-size=1400,1000")
-      # options.add_argument("--disable-gpu")
-      options.add_argument("--disable-dev-shm-usage")
-      options.add_argument("--remote-debugging-port=9225")
-      Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+      chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {} if Rails.env.production?
+      # options = Selenium::WebDriver::Chrome::Options.new
+      # # options.add_argument("--headless")
+      # options.add_argument("--no-sandbox")
+      # options.add_argument("--window-size=1400,1000")
+      # # options.add_argument("--disable-gpu")
+      # options.add_argument("--disable-dev-shm-usage")
+      # options.add_argument("--remote-debugging-port=9225")
+      # Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+      Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_opts)
     end
 
     Capybara.default_driver = :selenium
