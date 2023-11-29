@@ -5,5 +5,5 @@
 <p>Job description: <%= @job.job_description %></p>
 <p>Salary: <%= @job.salary %></p>
 
-<%= link_to 'Apply to this job', job_job_applications_path %>
+<%= link_to 'Apply to this job', job_job_applications_path(@job) %>
 <%# Above Line does not work yet  %>
