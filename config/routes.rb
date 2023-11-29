@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: "pages#home"
   match '/users/:id', to: 'users#show', via: 'get', as: 'profile'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

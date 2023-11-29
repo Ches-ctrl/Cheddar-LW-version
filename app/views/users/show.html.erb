@@ -7,7 +7,7 @@
 
 </div>
 
-<%= link_to 'Edit your information', edit_user_registration_path(current_user) %>
+<%= link_to 'Add/ Edit your information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
 
 <div>
   <h3>Jobs you've applied to:</h3>
