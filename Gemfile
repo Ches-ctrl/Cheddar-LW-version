@@ -60,6 +60,8 @@ gem "capybara"
 gem "selenium-webdriver", "4.0"
 gem "watir"
 
+gem "cloudinary"
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
