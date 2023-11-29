@@ -1,0 +1,10 @@
+<h3>Add your Education</h3>
+
+<%= simple_form_for [current_user, @education] do |f| %>
+  <%# <%= f.association :university, collection: University.all.map {|u| [u.name, u.id]} %> 
+  <%= f.input :university %>
+  <%= f.input :degree %>
+  <%= f.input :field_study %>
+  <%= f.input :graduation_year %>
+  <%= f.submit %>
+<% end %>
