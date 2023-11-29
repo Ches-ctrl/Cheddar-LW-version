@@ -1,0 +1,70 @@
+<h2>Fill in your information</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "first-name" }%>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "last-name" }%>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :phone_number,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "phone-number" }%>
+    <%= f.input :address_first,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "address-first" }%>
+    <%= f.input :address_second,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "address-second" }%>
+    <%= f.input :post_code,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "post-code" }%>
+    <%= f.input :city,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "city" }%>
+    <%= f.input :linkedin_profile,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "linkedin-profile" }%>
+    <%= f.input :github_profile_url,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "github-profile-url" }%>
+    <%= f.input :website_url,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "website-url" }%>
+    <%= f.input :cover_letter_template_url,
+                required: false,
+                autofocus: true,
+                input_html: { autocomplete: "cover-letter-template-url" }%>
+    <%= f.input :photo, as: :file %>
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
