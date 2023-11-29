@@ -1,17 +1,8 @@
-<h3>Hi, <%= current_user.first_name %>!</h3>
-
-<div>
-  <h3>Your information:</h3>
-  <p>Email: <%= current_user.email %></p>
-  <p>Phone Number: <%= current_user.phone_number %></p>
-
-</div>
-
-<%= link_to 'Add/ Edit your information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
+<h3>My Job Applications</h3>
 
 <div>
   <h3>Jobs you've applied to:</h3>
-  <% @job_applications.each do |application| %>
+  <% @job_applications.where(user: current_user).each do |application| %>
     <div>
       Application Status: <%= application.status %> |
       <% if application.job.company.company_website_url.present?%>
