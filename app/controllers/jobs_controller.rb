@@ -8,6 +8,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    @saved_job = SavedJob.new
   end
 
   def new

@@ -14,9 +14,11 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :show]
   resources :jobs, only: [:index, :show, :create] do
+    resources :saved_jobs, only: [:create]
     resources :job_applications, only: [:create]
   end
   resources :job_applications, only: [:index, :show]
+  resources :saved_jobs, only: [:index, :show, :destroy]
 
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
