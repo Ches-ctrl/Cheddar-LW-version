@@ -6,3 +6,9 @@
 <p>Salary: <%= @job.salary %></p>
 
 <%= link_to 'Apply to this job', job_job_applications_path(@job), data: {turbo_method: :post} %>
+
+<div>
+  <%= simple_form_for [@job, @saved_job] do |f| %>
+    <%= f.submit 'Save this Job!' %>
+  <% end %>
+</div>
