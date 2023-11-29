@@ -1,6 +1,6 @@
 class JobApplicationsController < ApplicationController
   def index
-    @job_applications = JobApplication.all
+    @job_applications = JobApplication.all.where(user_id: current_user.id)
   end
 
   def show
@@ -17,7 +17,7 @@ class JobApplicationsController < ApplicationController
     @job_application.job = @job
     @job_application.user = current_user
     if @job_application.save
-      redirect_to job_path(@job), notice: 'Your job application was successful!'
+      redirect_to job_applications_path, notice: 'Your job application was successful!'
     else
       redirect_to job_path(@job), alert: 'Something went wrong, please try again.'
     end

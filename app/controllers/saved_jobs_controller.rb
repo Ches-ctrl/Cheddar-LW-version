@@ -14,9 +14,18 @@ class SavedJobsController < ApplicationController
     @saved_job.job = @job
     @saved_job.user = current_user
     if @saved_job.save
-      redirect_to saved_jobs_path, notice: 'Succesfully added to your saved jobs!'
+      redirect_to saved_jobs_path, notice: 'Job successfully saved!'
     else
-      redirect_to job_path(@job), alert: 'Something went wrong, please try again.'
+      redirect_to job_path(@job), alert: 'Something went wrong, please try again'
+    end
+  end
+
+  def destroy
+    @saved_job = SavedJob.find(params[:id])
+    if @saved_job.destroy
+      redirect_to saved_jobs_path, notice: 'Successfully removed from your saved jobs'
+    else
+      render saved_jobs_path, status: :unprocessable_entity
     end
   end
 end

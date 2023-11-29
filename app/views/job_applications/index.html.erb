@@ -2,7 +2,7 @@
 
 <div>
   <h3>Jobs you've applied to:</h3>
-  <% @job_applications.where(user: current_user).each do |application| %>
+  <% @job_applications.each do |application| %>
     <div>
       Application Status: <%= application.status %> |
       <% if application.job.company.company_website_url.present?%>
