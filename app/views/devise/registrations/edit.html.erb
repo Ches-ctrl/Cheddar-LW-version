@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Add/ Edit your Information </h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -15,7 +15,9 @@
     <%= f.input :linkedin_profile, required: false, autofocus: true %>
     <%= f.input :github_profile_url, required: false, autofocus: true %>
     <%= f.input :website_url, required: false, autofocus: true %>
+    <%= f.input :resume, as: :file, label: 'PDF file:', input_html: {accept: ('application/pdf') }, required: true %>
     <%= f.input :cover_letter_template_url, required: false, autofocus: true %>
+    <%= f.input :photo, as: :file %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
