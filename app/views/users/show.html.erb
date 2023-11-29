@@ -8,7 +8,7 @@
     <div>
       Application Status: <%= application.status %> |
       <% if application.job.company.company_website_url.present?%>
-        Job: <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %>"> <%= application.job.company.company_name %> </a>
+        Job: <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %> " target="_blank"> <%= application.job.company.company_name %> </a>
 
       <% else %>
         Job: <%= application.job.job_title %> at <%= application.job.company.company_name %>
