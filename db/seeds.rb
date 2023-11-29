@@ -79,6 +79,7 @@ Job.create(job_title: "Fullstack Engineer: Green-Tech Business",
            company_id: Company.third.id)
 puts "Created job - #{Job.last.job_title}"
 
+
 puts "Creating 4 users..."
 
 User.create(email: "email1@gmail.com", password: "password", first_name: "Charlotte", last_name: "the genius", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London")

@@ -1,10 +1,8 @@
-<h3>Hi, <%= current_user.first_name %>!</h3>
-
-<%= link_to 'Edit your information', edit_user_registration_path(current_user) %>
+<h3>My Job Applications</h3>
 
 <div>
   <h3>Jobs you've applied to:</h3>
-  <% @job_applications.each do |application| %>
+  <% @job_applications.where(user: current_user).each do |application| %>
     <div>
       Application Status: <%= application.status %> |
       <% if application.job.company.company_website_url.present?%>
