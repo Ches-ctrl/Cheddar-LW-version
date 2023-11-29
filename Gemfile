@@ -55,10 +55,14 @@ gem "sassc-rails"
 # Additional Gems installed
 gem "ruby-openai"
 gem "faker"
-
 gem "capybara"
 gem "selenium-webdriver", "4.0"
 gem "watir"
+gem "sidekiq"
+gem "sidekiq-failures"
+
+
+gem "cloudinary"
 
 group :development, :test do
   gem "dotenv-rails"

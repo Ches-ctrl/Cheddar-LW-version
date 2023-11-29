@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Your Saved Jobs</h3>
+      <% @saved_jobs.each do |saved_job| %>
+        <p>
+          <%= link_to saved_job.job.job_title, job_path(saved_job) %>
+          for
+          <%= saved_job.job.company.company_name %>
+          |
+          <%= link_to saved_job_path(saved_job), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this job from your list?"} do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

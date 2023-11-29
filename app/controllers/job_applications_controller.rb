@@ -1,10 +1,9 @@
 class JobApplicationsController < ApplicationController
   def index
-    @job_applications = JobApplication.all
+    @job_applications = JobApplication.all.where(user_id: current_user.id)
   end
 
   def show
-
   end
 
   def new
@@ -14,10 +13,13 @@ class JobApplicationsController < ApplicationController
 
   def create
     @job_application = JobApplication.new(status: "Applied")
+    @job = Job.find(params[:job_id])
+    @job_application.job = @job
     @job_application.user = current_user
-    @job_application.job = Job.find(params[:job_id])
     if @job_application.save
-      redirect_to current_user
+      redirect_to job_applications_path, notice: 'Your job application was successful!'
+    else
+      redirect_to job_path(@job), alert: 'Something went wrong, please try again.'
     end
   end
 end
