@@ -26,7 +26,8 @@ end
   Job.create!(job_title: Faker::Job.title,
               job_description: Faker::Job.field,
               salary: Faker::Number.number(digits: 5),
-              company_id: Company.all.sample.id)
+              company_id: Company.all.sample.id,
+              application_deadline: Faker::Date.forward(days: 23))
   puts "Created job - #{Job.last.job_title}"
 end
 
