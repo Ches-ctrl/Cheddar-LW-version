@@ -11,4 +11,7 @@ class User < ApplicationRecord
   has_many :job_applications, dependent: :destroy
   has_many :jobs, through: :job_applications
   has_many :saved_jobs, dependent: :destroy
+
+  has_one_attached :photo
+  has_one_attached :resume
 end
