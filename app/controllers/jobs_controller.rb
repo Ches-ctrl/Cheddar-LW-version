@@ -2,7 +2,11 @@ class JobsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @jobs = Job.all
+    if params[:query].present?
+      @results = PgSearch.multisearch(params[:query])
+    else
+      @jobs = Job.all
+    end
     @job = Job.new
   end
 

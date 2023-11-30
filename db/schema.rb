@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_29_125057) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_163156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_125057) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "educations", force: :cascade do |t|
+    t.string "university"
+    t.string "degree"
+    t.string "field_study"
+    t.integer "graduation_year"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
   create_table "job_applications", force: :cascade do |t|
     t.string "status"
     t.bigint "user_id", null: false
@@ -71,8 +82,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_125057) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "saved", default: false, null: false
     t.index ["company_id"], name: "index_jobs_on_company_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
   create_table "saved_jobs", force: :cascade do |t|
@@ -110,6 +129,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_125057) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "educations", "users"
   add_foreign_key "job_applications", "jobs"
   add_foreign_key "job_applications", "users"
   add_foreign_key "jobs", "companies"

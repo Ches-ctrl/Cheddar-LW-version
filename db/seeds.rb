@@ -130,4 +130,7 @@ puts JobApplication.all
 
 puts "Done!"
 
+PgSearch::Multisearch.rebuild(Job)
+PgSearch::Multisearch.rebuild(Company)
+
 # Test method: ApplyJob.perform_now(35, 31)

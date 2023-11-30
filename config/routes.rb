@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "about"  => "pages#about"
   get "test" => "pages#test"
   get "faqs" => "pages#faqs"
+
   # Defines the root path route ("/")
   # root "posts#index"
 
@@ -21,6 +22,8 @@ Rails.application.routes.draw do
   end
   resources :job_applications, only: [:index, :show]
   resources :saved_jobs, only: [:index, :show, :destroy]
+
+  resources :educations, only: [:new, :create]
 
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
