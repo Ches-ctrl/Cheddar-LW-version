@@ -1,0 +1,17 @@
+<h3>Add your Education</h3>
+
+<div data-controller="select-university">
+  <%= simple_form_for @education do |f| %>
+    <%= f.input :university, as: :select, collection: Education::UNIVERSITIES,
+        input_html: { data: { select_university_target: 'button' }, style: 'display: none;' },
+        label: 'Search for your university',
+        label_html: { style: 'font-style: italic;' } %>
+    <%= f.input :degree, label: 'Enter your degree level',
+        label_html: { style: 'font-style: italic;' } %>
+    <%= f.input :field_study, label: 'Enter your field of study',
+        label_html: { style: 'font-style: italic;' } %>
+    <%= f.input :graduation_year, label: 'Enter your graduation year',
+        label_html: { style: 'font-style: italic;' } %>
+    <%= f.submit %>
+  <% end %>
+</div>

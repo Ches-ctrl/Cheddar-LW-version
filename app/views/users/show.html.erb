@@ -1,25 +1,63 @@
-<h3>Hi, <%= current_user.first_name %>!</h3>
-
-<div>
-  <h3>Your information:</h3>
-  <p>Email: <%= current_user.email %></p>
-  <p>Phone Number: <%= current_user.phone_number %></p>
-
+<div class="container">
+  <div class="align-items-center">
+    <div class="col-md-6">
+      <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+    </div>
+    <div class="col">
+      <div class="text-md-9 w-50">
+        <div class="d-flex align-items-center">
+          <h2 class="m-0"><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
+            <div class="m-2"> <!-- Apply margin as needed -->
+            <%= link_to current_user.linkedin_profile do %>
+            <i class="fab fa-linkedin fa-2xl" style="color: #0077b5;"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<%= link_to 'Add/ Edit your information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
+<div class="row justify-content-between mt-4">
+  <div class="col-md-6">
+    <div class="m-2 p-2 rounded shadow">
+      <h5>Your Details</h5>
+      <p>Address: <%= "#{current_user.address_first} #{current_user.city} #{current_user.post_code}" %></p>
+      <p>Email: <%= current_user.email %></p>
+      <p>Phone Number: <%= current_user.phone_number %></p>
+      
+      <h5>Education</h5>
 
-<div>
-  <h3>Jobs you've applied to:</h3>
-  <% @job_applications.each do |application| %>
-    <div>
-      Application Status: <%= application.status %> |
-      <% if application.job.company.company_website_url.present?%>
-        Job: <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %> " target="_blank"> <%= application.job.company.company_name %> </a>
+      <%= link_to 'Add/ Edit your information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
+      <%= link_to 'Add Education Information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
 
-      <% else %>
-        Job: <%= application.job.job_title %> at <%= application.job.company.company_name %>
+      <h5>Documents</h5>
+
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="m-2 p-2 rounded shadow">
+      <h5>Jobs you've applied to</h5>
+      <% @job_applications.each do |application| %>
+        <div>
+          <div class= "border p-1 m-3 ">
+          Application Status: <%= application.status %> |
+          <% if application.job.company.company_website_url.present? %> <!-- If the company website url is present, then display the company name as a link -->
+
+            Job: <%= application.job.job_title %> at <a href="<%= application.job.company.company_website_url %>" target="_blank"><%= application.job.company.company_name %></a>
+          <% else %>
+            Job: <%= application.job.job_title %> at <%= application.job.company.company_name %>
+          <% end %>
+
+          </div>
+        </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
+
+<div class="m-3">
+  <h5> <%= link_to 'Edit', edit_user_registration_path(current_user), data: { turbo_method: :post } %> your information:</h5>
+</div>
+
