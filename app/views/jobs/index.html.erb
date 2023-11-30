@@ -24,7 +24,10 @@
           <% end %>
         <% end %>
 
-        <%= render 'form', job: @job %>
+        <div data-controller="new-job-form">
+          <button data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
+          <%= render 'form', job: @job %>
+        </div>
     </div>
   </div>
 </div>
