@@ -4,6 +4,7 @@ require 'capybara/dsl'
 class FormFiller
   include Capybara::DSL
 
+  # TODO: Move to config intializers
 
   def initialize
     Capybara.run_server = false
@@ -11,9 +12,9 @@ class FormFiller
     if Rails.env.production?
       Capybara.register_driver :selenium do |app|
         chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
-        p chrome_bin
+        # p chrome_bin
         chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
-        p chrome_opts
+        # p chrome_opts
         Selenium::WebDriver::Chrome.path = chrome_bin
         Capybara::Selenium::Driver.new(
           app,
@@ -39,28 +40,30 @@ class FormFiller
     end
   end
 
+  # TODO: Move to application jobs controller when complete. This will run as a background job.
+
   def fill_out_form(url, fields)
     visit(url)
     find_apply_button.click
     p "started filling form at #{Time.zone.now}"
 
     fields.each do |field|
-      case field[:interaction]
-      when :input
-        selected_locator = find_available_locator(field[:locators])
-        p selected_locator
-        fill_in(selected_locator, with: field[:value]) if selected_locator
+      # case field[:interaction]
+      # when :input
+      selected_locator = find_available_locator(field[:locators])
+      p selected_locator
+      fill_in(selected_locator, with: field[:value]) if selected_locator
       # when :click
       #   selected_locator = find_available_locator(field[:locators])
       #   p selected_locator
       #   click_on(selected_locator) if selected_locator
-      when :combobox
-        combobox_locator = find_available_locator(field[:locators])
-        option_locator = field[:value]
-        p combobox_locator
-        p option_locator
-        select_option_from_combobox(combobox_locator, option_locator)
-      end
+      # when :combobox
+      #   combobox_locator = find_available_locator(field[:locators])
+      #   option_locator = field[:value]
+      #   p combobox_locator
+      #   p option_locator
+      #   select_option_from_combobox(combobox_locator, option_locator)
+      # end
     end
     p "finished filling form at #{Time.zone.now}"
   end
