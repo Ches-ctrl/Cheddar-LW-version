@@ -84,13 +84,13 @@ puts "Creating 5 users..."
 User.create(email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'], first_name: "Ms", last_name: "Administrator", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: true)
 puts "Created user:  #{User.first.first_name}"
 User.create(email: ENV['CHARLIE_EMAIL'], password: ENV['CHARLIE_PASSWORD'], first_name: "Charlie", last_name: "Cheesman", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: true)
-puts "Created user:  #{User.first.first_name}"
-User.create(email: "email2@gmail.com", password: "password", first_name: "Ilya", last_name: "the russian hacker", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: false)
 puts "Created user:  #{User.second.first_name}"
-User.create(email: "email3@gmail.com", password: "password", first_name: "Direncan", last_name: "the mysterious", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: false)
+User.create(email: "email2@gmail.com", password: "password", first_name: "Ilya", last_name: "the russian hacker", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: false)
 puts "Created user:  #{User.third.first_name}"
-User.create(email: "email4@gmail.com", password: "password", first_name: "Charlotte", last_name: "the genius", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: false)
+User.create(email: "email3@gmail.com", password: "password", first_name: "Direncan", last_name: "the mysterious", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: false)
 puts "Created user:  #{User.fourth.first_name}"
+User.create(email: "email4@gmail.com", password: "password", first_name: "Charlotte", last_name: "the genius", address_first: "Le Wagon", address_second: "London", post_code: "E1 6JJ", city: "London", admin: false)
+puts "Created user:  #{User.fifth.first_name}"
 
 # TODO: Seed applications
 # TODO: Connect Users to Applications
