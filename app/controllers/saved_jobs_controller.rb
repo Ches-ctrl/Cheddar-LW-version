@@ -9,10 +9,10 @@ class SavedJobsController < ApplicationController
   end
 
   def create
-    @saved_job = SavedJob.new
+    @saved_job = SavedJob.new()
+    @saved_job.user = current_user
     @job = Job.find(params[:job_id])
     @saved_job.job = @job
-    @saved_job.user = current_user
     if @saved_job.save
       redirect_to saved_jobs_path, notice: 'Job successfully saved!'
     else
