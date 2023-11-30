@@ -12,11 +12,18 @@ class JobApplicationsController < ApplicationController
   end
 
   def create
-    @job_application = JobApplication.new(status: "Applied")
+    # TODO: only be able to make a job application if you haven't already applied to the job
+    # TODO: add failed status to job applications if incomplete
+
+    @job_application = JobApplication.new(status: "Pending")
     @job = Job.find(params[:job_id])
     @job_application.job = @job
     @job_application.user = current_user
     if @job_application.save
+      if ApplyJob.perform_now(@job_application.id, current_user.id)
+        @job_application.update(status: "Applied")
+      end
+      puts "I'm starting the application job"
       redirect_to job_applications_path, notice: 'Your job application was successful!'
     else
       redirect_to job_path(@job), alert: 'Something went wrong, please try again.'
