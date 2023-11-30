@@ -1,9 +1,13 @@
 <h3>Add your Education</h3>
 
-<%= simple_form_for @education do |f| %>
-  <%= f.input :university, as: :select, collection: Education::UNIVERSITIES %>
-  <%= f.input :degree %>
-  <%= f.input :field_study %>
-  <%= f.input :graduation_year %>
-  <%= f.submit %>
-<% end %>
+<div data-controller="select-university">
+  <%= simple_form_for @education do |f| %>
+    <%= f.input :university, as: :select, collection: Education::UNIVERSITIES,
+        input_html: { id: 'select-university'},
+        input_html: { data: { select_university_target: 'button' } } %>
+    <%= f.input :degree %>
+    <%= f.input :field_study %>
+    <%= f.input :graduation_year %>
+    <%= f.submit %>
+  <% end %>
+</div>
