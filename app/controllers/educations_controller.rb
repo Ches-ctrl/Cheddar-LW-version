@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+
 class EducationsController < ApplicationController
   def new
     @education = Education.new
