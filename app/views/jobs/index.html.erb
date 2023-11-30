@@ -8,7 +8,9 @@
         <% @jobs.each do |job| %>
           <p><%= link_to job.job_title, job_path(job) %>
           for
-          <%= job.company.company_name %></p>
+          <%= job.company.company_name %>
+          <p>More info: <%= job.job_description %></p>
+          </p>
         <% end %>
         <%= render 'form', job: @job %>
     </div>
