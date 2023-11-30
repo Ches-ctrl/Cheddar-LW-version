@@ -1,33 +1,31 @@
-body,html {
+body, html {
   height: 50%;
   background-color: white;
 }
 
 .slider-container {
-  color: rgba(0,0,0,0.3);
+  color: rgba(123, 119, 119, 0.3);
   overflow: hidden;
 }
 
-.container {
-  .slider {
-    animation: slidein 30s linear infinite;
-    white-space: nowrap;
-    .logos {
-      width: 50%;
-      min-width: fit-content;
-      display: inline-block;
-      margin-right: calc(2rem * 5);
-      .logo {
-        aspect-ratio: 1/1;
-        width: calc(100% / 5);
-        margin-left: 2rem;
-        animation: fade-in 0.5s
-          cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
-        filter: saturate(0);
-        opacity: 0.3;
-      }
-    }
-  }
+.container .slider {
+  animation: slidein 30s linear infinite;
+  white-space: nowrap;
+}
+
+.container .slider .logos {
+  display: inline-block;
+  margin-right: calc(2rem * 5);
+}
+
+.container .slider .logos .logo {
+  aspect-ratio: 1/1;
+  height: auto;
+  width: calc(100% / 5); /* Evenly space out images */
+  margin-left: 2rem;
+  animation: fade-in 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  filter: saturate(0);
+  opacity: 0.5;
 }
 
 @keyframes slidein {
@@ -48,45 +46,8 @@ body,html {
   }
 }
 
-// .oxford-icon-svg {
-//   // height: 80px;
-//   // width: 80px;
-//   filter: saturate(0);
-//   opacity: 0.6;
-// }
-
-// .stanford-icon-svg {
-//   height: 100px;
-//   width: 100px;
-//   filter: saturate(0);
-//   opacity: 0.6;
-// }
-
-// .mit-icon-svg {
-//   height: 90px;
-//   width: 90px;
-//   filter: saturate(0);
-
-// }
-
-// .cali-icon-svg {
-//   height: 90px;
-//   width: 90px;
-//   filter: saturate(0);
-//   opacity: 0.6;
-// }
-
-// .cambridge-icon-svg {
-//   aspect-ratio: 1/1;
-//   opacity: 0.5;
-// }
-
-
-// .logos {
-//   display: flex;
-//   width: 100%;
-//   justify-content: space-evenly;
-//   align-items: center; /* Optional: Align items vertically in the container */
-// }
-
-/* Rest of your CSS */
+.logos {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
