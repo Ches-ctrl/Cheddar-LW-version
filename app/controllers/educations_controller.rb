@@ -15,4 +15,10 @@ class EducationsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  private
+
+  def education_params
+    params.require(:education).permit(:university, :degree, :field_study, :graduation_year)
+  end
 end

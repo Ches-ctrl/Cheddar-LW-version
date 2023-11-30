@@ -8,6 +8,7 @@ export default class extends Controller {
   connect() {
     console.log(this.buttonTarget)
     new TomSelect(this.buttonTarget, {
+      plugins: ["remove_button"],
       create: true,
       sortField: {
         field: "text",
