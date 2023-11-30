@@ -1,12 +1,29 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+
+      <%= render 'search' %>
+
       <h3>All Jobs</h3>
-        <% @jobs.each do |job| %>
-          <p><%= link_to job.job_title, job_path(job) %>
-          for
-          <%= job.company.company_name %></p>
+
+        <% if params[:query].present? %>
+          <% @results.each do | result | %>
+            <% if result.searchable.is_a? Company %>
+              <p><%= Company.find(result.searchable_id).company_name %></p>
+            <% elsif result.searchable.is_a? Job %>
+              <p><%= Job.find(result.searchable_id).job_title %></p>
+            <% end %>
+          <% end %>
+
+        <% else %>
+          <% @jobs.each do |job| %>
+            <p><%= link_to job.job_title, job_path(job) %>
+            for
+            <%= job.company.company_name %></p>
+            <p>More info: <%= job.job_description %></p>
+          <% end %>
         <% end %>
+
         <div data-controller="new-job-form">
           <button data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
           <%= render 'form', job: @job %>

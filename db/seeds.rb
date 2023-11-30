@@ -103,3 +103,5 @@ puts User.all
 
 puts "Done!"
 
+PgSearch::Multisearch.rebuild(Job)
+PgSearch::Multisearch.rebuild(Company)

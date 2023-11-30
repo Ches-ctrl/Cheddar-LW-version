@@ -61,8 +61,8 @@ gem "watir"
 gem "sidekiq"
 gem "sidekiq-failures"
 
-
 gem "cloudinary"
+gem "pg_search"
 
 group :development, :test do
   gem "dotenv-rails"
