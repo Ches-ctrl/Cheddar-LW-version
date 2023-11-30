@@ -3,7 +3,7 @@ class JobsController < ApplicationController
 
   def index
     if params[:query].present?
-      @jobs = Job.search_all_strings(params[:query])
+      @results = PgSearch.multisearch(params[:query])
     else
       @jobs = Job.all
     end

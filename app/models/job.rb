@@ -7,9 +7,11 @@ class Job < ApplicationRecord
 
   include PgSearch::Model
 
-  pg_search_scope :search_all_strings,
-    against: [:job_title, :job_description, :application_criteria],
-    using: {
-      tsearch: { prefix: true }
-    }
+  multisearchable against: [:job_title, :job_description, :application_criteria]
+
+  # pg_search_scope :search_all_strings,
+  #   against: [:job_title, :job_description, :application_criteria],
+  #   using: {
+  #     tsearch: { prefix: true }
+  #   }
 end

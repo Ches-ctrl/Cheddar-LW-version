@@ -5,13 +5,31 @@
       <%= render 'search' %>
 
       <h3>All Jobs</h3>
-        <% @jobs.each do |job| %>
-          <p><%= link_to job.job_title, job_path(job) %>
-          for
-          <%= job.company.company_name %>
-          <p>More info: <%= job.job_description %></p>
-          </p>
+
+        <% if params[:query].present? %>
+          <%= @results.each do | result | %>
+            <% if result.searchable.is_a? Company %>
+              <p><%= Company.find(result.searchable_id).company_name %></p>
+              <%# <% company = Company.find(result.searchable_id) %>
+              <%# <%= company.company_name %>
+
+              <%# <%= Company.find(result.searchable_id).company_name %>
+
+            <% elsif result.searchable.is_a? Job %>
+              <p><%= Job.find(result.searchable_id).job_title %></p>
+            <% end %>
+          <% end %>
+
+        <% else %>
+          <% @jobs.each do |job| %>
+            <p><%= link_to job.job_title, job_path(job) %>
+            for
+            <%= job.company.company_name %></p>
+            <p>More info: <%= job.job_description %>
+            </p>
+          <% end %>
         <% end %>
+
         <%= render 'form', job: @job %>
     </div>
   </div>
