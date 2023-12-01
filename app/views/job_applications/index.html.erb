@@ -5,6 +5,11 @@
   <% @job_applications.each do |application| %>
     <div>
       Application Status: <%= application.status %> |
+      <% if application.screenshot.attached? %>
+       <%= cl_image_tag application.screenshot.key %>
+       <% else %>
+      <%= image_tag "cheddar_logo.png"%>
+      <% end %>
       <% if application.job.company.company_website_url.present?%>
         Job: <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %> " target="_blank"> <%= application.job.company.company_name %> </a>
 

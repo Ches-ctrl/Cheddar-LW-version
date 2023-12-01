@@ -29,6 +29,8 @@ puts "Created company - #{Company.last.company_name}"
 
 puts "Creating new jobs..."
 
+# TODO: Test filling in forms based on different locators to see what is most efficient and what works
+
 Job.create(
   job_title: "Software Engineer-Full stack (Junior Level)",
   job_description: "Kroo has a big vision. To be the first bank that is both trusted and loved by its customers.We’re helping people take control of their financial future and achieve their goals, whilst making a positive impact on the planet. Here at Kroo, doing what is right is in our DNA. We act with integrity, transparency and honesty. We think big, dream big, and relentlessly pursue our goals. We like to be bold, break new ground, and we never stop learning. But most importantly, we are on this journey together.",
@@ -62,8 +64,9 @@ Job.create(
       locators: ['CA_18698']
     },
     right_to_work: {
-      interaction: :input,
-      locators: "XXX"
+      interaction: :radiogroup,
+      locators: ['fieldset[data-ui="QA_6308627"]'],
+      option: "label",
     },
     salary_expectation_figure: {
       interaction: :input,
@@ -74,12 +77,13 @@ Job.create(
       locators: ['QA_6308629']
     },
     preferred_pronoun_select: {
-      interaction: :input,
-      locators: "XXX"
+      interaction: :combobox,
+      locators: ['input#input_QA_6308630_input'],
+      option: "li"
     },
     preferred_pronoun_text: {
       interaction: :input,
-      locators: ['QA_6308631']
+      locators: ['QA_6308631'],
     },
     employee_referral: {
       interaction: :input,
@@ -89,13 +93,9 @@ Job.create(
 
   # { interaction: :input, locators: ['job_application_answers_attributes_1_text_value'], value: 'https://www.ilya.com' },
   # { interaction: :input, locators: ['job_application_answers_attributes_2_text_value'], value: 'Cheddar' },
-  # { interaction: :combobox, locators: ['input#input_QA_6308630_input'], value: 'li', text: /he\/him/i },
-  # { interaction: :radiogroup, locators: ['fieldset[data-ui="QA_6308627"]'], value: 'label', text: /yes/i },
   # { interaction: :select, locators: ['select#job_application_answers_attributes_1_boolean_value', 'select#job_application_answers_attributes_3_boolean_value'], value: 'option', text: /yes/i},
   # { interaction: :select, locators: ['select#job_application_answers_attributes_2_boolean_value'], value: 'option', text: /yes/i},
   # { interaction: :select, locators: ['select#job_application_answers_attributes_4_boolean_value'], value: 'option', text: /no/i},
-  #   { interaction: :upload, locators: ['input[type="file"]', 'button[aria-describedby="resume-allowable-file-types"'], value: "/home/ilya/code/obreil54/Cheddar/Cheddar/public/Obretetskiy_cv.pdf"}
-
 
   application_deadline: Date.today + 30,
   job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
@@ -103,126 +103,126 @@ Job.create(
 
 puts "Created job - #{Job.last.job_title}"
 
-Job.create(
-  job_title: "Software Engineer II - Full-Stack",
-  job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivalled network to bring incredible convenience and selection to our customers.",
-  salary: 31000,
-  date_created: Date.today,
-  application_criteria: {
-    first_name: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    last_name: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    email: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    phone_number: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    cv_upload: {
-      interaction: :upload,
-      locators: "XXX"
-    },
-    salary_expectation_text: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    right_to_work: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    salary_expectation_figure: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    notice_period: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    preferred_pronoun_select: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    preferred_pronoun_text: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    employee_referral: {
-      interaction: :input,
-      locators: "XXX"
-    }
-  },
-  application_deadline: Date.today + 30,
-  job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
-  company_id: Company.second.id)
+# Job.create(
+#   job_title: "Software Engineer II - Full-Stack",
+#   job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivalled network to bring incredible convenience and selection to our customers.",
+#   salary: 31000,
+#   date_created: Date.today,
+#   application_criteria: {
+#     first_name: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     last_name: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     email: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     phone_number: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     cv_upload: {
+#       interaction: :upload,
+#       locators: XXX
+#     },
+#     salary_expectation_text: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     right_to_work: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     salary_expectation_figure: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     notice_period: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     preferred_pronoun_select: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     preferred_pronoun_text: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     employee_referral: {
+#       interaction: :input,
+#       locators: XXX
+#     }
+#   },
+#   application_deadline: Date.today + 30,
+#   job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
+#   company_id: Company.second.id)
 
-puts "Created job - #{Job.last.job_title}"
+# puts "Created job - #{Job.last.job_title}"
 
-Job.create(
-  job_title: "Fullstack Engineer: Green-Tech Business",
-  job_description: "Part of a new team, we are hiring software engineers to work in squads on developing applications for the company’s digital portfolio, built in the Azure ecosystem. You will play a key role in designing, developing, maintaining and improving business’ key product, thus enabling customers to measure their climate impact.",
-  salary: 40000,
-  date_created: Date.today,
-  application_criteria: {
-    first_name: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    last_name: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    email: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    phone_number: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    cv_upload: {
-      interaction: :upload,
-      locators: "XXX"
-    },
-    salary_expectation_text: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    right_to_work: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    salary_expectation_figure: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    notice_period: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    preferred_pronoun_select: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    preferred_pronoun_text: {
-      interaction: :input,
-      locators: "XXX"
-    },
-    employee_referral: {
-      interaction: :input,
-      locators: "XXX"
-    }
-  },
-  application_deadline: Date.today + 30,
-  job_posting_url: "https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002",
-  company_id: Company.third.id)
-puts "Created job - #{Job.last.job_title}"
+# Job.create(
+#   job_title: "Fullstack Engineer: Green-Tech Business",
+#   job_description: "Part of a new team, we are hiring software engineers to work in squads on developing applications for the company’s digital portfolio, built in the Azure ecosystem. You will play a key role in designing, developing, maintaining and improving business’ key product, thus enabling customers to measure their climate impact.",
+#   salary: 40000,
+#   date_created: Date.today,
+#   application_criteria: {
+#     first_name: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     last_name: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     email: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     phone_number: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     cv_upload: {
+#       interaction: :upload,
+#       locators: XXX
+#     },
+#     salary_expectation_text: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     right_to_work: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     salary_expectation_figure: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     notice_period: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     preferred_pronoun_select: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     preferred_pronoun_text: {
+#       interaction: :input,
+#       locators: XXX
+#     },
+#     employee_referral: {
+#       interaction: :input,
+#       locators: XXX
+#     }
+#   },
+#   application_deadline: Date.today + 30,
+#   job_posting_url: "https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002",
+#   company_id: Company.third.id)
+# puts "Created job - #{Job.last.job_title}"
 
 puts "Creating 5 users..."
 
@@ -234,6 +234,7 @@ User.create(
   password: ENV['ADMIN_PASSWORD'],
   first_name: "Charlotte",
   last_name: "Boyd",
+  phone_number: "+447874943555",
   address_first: "14 Knapp Drive",
   address_second: "London",
   post_code: "E1 7SH",
@@ -318,7 +319,7 @@ puts "Done!"
 PgSearch::Multisearch.rebuild(Job)
 PgSearch::Multisearch.rebuild(Company)
 
-# Test method: ApplyJob.perform_now(35, 31)
+# Test method: ApplyJob.perform_now(16, 7)
 
 
 # Template Job Structure:

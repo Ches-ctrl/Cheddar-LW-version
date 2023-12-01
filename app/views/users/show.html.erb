@@ -1,7 +1,11 @@
 <div class="container">
   <div class="align-items-center">
     <div class="col-md-6">
-      <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+      <% if current_user.photo.key %>
+        <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+      <% else %>
+        <%= image_tag "avatar_default.png", class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+      <% end %>
     </div>
     <div class="col">
       <div class="text-md-9 w-50">
