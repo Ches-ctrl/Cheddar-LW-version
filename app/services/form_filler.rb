@@ -7,37 +7,39 @@ class FormFiller
   # TODO: Move to config intializers
 
   def initialize#(url, fields)
-    fields = [
-      { interaction: :input, locators: ['firstname', 'first_name'], value: 'Ilya' },
-      { interaction: :input, locators: ['lastname', 'last_name'], value: 'Obretetskiy' },
-      { interaction: :input, locators: ['email'], value: 'obreil54@gmail.com' },
-      { interaction: :input, locators: ['phone'], value: '+447564055308' },
-      { interaction: :input, locators: ['CA_18698'], value: '£30,000' },
-      { interaction: :input, locators: ['QA_6308628'], value: '£30,000' },
-      { interaction: :input, locators: ['QA_6308629'], value: '3' },
-      { interaction: :input, locators: ['QA_6308631'], value: 'N/A' },
-      { interaction: :input, locators: ['QA_6427777'], value: 'no' },
-      { interaction: :input, locators: ['job_application[location]'], value: 'London' },
-      { interaction: :listbox, locators: ['ul#location_autocomplete-items-popup'] },
-      { interaction: :input, locators: ['job_application_answers_attributes_0_text_value'], value: 'https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/' },
-      { interaction: :input, locators: ['job_application_answers_attributes_1_text_value'], value: 'https://www.ilya.com' },
-      { interaction: :input, locators: ['job_application_answers_attributes_2_text_value'], value: 'Cheddar' },
-      { interaction: :combobox, locators: ['input#input_QA_6308630_input'], value: 'li', text: /he\/him/i },
-      { interaction: :radiogroup, locators: ['fieldset[data-ui="QA_6308627"]'], value: 'label', text: /yes/i },
-      { interaction: :select, locators: ['select#job_application_answers_attributes_1_boolean_value', 'select#job_application_answers_attributes_3_boolean_value'], value: 'option', text: /yes/i},
-      { interaction: :select, locators: ['select#job_application_answers_attributes_2_boolean_value'], value: 'option', text: /yes/i},
-      { interaction: :select, locators: ['select#job_application_answers_attributes_4_boolean_value'], value: 'option', text: /no/i},
+    # fields =
+      # { interaction: :input, locators: ['firstname', 'first_name'], value: 'Ilya' }, DONE
+      # { interaction: :input, locators: ['lastname', 'last_name'], value: 'Obretetskiy' },DONE
+      # { interaction: :input, locators: ['email'], value: 'obreil54@gmail.com' },DONE
+      # { interaction: :input, locators: ['phone'], value: '+447564055308' },DONE
+      # { interaction: :input, locators: ['CA_18698'], value: '£30,000' },DONE
+      # { interaction: :input, locators: ['QA_6308628'], value: '£30,000' },DONE
+      # { interaction: :input, locators: ['QA_6308629'], value: '3' },DONE
+      # { interaction: :input, locators: ['QA_6308631'], value: 'N/A' },DONE
+      # { interaction: :input, locators: ['QA_6427777'], value: 'no' },DONE
+      # { interaction: :input, locators: ['job_application[location]'], value: 'London' },DONE
+      # { interaction: :listbox, locators: ['ul#location_autocomplete-items-popup'] },
+      # { interaction: :input, locators: ['job_application_answers_attributes_0_text_value'], value: 'https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/' },
+      # { interaction: :input, locators: ['job_application_answers_attributes_1_text_value'], value: 'https://www.ilya.com' },
+      # { interaction: :input, locators: ['job_application_answers_attributes_2_text_value'], value: 'Cheddar' },
+      # { interaction: :combobox, locators: ['input#input_QA_6308630_input'], value: 'li', text: /he\/him/i },
+      # { interaction: :radiogroup, locators: ['fieldset[data-ui="QA_6308627"]'], value: 'label', text: /yes/i },
+      # { interaction: :select, locators: ['select#job_application_answers_attributes_1_boolean_value', 'select#job_application_answers_attributes_3_boolean_value'], value: 'option', text: /yes/i},
+      # { interaction: :select, locators: ['select#job_application_answers_attributes_2_boolean_value'], value: 'option', text: /yes/i},
+      # { interaction: :select, locators: ['select#job_application_answers_attributes_4_boolean_value'], value: 'option', text: /no/i},
+
       #1. Pass in cloudinary url file we want to upload
       #2. Open URL to download it
       #3. Save to temp folder
       #4. Pass that file as argument
-      { interaction: :upload, locators: ['input[type="file"]', 'button[aria-describedby="resume-allowable-file-types"'], value: "/home/ilya/code/obreil54/Cheddar/Cheddar/public/Obretetskiy_cv.pdf"}
-    ]
+
+    #   { interaction: :upload, locators: ['input[type="file"]', 'button[aria-describedby="resume-allowable-file-types"'], value: "/home/ilya/code/obreil54/Cheddar/Cheddar/public/Obretetskiy_cv.pdf"}
+    # ]
 
     # @url = 'https://apply.workable.com/kroo/j/C51C29B6C0/' #url
     # @url = 'https://boards.greenhouse.io/deliveroo/jobs/5447359?utm_source=trueup&utm_medium=website&ref=trueup#app' #url
-    @url = 'https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002&utm_source=trueup&utm_medium=website&ref=trueup' #url
-    @fields = fields
+    # @url = 'https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002&utm_source=trueup&utm_medium=website&ref=trueup' #url
+    # @fields = fields
 
 
     Capybara.run_server = false
@@ -72,7 +74,7 @@ class FormFiller
       Capybara.default_driver = :selenium
       Capybara.javascript_driver = :selenium
     end
-    fill_out_form
+    # fill_out_form
   end
 
 #   # TODO: Move to application jobs controller when complete. This will run as a background job.
@@ -114,30 +116,30 @@ class FormFiller
     @fields.each do |field|
       case field[:interaction]
       when :input
-        selected_locator = find_available_locator(field[:locators])
+        selected_locator = find_available_locator(field[1]["locators"])
         p selected_locator
         fill_in(selected_locator, with: field[:value]) if selected_locator
       when :combobox
-        combobox_locator = find_combobox_locator(field[:locators])
+        combobox_locator = find_combobox_locator(field[1]["locators"])
         option_locator = field[:value]
         option_text = field[:text]
         select_option_from_combobox(combobox_locator, option_locator, option_text) if combobox_locator
       when :radiogroup
-        radiogroup_locator = find_radiogroup_locator(field[:locators])
+        radiogroup_locator = find_radiogroup_locator(field[1]["locators"])
         option_locator = field[:value]
         option_text = field[:text]
         select_option_from_radiogroup(radiogroup_locator, option_locator, option_text) if radiogroup_locator
       when :listbox
-        listbox_locator = find_listbox_locator(field[:locators])
+        listbox_locator = find_listbox_locator(field[1]["locators"])
         p listbox_locator
         select_option_from_listbox(listbox_locator) if listbox_locator
       when :select
-        select_locator = find_select_locator(field[:locators])
+        select_locator = find_select_locator(field[1]["locators"])
         option_locator = field[:value]
         option_text = field[:text]
         select_option_from_select(select_locator, option_locator, option_text) if select_locator
       when :upload
-        upload_locator = find_upload_locator(field[:locators])
+        upload_locator = find_upload_locator(field[1]["locators"])
         option_locator = field[:value]
         upload_file(upload_locator, option_locator) if upload_locator
       end
