@@ -46,11 +46,11 @@ class ApplyJob < ApplicationJob
     p "Application criteria without values: #{application_criteria}"
 
     application_criteria.each do |key, value|
-      if user.respond_to?(key)
+      if user.respond_to?(key) && user.send(key).present?
         # Update the hash with the user's value for this attribute
         p "Using USER value for #{key}"
         application_criteria[key]['value'] = user.send(key)
-      elsif Defaults.key?(key)
+      elsif Defaults.key?(key) && Defaults[key].key?('value')
         p "Warning: User does not have a method or attribute '#{key}'"
         p "Using DEFAULT value instead"
         application_criteria[key]['value'] = Defaults.dig(key, 'value')
@@ -65,6 +65,10 @@ class ApplyJob < ApplicationJob
   end
 end
 
+# Phone
+# Right to work
+# Preferred Pronouns
+# TODO: Default value of Prefer Not To Say
 
 Defaults = {
   'first_name' => {
@@ -79,8 +83,14 @@ Defaults = {
   'phone_number' => {
     'value' => "+447874943544"
   },
+  'cv_upload' => {
+    'value' => '/Users/charliecheesman/code/Ches-ctrl/Cheddar/public/Obretetskiy_cv.pdf'
+  },
   'salary_expectation_text' => {
     'value' => "£30,000 - £40,000"
+  },
+  'right_to_work' => {
+    'value' => /yes/i ## TODO
   },
   'salary_expectation_figure' => {
     'value' => 30000
@@ -88,10 +98,62 @@ Defaults = {
   'notice_period' => {
     'value' => 12
   },
+  'preferred_pronoun_value' => {
+    'value' => /he\/him/i ## TODO
+  },
   'preferred_pronoun_text' => {
-    'value' => "he/him"
+    'value' => 'N/A' ## TODO
   },
   'employee_referral' => {
     'value' => "no"
   }
 }
+
+# first_name: {
+#   interaction: :input,
+#   locators: ['firstname']
+# },
+# last_name: {
+#   interaction: :input,
+#   locators: ['lastname']
+# },
+# email: {
+#   interaction: :input,
+#   locators: ['email']
+# },
+# phone_number: {
+#   interaction: :input,
+#   locators: ['phone']
+# },
+# cv_upload: {
+#   interaction: :upload,
+#   locators: ['input#input_files_input_3965534823623269']
+# },
+# salary_expectation_text: {
+#   interaction: :input,
+#   locators: ['CA_18698']
+# },
+# right_to_work: {
+#   interaction: :input,
+#   locators: ['fieldset[data-ui="QA_6308627"]']
+# },
+# salary_expectation_figure: {
+#   interaction: :input,
+#   locators: ['QA_6308628']
+# },
+# notice_period: {
+#   interaction: :input,
+#   locators: ['QA_6308629']
+# },
+# preferred_pronoun_select: {
+#   interaction: :input,
+#   locators: XXX
+# },
+# preferred_pronoun_text: {
+#   interaction: :input,
+#   locators: ['QA_6308631']
+# },
+# employee_referral: {
+#   interaction: :input,
+#   locators: ['QA_6427777']
+# }
