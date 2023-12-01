@@ -4,22 +4,14 @@ class ApplyJob < ApplicationJob
   # TODO: Separate application criteria into separate DB table that is then called and we search through dynamically
   # TODO: Add a callback option so that the user inputs all the information required for the job before submitting
   # TODO: Notify the user of the application steps so that they're kept in the loop
+  # TODO: Default value of Prefer Not To Say
 
   def perform(job_application_id, user_id)
+    # p Setting job and user variables
     job = JobApplication.find(job_application_id).job
     user = User.find(user_id)
 
-    # p "Starting the job application..."
-    # p "Job details: #{JobApplication.find(job_application_id).job.job_title}}"
-    # p "User details: #{User.find(user_id).first_name}"
-
-    # p "Finding URL for job application..."
-    # p "Assigning values to fill in the form..."
-
-    # TODO: check application criteria, query user based on application criteria, fill in form with user details
-    # TODO: send method in ruby to get user values
-
-    # Filling in form with user details
+    # p Filling in form with user details
     application_criteria = assign_values_to_form(job, user)
 
     # Reassigning application criteria to fields_to_fill
@@ -65,26 +57,33 @@ class ApplyJob < ApplicationJob
   end
 end
 
-# Phone
-# Right to work
-# Preferred Pronouns
-# TODO: Default value of Prefer Not To Say
-
 Defaults = {
   'first_name' => {
-    'value' => "Chuck"
+    'value' => "UserMissingFirst"
   },
   'last_name' => {
-    'value' => "Norris"
+    'value' => "UserMissingLast"
   },
   'email' => {
-    'value' => "email1@gmail.com"
+    'value' => "usermissingemail@getcheddar.xyz"
   },
   'phone_number' => {
-    'value' => "+447874943544"
+    'value' => "+447555555555"
   },
-  'cv_upload' => {
-    'value' => '/Users/charliecheesman/code/Ches-ctrl/Cheddar/public/Obretetskiy_cv.pdf'
+  'address_first' => {
+    'value' => "99 Missing Drive"
+  },
+  'address_second' => {
+    'value' => "Missingham"
+  },
+  'post_code' => {
+    'value' => "M1 1MM"
+  },
+  'city' => {
+    'value' => "Missingdon"
+  },
+  'resume' => {
+    'value' => 'public/Obretetskiy_cv.pdf'
   },
   'salary_expectation_text' => {
     'value' => "£30,000 - £40,000"
@@ -98,7 +97,7 @@ Defaults = {
   'notice_period' => {
     'value' => 12
   },
-  'preferred_pronoun_value' => {
+  'preferred_pronoun_select' => {
     'value' => /he\/him/i ## TODO
   },
   'preferred_pronoun_text' => {
@@ -108,52 +107,3 @@ Defaults = {
     'value' => "no"
   }
 }
-
-# first_name: {
-#   interaction: :input,
-#   locators: ['firstname']
-# },
-# last_name: {
-#   interaction: :input,
-#   locators: ['lastname']
-# },
-# email: {
-#   interaction: :input,
-#   locators: ['email']
-# },
-# phone_number: {
-#   interaction: :input,
-#   locators: ['phone']
-# },
-# cv_upload: {
-#   interaction: :upload,
-#   locators: ['input#input_files_input_3965534823623269']
-# },
-# salary_expectation_text: {
-#   interaction: :input,
-#   locators: ['CA_18698']
-# },
-# right_to_work: {
-#   interaction: :input,
-#   locators: ['fieldset[data-ui="QA_6308627"]']
-# },
-# salary_expectation_figure: {
-#   interaction: :input,
-#   locators: ['QA_6308628']
-# },
-# notice_period: {
-#   interaction: :input,
-#   locators: ['QA_6308629']
-# },
-# preferred_pronoun_select: {
-#   interaction: :input,
-#   locators: XXX
-# },
-# preferred_pronoun_text: {
-#   interaction: :input,
-#   locators: ['QA_6308631']
-# },
-# employee_referral: {
-#   interaction: :input,
-#   locators: ['QA_6427777']
-# }
