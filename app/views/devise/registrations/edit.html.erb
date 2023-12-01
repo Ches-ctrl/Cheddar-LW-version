@@ -7,20 +7,20 @@
           <%= f.error_notification %>
 
           <div class="form-inputs">
-            <%= f.input :first_name, required: false, autofocus: true %>
-            <%= f.input :last_name, required: false, autofocus: true %>
-            <%= f.input :email, required: false, autofocus: true %>
-            <%= f.input :phone_number, required: false, autofocus: true %>
-            <%= f.input :address_first, required: false, autofocus: true %>
-            <%= f.input :address_second, required: false, autofocus: true %>
-            <%= f.input :post_code, required: false, autofocus: true %>
-            <%= f.input :city, required: false, autofocus: true %>
-            <%= f.input :linkedin_profile, required: false, autofocus: true %>
-            <%= f.input :github_profile_url, required: false, autofocus: true %>
-            <%= f.input :website_url, required: false, autofocus: true %>
-            <%= f.input :resume, as: :file, label: 'PDF file:', input_html: {accept: ('application/pdf') }, required: true %>
-            <%= f.input :cover_letter_template_url, required: false, autofocus: true %>
-            <%= f.input :photo, as: :file %>
+            <%= f.input :first_name, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :last_name, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :email, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :phone_number, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :address_first, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :address_second, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :post_code, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :city, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :linkedin_profile, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :github_profile_url, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :website_url, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :resume, as: :file, label: 'PDF file:', input_html: {accept: ('application/pdf') }, required: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :cover_letter_template_url, required: false, autofocus: true, label_html: { style: 'font-style: italic;' } %>
+            <%= f.input :photo, as: :file, label_html: { style: 'font-style: italic;' } %>
 
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -29,30 +29,17 @@
             <%= f.input :password,
                         hint: "leave it blank if you don't want to change it",
                         required: false,
-                        input_html: { autocomplete: "new-password" } %>
+                        input_html: { autocomplete: "new-password" }, label_html: { style: 'font-style: italic;' } %>
             <%= f.input :password_confirmation,
                         required: false,
-                        input_html: { autocomplete: "new-password" } %>
+                        input_html: { autocomplete: "new-password" }, label_html: { style: 'font-style: italic;' } %>
             <%= f.input :current_password,
                         hint: "we need your current password to confirm your changes",
                         required: true,
-                        input_html: { autocomplete: "current-password" } %>
+                        input_html: { autocomplete: "current-password" }, label_html: { style: 'font-style: italic;' } %>
           </div>
-
-        <div class="form-actions">
-          <%= f.button :submit, "Update" %>
-            <%# <%= link_to 'Back to User', profile_path(current_user) %> %>
-
-        </div>
+          <%= f.submit "Update", class: 'btn-add-info' %>
         <% end %>
-
-        <%# <h3>Cancel my account</h3> %>
-
-        <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-        >
-
-        <%= link_to "User", :back %>
       </div>
     </div>
   </div>
