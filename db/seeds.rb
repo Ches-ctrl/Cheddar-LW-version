@@ -103,126 +103,122 @@ Job.create(
 
 puts "Created job - #{Job.last.job_title}"
 
-# Job.create(
-#   job_title: "Software Engineer II - Full-Stack",
-#   job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivalled network to bring incredible convenience and selection to our customers.",
-#   salary: 31000,
-#   date_created: Date.today,
-#   application_criteria: {
-#     first_name: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     last_name: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     email: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     phone_number: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     cv_upload: {
-#       interaction: :upload,
-#       locators: XXX
-#     },
-#     salary_expectation_text: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     right_to_work: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     salary_expectation_figure: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     notice_period: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     preferred_pronoun_select: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     preferred_pronoun_text: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     employee_referral: {
-#       interaction: :input,
-#       locators: XXX
-#     }
-#   },
-#   application_deadline: Date.today + 30,
-#   job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
-#   company_id: Company.second.id)
+Job.create(
+  job_title: "Software Engineer II - Full-Stack",
+  job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivalled network to bring incredible convenience and selection to our customers.",
+  salary: 31000,
+  date_created: Date.today,
+  application_criteria: {
+    first_name: {
+      interaction: :input,
+      locators: ['first_name']
+    },
+    last_name: {
+      interaction: :input,
+      locators: ['last_name']
+    },
+    email: {
+      interaction: :input,
+      locators: ['email']
+    },
+    phone_number: {
+      interaction: :input,
+      locators: ['phone']
+    },
+    city: {
+      interaction: :input,
+      locators: ['job_application[location]']
+    },
+    location_click: {
+      interaction: :listbox,
+      locators: ['ul#location_autocomplete-items-popup']
+    },
+    resume: {
+      interaction: :upload,
+      locators: ['button[aria-describedby="resume-allowable-file-types"']
+    },
+    linkedin_profile: {
+      interaction: :input,
+      locators: ['job_application_answers_attributes_0_text_value']
+    },
+    require_visa?: {
+      interaction: :select,
+      locators: ['select#job_application_answers_attributes_1_boolean_value'],
+      option: 'option'
+    },
+    heard_of_company?: {
+      interaction: :select,
+      locators: ['select#job_application_answers_attributes_2_boolean_value'],
+      option: 'option'
+    }
+  },
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
+  company_id: Company.second.id)
 
-# puts "Created job - #{Job.last.job_title}"
+puts "Created job - #{Job.last.job_title}"
 
-# Job.create(
-#   job_title: "Fullstack Engineer: Green-Tech Business",
-#   job_description: "Part of a new team, we are hiring software engineers to work in squads on developing applications for the company’s digital portfolio, built in the Azure ecosystem. You will play a key role in designing, developing, maintaining and improving business’ key product, thus enabling customers to measure their climate impact.",
-#   salary: 40000,
-#   date_created: Date.today,
-#   application_criteria: {
-#     first_name: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     last_name: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     email: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     phone_number: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     cv_upload: {
-#       interaction: :upload,
-#       locators: XXX
-#     },
-#     salary_expectation_text: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     right_to_work: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     salary_expectation_figure: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     notice_period: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     preferred_pronoun_select: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     preferred_pronoun_text: {
-#       interaction: :input,
-#       locators: XXX
-#     },
-#     employee_referral: {
-#       interaction: :input,
-#       locators: XXX
-#     }
-#   },
-#   application_deadline: Date.today + 30,
-#   job_posting_url: "https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002",
-#   company_id: Company.third.id)
-# puts "Created job - #{Job.last.job_title}"
+Job.create(
+  job_title: "Fullstack Engineer: Green-Tech Business",
+  job_description: "Part of a new team, we are hiring software engineers to work in squads on developing applications for the company’s digital portfolio, built in the Azure ecosystem. You will play a key role in designing, developing, maintaining and improving business’ key product, thus enabling customers to measure their climate impact.",
+  salary: 40000,
+  date_created: Date.today,
+  application_criteria: {
+    first_name: {
+      interaction: :input,
+      locators: ['first_name']
+    },
+    last_name: {
+      interaction: :input,
+      locators: ['last_name']
+    },
+    email: {
+      interaction: :input,
+      locators: ['email']
+    },
+    phone_number: {
+      interaction: :input,
+      locators: ['phone']
+    },
+    city: {
+      interaction: :input,
+      locators: ['job_application[location]']
+    },
+    location_click: {
+      interaction: :listbox,
+      locators: ['ul#location_autocomplete-items-popup']
+    },
+    resume: {
+      interaction: :upload,
+      locators: ['button[aria-describedby="resume-allowable-file-types"']
+    },
+    linkedin_profile: {
+      interaction: :input,
+      locators: ['job_application_answers_attributes_0_text_value']
+    },
+    personal_website: {
+      interaction: :input,
+      locators: ['job_application_answers_attributes_1_text_value']
+    },
+    heard_from: {
+      interaction: :input,
+      locators: ['job_application_answers_attributes_2_text_value']
+    },
+    right_to_work: {
+      interaction: :select,
+      locators: ['select#job_application_answers_attributes_3_boolean_value'],
+      option: 'option'
+    },
+    require_visa?: {
+      interaction: :select,
+      locators: ['select#job_application_answers_attributes_4_boolean_value'],
+      option: 'option'
+    }
+  },
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002",
+  company_id: Company.third.id)
+puts "Created job - #{Job.last.job_title}"
 
 puts "Creating 5 users..."
 
@@ -408,7 +404,7 @@ PgSearch::Multisearch.rebuild(Company)
 #       interaction: :input,
 #       locators: XXX
 #     },
-#     cv_upload: {
+#     resume: {
 #       interaction: :upload,
 #       locators: XXX
 #     },

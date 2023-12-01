@@ -105,5 +105,23 @@ Defaults = {
   },
   'employee_referral' => {
     'value' => "no"
+  },
+  'city' => {
+    'value' => 'London'
+  },
+  'linkedin_profile' => {
+    'value' => "https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/"
+  },
+  'personal_website' => {
+    'value' => "https://www.ilya.com"
+  },
+  'require_visa?' => {
+    'value' => /no/i,
+  },
+  'heard_of_company?' => {
+    'value' => /yes/i
+  },
+  'heard_from' => {
+    'value' => 'Cheddar'
   }
 }
