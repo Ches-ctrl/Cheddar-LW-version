@@ -44,7 +44,7 @@ class FormFiller
 
   # TODO: Move to application jobs controller when complete. This will run as a background job.
 
-  def fill_out_form(url, fields)
+  def fill_out_form(url, fields, job_application_id)
     visit(url)
     find_apply_button.click
 
@@ -80,7 +80,8 @@ class FormFiller
       end
     end
     # TODO: Return a screenshot of the submitted form
-    sleep 3
+    take_screenshot_and_store(job_application_id)
+    sleep 5
     close_session
   end
 
@@ -212,5 +213,18 @@ class FormFiller
         page.find(upload_locator).click
       end
     end
+  end
+
+  def take_screenshot_and_store(job_application_id)
+    screenshot_path = Rails.root.join('tmp', "screenshot-#{job_application_id}.png")
+    page.save_screenshot(screenshot_path, full: true)
+
+    # Store the screenshot using Active Storage
+    file = File.open(screenshot_path)
+    job_app = JobApplication.find(job_application_id) # Replace with your actual job_app using the id from the initialize method
+    job_app.screenshot.attach(io: file, filename: "screenshot-#{job_application_id}.png", content_type: 'image/png')
+
+    # Clean up temporary screenshot file
+    File.delete(screenshot_path)
   end
 end

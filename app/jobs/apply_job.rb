@@ -21,7 +21,7 @@ class ApplyJob < ApplicationJob
     form_filler = FormFiller.new
 
     # Going to URL and filling out form
-    form_filler.fill_out_form(job.job_posting_url, fields_to_fill)
+    form_filler.fill_out_form(job.job_posting_url, fields_to_fill, job_application_id)
 
     # Ending Capbybara session
     Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
