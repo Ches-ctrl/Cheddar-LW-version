@@ -1,4 +1,13 @@
-<h3>My Job Applications</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 id="my-application-index-title">My Job Applications</h3>
+      <div>
+        <% @job_applications.each do |application| %>
+          <div>
+            Application Status: <%= application.status %> |
+            <% if application.job.company.company_website_url.present?%>
+              Job: <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %> " target="_blank"> <%= application.job.company.company_name %> </a>
 
 <div>
   <h3>Jobs you've applied to:</h3>
@@ -17,5 +26,5 @@
         Job: <%= application.job.job_title %> at <%= application.job.company.company_name %>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

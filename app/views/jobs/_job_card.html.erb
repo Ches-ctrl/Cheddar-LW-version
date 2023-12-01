@@ -1,0 +1,66 @@
+<!-- Jobs List -->
+<% if params[:query].present? %>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="card job-card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col"><%= job.company.company_name %></div>
+            <div class="col"><%= link_to job.job_title, job_path(job) %></div>
+            <div class="col">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
+            <div class="col">
+              <% if (Time.now.next_day(7)) >= job.application_deadline %>
+                CLOSING SOON
+              <% elsif Time.now < job.application_deadline %>
+                OPEN
+              <% else %>
+                CLOSED
+              <% end %>
+            </div>
+            <div class="col"><%= job.application_deadline %></div>
+            <div class="col text-center"><input type="checkbox"></div>
+            <div class="col text-center"><input type="checkbox"></div>
+            <%# <div class="col text-center">...</div> %>
+            <%# <div class="col text-center">...</div> %>
+            <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
+            <div class="col text-center"><input type="checkbox"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <% @jobs.each do |job| %>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="card job-card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col"><%= job.company.company_name %></div>
+            <div class="col"><%= link_to job.job_title, job_path(job) %></div>
+            <div class="col">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
+            <div class="col">
+              <% if (Time.now.next_day(7)) >= job.application_deadline %>
+                CLOSING SOON
+              <% elsif Time.now < job.application_deadline %>
+                OPEN
+              <% else %>
+                CLOSED
+              <% end %>
+            </div>
+            <div class="col"><%= job.application_deadline %></div>
+            <div class="col text-center"><input type="checkbox"></div>
+            <div class="col text-center"><input type="checkbox"></div>
+            <%# <div class="col text-center">...</div> %>
+            <%# <div class="col text-center">...</div> %>
+            <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
+            <div class="col text-center"><input type="checkbox"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+<% end %>
