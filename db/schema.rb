@@ -94,15 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_163156) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
-  create_table "saved_jobs", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "job_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_saved_jobs_on_job_id"
-    t.index ["user_id"], name: "index_saved_jobs_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -133,6 +124,4 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_163156) do
   add_foreign_key "job_applications", "jobs"
   add_foreign_key "job_applications", "users"
   add_foreign_key "jobs", "companies"
-  add_foreign_key "saved_jobs", "jobs"
-  add_foreign_key "saved_jobs", "users"
 end

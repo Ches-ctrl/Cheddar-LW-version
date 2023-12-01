@@ -145,6 +145,7 @@ class FormFiller
       end
     end
     # TODO: Return a screenshot of the submitted form
+    take_screenshot_and_store
     sleep 10
     close_session
   end
@@ -277,5 +278,18 @@ class FormFiller
         page.find(upload_locator).click
       end
     end
+  end
+
+  def take_screenshot_and_store
+    screenshot_path = Rails.root.join('tmp', 'screenshot.png')
+    page.save_screenshot(screenshot_path)
+
+    # Store the screenshot using Active Storage
+    file = File.open(screenshot_path)
+    user = JobApplication.first # Replace with your actual user
+    user.screenshot.attach(io: file, filename: 'screenshot.png', content_type: 'image/png')
+
+    # Clean up temporary screenshot file
+    File.delete(screenshot_path)
   end
 end

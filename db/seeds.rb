@@ -63,7 +63,7 @@ Job.create(
     },
     right_to_work: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     salary_expectation_figure: {
       interaction: :input,
@@ -75,7 +75,7 @@ Job.create(
     },
     preferred_pronoun_select: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     preferred_pronoun_text: {
       interaction: :input,
@@ -111,51 +111,51 @@ Job.create(
   application_criteria: {
     first_name: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     last_name: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     email: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     phone_number: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     cv_upload: {
       interaction: :upload,
-      locators: XXX
+      locators: "XXX"
     },
     salary_expectation_text: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     right_to_work: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     salary_expectation_figure: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     notice_period: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     preferred_pronoun_select: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     preferred_pronoun_text: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     employee_referral: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     }
   },
   application_deadline: Date.today + 30,
@@ -172,51 +172,51 @@ Job.create(
   application_criteria: {
     first_name: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     last_name: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     email: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     phone_number: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     cv_upload: {
       interaction: :upload,
-      locators: XXX
+      locators: "XXX"
     },
     salary_expectation_text: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     right_to_work: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     salary_expectation_figure: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     notice_period: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     preferred_pronoun_select: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     preferred_pronoun_text: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     },
     employee_referral: {
       interaction: :input,
-      locators: XXX
+      locators: "XXX"
     }
   },
   application_deadline: Date.today + 30,
@@ -324,60 +324,60 @@ PgSearch::Multisearch.rebuild(Company)
 # Template Job Structure:
 
 # Job.create(
-#   job_title: "XXX",
-#   job_description: "XXX",
-#   salary: XXX,
-#   date_created: Date.XXX,
+#   job_title: ""XXX"",
+#   job_description: ""XXX"",
+#   salary: "XXX",
+#   date_created: Date."XXX",
 #   application_criteria: {
 #     first_name: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     last_name: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     email: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     phone_number: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     cv_upload: {
 #       interaction: :upload,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     salary_expectation_text: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     right_to_work: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     salary_expectation_figure: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     notice_period: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     preferred_pronoun_select: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     preferred_pronoun_text: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     },
 #     employee_referral: {
 #       interaction: :input,
-#       locators: XXX
+#       locators: "XXX"
 #     }
 #   },
-#   application_deadline: Date.XXX,
-#   job_posting_url: "XXX",
-#   company_id: Company.XXX.id)
+#   application_deadline: Date."XXX",
+#   job_posting_url: ""XXX"",
+#   company_id: Company."XXX".id)
