@@ -205,6 +205,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (3.0.8)
+    rack-protection (3.0.6)
+      rack
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -278,11 +280,11 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    sidekiq (7.2.0)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
+    sidekiq (6.0.4)
+      connection_pool (>= 2.2.2)
+      rack (>= 2.0.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     sidekiq-failures (1.0.4)
       sidekiq (>= 4.0.0)
     simple_form (5.3.0)
@@ -352,8 +354,8 @@ DEPENDENCIES
   ruby-openai
   sassc-rails
   selenium-webdriver (= 4.0)
-  sidekiq
-  sidekiq-failures
+  sidekiq (~> 6)
+  sidekiq-failures (~> 1.0)
   simple_form
   sprockets-rails
   stimulus-rails
