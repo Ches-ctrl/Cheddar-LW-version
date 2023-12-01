@@ -23,7 +23,15 @@
             <%# <div class="col text-center">...</div> %>
             <%# <div class="col text-center">...</div> %>
             <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
-            <div class="col text-center"><input type="checkbox"></div>
+            <div class="col">
+              <%= simple_form_for [job, @saved_job] do |f| %>
+                <%# <%= f.submit 'Save this Job!' %>
+                <%= button_tag type: 'submit' do %>
+                  <i class="fa-regular fa-bookmark"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <%# <div class="col text-center"><input type="checkbox"></div> %>
           </div>
         </div>
       </div>
@@ -55,7 +63,15 @@
             <%# <div class="col text-center">...</div> %>
             <%# <div class="col text-center">...</div> %>
             <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
-            <div class="col text-center"><input type="checkbox"></div>
+            <div class="col">
+              <%= simple_form_for [job, @saved_job] do |f| %>
+                <%# <%= f.submit 'Save this Job!' %>
+                <%= button_tag type: 'submit' do %>
+                  <i class="fa-regular fa-bookmark"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <%# <div class="col text-center"><input type="checkbox"></div> %>
           </div>
         </div>
       </div>

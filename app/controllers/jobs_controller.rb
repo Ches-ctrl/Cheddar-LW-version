@@ -8,6 +8,7 @@ class JobsController < ApplicationController
       @jobs = Job.all
     end
     @job = Job.new
+    @saved_job = SavedJob.new
   end
 
   def show
