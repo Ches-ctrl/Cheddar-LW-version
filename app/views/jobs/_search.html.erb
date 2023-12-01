@@ -1,7 +1,10 @@
-<%= form_tag jobs_path, method: :get, class: 'd-flex' do %>
-  <%= text_field_tag :query,
-      params[:query],
-      class: 'form-control',
-      placeholder: 'Filter your job search' %>
-  <%= submit_tag 'Search' %>
-<% end %>
+<div id="jobs-search-bar">
+  <%= form_tag jobs_path, method: :get, class: 'd-flex' do %>
+    <%= text_field_tag :query,
+        params[:query],
+        class: 'form-control',
+        placeholder: 'Filter your job search', id: 'search-jobs' %>
+    <%= submit_tag 'Search', id: 'search-button' %>
+  <% end %>
+  <%= link_to 'Clear search', jobs_path, id: 'clear-search-button' %>
+</div>

@@ -1,6 +1,6 @@
 class SavedJobsController < ApplicationController
   def index
-    @saved_jobs = SavedJob.all.where(user_id: current_user.id)
+    @saved_jobs = SavedJob.where(user_id: current_user.id)
   end
 
   def new

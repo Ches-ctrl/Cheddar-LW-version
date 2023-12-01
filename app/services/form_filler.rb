@@ -44,12 +44,6 @@ class FormFiller
 
   # TODO: Move to application jobs controller when complete. This will run as a background job.
 
-  # Not yet filling in:
-  # - Resume
-  # - Right to work
-  # - Preferred pronoun (value)
-  # - Preferred pronoun (text)
-
   def fill_out_form(url, fields)
     visit(url)
     find_apply_button.click
@@ -86,7 +80,7 @@ class FormFiller
       end
     end
     # TODO: Return a screenshot of the submitted form
-    sleep 10
+    sleep 3
     close_session
   end
 
@@ -220,69 +214,3 @@ class FormFiller
     end
   end
 end
-
-# OLD CODE:
-
-#   def fill_out_form(url, fields)
-#     visit(url)
-#     find_apply_button.click
-#     p url
-#     p fields
-#     p "started filling form at #{Time.zone.now}"
-
-#     fields.each do |field|
-#       # case field[:interaction]
-#       # when :input
-#       p field
-#       p field[1]
-#       p field[1]["locators"]
-#       selected_locator = find_available_locator(field[1]["locators"])
-#       p selected_locator
-#       fill_in(selected_locator, with: field[1]['value']) if selected_locator
-#       # when :click
-#       #   selected_locator = find_available_locator(field[:locators])
-#       #   p selected_locator
-#       #   click_on(selected_locator) if selected_locator
-#       # when :combobox
-#       #   combobox_locator = find_available_locator(field[:locators])
-#       #   option_locator = field['value']
-#       #   p combobox_locator
-#       #   p option_locator
-#       #   select_option_from_combobox(combobox_locator, option_locator)
-#       # end
-
-#       sleep 5
-
-    # fields =
-      # { interaction: :input, locators: ['firstname', 'first_name'], value: 'Ilya' }, DONE
-      # { interaction: :input, locators: ['lastname', 'last_name'], value: 'Obretetskiy' },DONE
-      # { interaction: :input, locators: ['email'], value: 'obreil54@gmail.com' },DONE
-      # { interaction: :input, locators: ['phone'], value: '+447564055308' },DONE
-      # { interaction: :input, locators: ['CA_18698'], value: '£30,000' },DONE
-      # { interaction: :input, locators: ['QA_6308628'], value: '£30,000' },DONE
-      # { interaction: :input, locators: ['QA_6308629'], value: '3' },DONE
-      # { interaction: :input, locators: ['QA_6308631'], value: 'N/A' },DONE
-      # { interaction: :input, locators: ['QA_6427777'], value: 'no' },DONE
-      # { interaction: :input, locators: ['job_application[location]'], value: 'London' },DONE
-      # { interaction: :listbox, locators: ['ul#location_autocomplete-items-popup'] },
-      # { interaction: :input, locators: ['job_application_answers_attributes_0_text_value'], value: 'https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/' },
-      # { interaction: :input, locators: ['job_application_answers_attributes_1_text_value'], value: 'https://www.ilya.com' },
-      # { interaction: :input, locators: ['job_application_answers_attributes_2_text_value'], value: 'Cheddar' },
-      # { interaction: :combobox, locators: ['input#input_QA_6308630_input'], value: 'li', text: /he\/him/i },
-      # { interaction: :radiogroup, locators: ['fieldset[data-ui="QA_6308627"]'], value: 'label', text: /yes/i },
-      # { interaction: :select, locators: ['select#job_application_answers_attributes_1_boolean_value', 'select#job_application_answers_attributes_3_boolean_value'], value: 'option', text: /yes/i},
-      # { interaction: :select, locators: ['select#job_application_answers_attributes_2_boolean_value'], value: 'option', text: /yes/i},
-      # { interaction: :select, locators: ['select#job_application_answers_attributes_4_boolean_value'], value: 'option', text: /no/i},
-
-      #1. Pass in cloudinary url file we want to upload
-      #2. Open URL to download it
-      #3. Save to temp folder
-      #4. Pass that file as argument
-
-    #   { interaction: :upload, locators: ['input[type="file"]', 'button[aria-describedby="resume-allowable-file-types"'], value: "/home/ilya/code/obreil54/Cheddar/Cheddar/public/Obretetskiy_cv.pdf"}
-    # ]
-
-    # @url = 'https://apply.workable.com/kroo/j/C51C29B6C0/' #url
-    # @url = 'https://boards.greenhouse.io/deliveroo/jobs/5447359?utm_source=trueup&utm_medium=website&ref=trueup#app' #url
-    # @url = 'https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002&utm_source=trueup&utm_medium=website&ref=trueup' #url
-    # @fields = fields

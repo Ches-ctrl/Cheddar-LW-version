@@ -30,6 +30,12 @@ puts "Created company - #{Company.last.company_name}"
 puts "Creating new jobs..."
 
 # TODO: Test filling in forms based on different locators to see what is most efficient and what works
+# TODO: Add migration for additional fields in user model
+# TODO: Add values for user model
+# TODO: Add additional fields and change fields e.g. notice_period_weeks
+# TODO: Update Job to have Job Application Fields so that we can pull those in the same format as the user model
+
+# NB. Whenever changing a field, you need to adjust 3 places: Job Model, User Model and Default Value
 
 Job.create(
   job_title: "Software Engineer-Full stack (Junior Level)",
@@ -37,7 +43,8 @@ Job.create(
   salary: 30000,
   date_created: Date.today,
 
-  # note: this all converts to string when parsed to json in the databse
+  # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
+
   application_criteria: {
     first_name: {
       interaction: :input,
@@ -55,7 +62,7 @@ Job.create(
       interaction: :input,
       locators: ['phone']
     },
-    cv_upload: {
+    resume: {
       interaction: :upload,
       locators: ['input[type="file"]']
     },
@@ -90,13 +97,6 @@ Job.create(
       locators: ['QA_6427777']
     }
   },
-
-  # { interaction: :input, locators: ['job_application_answers_attributes_1_text_value'], value: 'https://www.ilya.com' },
-  # { interaction: :input, locators: ['job_application_answers_attributes_2_text_value'], value: 'Cheddar' },
-  # { interaction: :select, locators: ['select#job_application_answers_attributes_1_boolean_value', 'select#job_application_answers_attributes_3_boolean_value'], value: 'option', text: /yes/i},
-  # { interaction: :select, locators: ['select#job_application_answers_attributes_2_boolean_value'], value: 'option', text: /yes/i},
-  # { interaction: :select, locators: ['select#job_application_answers_attributes_4_boolean_value'], value: 'option', text: /no/i},
-
   application_deadline: Date.today + 30,
   job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
   company_id: Company.first.id)
@@ -235,9 +235,17 @@ User.create(
   address_second: "London",
   post_code: "E1 7SH",
   city: "London",
+  # resume: "public/Obtretetskiy_cv.pdf",
+  salary_expectation_text: "£30,000 - £40,000",
+  # right_to_work: /yes/i,
+  salary_expectation_figure: 30000,
+  notice_period: 12,
+  # preferred_pronoun_select: /he\/him/i,
+  preferred_pronoun_text: 'N/A',
+  employee_referral: "no",
   admin: true)
 
-puts "Created user:  #{User.first.first_name}"
+puts "Created admin user:  #{User.last.first_name}"
 
 # Admin user
 User.create(
@@ -249,9 +257,42 @@ User.create(
   address_second: "London",
   post_code: "E5 6KK",
   city: "London",
+  # resume: "public/Obtretetskiy_cv.pdf",
+  salary_expectation_text: "£30,000 - £40,000",
+  # right_to_work: /yes/i,
+  salary_expectation_figure: 30000,
+  notice_period: 12,
+  # preferred_pronoun_select: /he\/him/i,
+  preferred_pronoun_text: 'N/A',
+  employee_referral: "no",
   admin: true)
 
-puts "Created user:  #{User.first.first_name}"
+puts "Created admin user:  #{User.last.first_name}"
+
+puts "Creating default user..."
+
+# Default user
+User.create(
+  email: "usermissingemail@getcheddar.xyz",
+  password: ENV['ADMIN_PASSWORD'],
+  first_name: "UserMissingFirst",
+  last_name: "UserMissingLast",
+  phone_number: "+447555555555",
+  address_first: "99 Missing Drive",
+  address_second: "Missingham",
+  post_code: "M1 1MM",
+  city: "Missingdon",
+  # resume: "public/Obtretetskiy_cv.pdf",
+  salary_expectation_text: "£Missing - £Missing",
+  # right_to_work: /yes/i,
+  salary_expectation_figure: 99999,
+  notice_period: 12,
+  # preferred_pronoun_select: /he\/him/i,
+  preferred_pronoun_text: 'N/A',
+  employee_referral: "Missing",
+  admin: false)
+
+puts "Created default user:  #{User.last.first_name}"
 
 puts "Creating standard users..."
 
@@ -264,9 +305,17 @@ User.create(
   address_second: "London",
   post_code: "E1 3KR",
   city: "London",
+  # resume: "public/Obtretetskiy_cv.pdf",
+  salary_expectation_text: "£30,000 - £40,000",
+  # right_to_work: /yes/i,
+  salary_expectation_figure: 30000,
+  notice_period: 12,
+  # preferred_pronoun_select: /he\/him/i,
+  preferred_pronoun_text: 'N/A',
+  employee_referral: "no",
   admin: false)
 
-puts "Created user:  #{User.second.first_name}"
+puts "Created user:  #{User.last.first_name}"
 
 User.create(
   email: "email3@gmail.com",
@@ -277,22 +326,38 @@ User.create(
   address_second: "London",
   post_code: "E1 3KR",
   city: "London",
+  # resume: "public/Obtretetskiy_cv.pdf",
+  salary_expectation_text: "£30,000 - £40,000",
+  # right_to_work: /yes/i,
+  salary_expectation_figure: 30000,
+  notice_period: 12,
+  # preferred_pronoun_select: /he\/him/i,
+  preferred_pronoun_text: 'N/A',
+  employee_referral: "no",
   admin: false)
 
-puts "Created user:  #{User.third.first_name}"
+puts "Created user:  #{User.last.first_name}"
 
-User.create(
-  email: "email4@gmail.com",
-  password: "password",
-  first_name: "Charlotte",
-  last_name: "the genius",
-  address_first: "15 Hackney Drive",
-  address_second: "London",
-  post_code: "E1 3KR",
-  city: "London",
-  admin: false)
+# User.create(
+#   email: "email4@gmail.com",
+#   password: "password",
+#   first_name: "Charlotte",
+#   last_name: "the genius",
+#   address_first: "15 Hackney Drive",
+#   address_second: "London",
+#   post_code: "E1 3KR",
+#   city: "London",
+#   resume: "public/Obtretetskiy_cv.pdf",
+#   salary_expectation_text: "£30,000 - £40,000",
+#   right_to_work: /yes/i,
+#   salary_expectation_figure: 30000,
+#   notice_period: 12,
+#   preferred_pronoun_select: /he\/him/i,
+#   preferred_pronoun_text: 'N/A',
+#   employee_referral: "no",
+#   admin: false)
 
-puts "Created user:  #{User.fourth.first_name}"
+# puts "Created user:  #{User.fourth.first_name}"
 
 5.times do |_application|
   JobApplication.create(
@@ -302,8 +367,6 @@ puts "Created user:  #{User.fourth.first_name}"
   )
   puts "Created job application for #{User.first.first_name} for #{Job.first.job_title}"
 end
-
-puts "Created 5 Super Users"
 
 puts Company.all
 puts Job.all
@@ -315,9 +378,8 @@ puts "Done!"
 PgSearch::Multisearch.rebuild(Job)
 PgSearch::Multisearch.rebuild(Company)
 
-# Test method: ApplyJob.perform_now(16, 7)
 
-
+# -----------------------
 # Template Job Structure:
 
 # Job.create(
@@ -378,3 +440,7 @@ PgSearch::Multisearch.rebuild(Company)
 #   application_deadline: Date.XXX,
 #   job_posting_url: "XXX",
 #   company_id: Company.XXX.id)
+
+# ---------------------------
+# Test method:
+# ApplyJob.perform_now(16, 7)

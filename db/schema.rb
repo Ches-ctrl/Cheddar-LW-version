@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_163156) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_01_123935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,6 +123,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_163156) do
     t.string "website_url"
     t.string "cover_letter_template_url"
     t.boolean "admin", default: false, null: false
+    t.string "salary_expectation_text"
+    t.string "right_to_work"
+    t.integer "salary_expectation_figure"
+    t.integer "notice_period"
+    t.string "preferred_pronoun_select"
+    t.string "preferred_pronoun_text"
+    t.string "employee_referral"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
