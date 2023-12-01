@@ -30,6 +30,16 @@ class JobsController < ApplicationController
     end
   end
 
+  def apply_to_selected_jobs
+    selected_job_ids = params[:job_ids]
+    selected_job_ids.each do |job_id|
+      job_app = JobApplication.create(job_id: job_id, user_id: current_user.id, status: "Pre-application")
+      ApplyJob.perform_now(job_app.id, current_user.id)
+      # flash[:notice] = "You applied to #{Job.find(job_id).job_title}!"
+    end
+    redirect_to job_applications_path
+  end
+
   private
 
   def job_params

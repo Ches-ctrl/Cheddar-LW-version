@@ -1,6 +1,6 @@
 body, html {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  // font-family: 'Montserrat', sans-serif;
   font-weight: 300;
 }
 
@@ -398,7 +398,7 @@ section#animated-cta-bar {
 	background: #c22525;
 	background: -webkit-linear-gradient(to left, rgb(255, 255, 255), #5b646b);
 	background: linear-gradient(to left, #ffffff, #ffffff);
-  height: 100vh;
+  height: 75vh;
 
 	.cta-content {
 		display: block;

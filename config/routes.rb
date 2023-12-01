@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "test" => "pages#test"
   get "faqs" => "pages#faqs"
 
+  post 'apply_jobs' => 'jobs#apply_to_selected_jobs', as: :apply_jobs
+
   # Defines the root path route ("/")
   # root "posts#index"
 
