@@ -84,7 +84,7 @@ Defaults = {
     'value' => "+447874943544"
   },
   'cv_upload' => {
-    'value' => '/Users/charliecheesman/code/Ches-ctrl/Cheddar/public/Obretetskiy_cv.pdf'
+    'value' => 'public/Obretetskiy_cv.pdf'
   },
   'salary_expectation_text' => {
     'value' => "£30,000 - £40,000"
@@ -106,6 +106,24 @@ Defaults = {
   },
   'employee_referral' => {
     'value' => "no"
+  },
+  'city' => {
+    'value' => 'London'
+  },
+  'linkedin_profile' => {
+    'value' => "https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/"
+  },
+  'personal_website' => {
+    'value' => "https://www.ilya.com"
+  },
+  'require_visa?' => {
+    'value' => /no/i,
+  },
+  'heard_of_company?' => {
+    'value' => /yes/i
+  },
+  'heard_from' => {
+    'value' => 'Cheddar'
   }
 }
 
