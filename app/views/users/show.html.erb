@@ -1,7 +1,11 @@
 <div class="container">
   <div class="align-items-center">
     <div class="col-md-6">
-      <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+      <% if current_user.photo.key %>
+        <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+      <% else %>
+        <%= image_tag "avatar_default.png", class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+      <% end %>
     </div>
     <div class="col">
       <div class="text-md-9 w-50">
@@ -25,7 +29,7 @@
       <p>Address: <%= "#{current_user.address_first} #{current_user.city} #{current_user.post_code}" %></p>
       <p>Email: <%= current_user.email %></p>
       <p>Phone Number: <%= current_user.phone_number %></p>
-      
+
       <h5>Education</h5>
 
       <%= link_to 'Add/ Edit your information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
@@ -60,4 +64,3 @@
 <div class="m-3">
   <h5> <%= link_to 'Edit', edit_user_registration_path(current_user), data: { turbo_method: :post } %> your information:</h5>
 </div>
-
