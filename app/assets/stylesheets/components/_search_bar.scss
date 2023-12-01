@@ -1,16 +1,13 @@
 #jobs-search-bar {
+  margin: 24px 0;
   display: flex;
   justify-content: center;
-}
-
-#clear-search-button {
 
 }
 
-#search-button {
-
-}
 
 #search-jobs {
   width: 400px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }

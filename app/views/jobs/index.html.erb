@@ -4,7 +4,12 @@
 
       <%= render 'search' %>
 
-      <h3>All Jobs</h3>
+      <% if params[:query].present? %>
+        <h3>Your Jobs Search</h3>
+      <% else %>
+        <h3>All Jobs</h3>
+      <% end %>
+
         <%= render 'jobs_header' %>
 
         <% if params[:query].present? %>
@@ -19,7 +24,7 @@
         <% end %>
 
         <div data-controller="new-job-form">
-          <button data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
+          <button id="btn-add-job" data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
           <%= render 'form', job: @job %>
         </div>
     </div>
