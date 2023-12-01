@@ -33,3 +33,12 @@
   margin-top: 100px; /* Adjust the value to control the amount of vertical space */
   margin-bottom: 100px; /* Adjust the value to control the amount of vertical space */
 }
+
+a {
+  color: $main-color;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
