@@ -25,11 +25,11 @@
       <p>Address: <%= "#{current_user.address_first} #{current_user.city} #{current_user.post_code}" %></p>
       <p>Email: <%= current_user.email %></p>
       <p>Phone Number: <%= current_user.phone_number %></p>
-      
+
       <h5>Education</h5>
 
       <%= link_to 'Add/ Edit your information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
-      <%= link_to 'Add Education Information', edit_user_registration_path(current_user), data: {turbo_method: :post} %>
+      <%= link_to 'Add Education Information', new_education_path(current_user), data: {turbo_method: :post} %>
 
       <h5>Documents</h5>
 
@@ -60,4 +60,3 @@
 <div class="m-3">
   <h5> <%= link_to 'Edit', edit_user_registration_path(current_user), data: { turbo_method: :post } %> your information:</h5>
 </div>
-

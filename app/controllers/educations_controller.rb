@@ -10,7 +10,7 @@ class EducationsController < ApplicationController
     @education = Education.new(education_params)
     @education.user = current_user
     if @education.save
-      redirect_to profile_path(current_user), notice: 'Education was successfully added'
+      redirect_to profile_path(current_user), notice: 'Your education information was successfully added'
     else
       render :new, status: :unprocessable_entity
     end
