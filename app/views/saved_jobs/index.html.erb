@@ -4,7 +4,7 @@
       <h3>Your Saved Jobs</h3>
       <% @saved_jobs.each do |saved_job| %>
         <p>
-          <%= link_to saved_job.job.job_title, job_path(saved_job) %>
+          <%= link_to saved_job.job.job_title, job_path(saved_job.job) %>
           for
           <%= saved_job.job.company.company_name %>
           |

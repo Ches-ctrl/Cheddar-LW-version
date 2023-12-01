@@ -1,14 +1,20 @@
-<h3>Job #<%= @job.id %></h3>
+<div class="container">
+  <div class="d-flex">
+    <h3><%= @job.job_title %></h3>
+    <%= link_to 'Apply to this job', job_job_applications_path(@job), data: {turbo_method: :post}, class: "btn-apply" %>
+  </div>
 
-<p>Company: <%= @job.company.company_name %></p>
-<p>Job title: <%= @job.job_title %></p>
-<p>Job description: <%= @job.job_description %></p>
-<p>Salary: <%= @job.salary %></p>
 
-<%= link_to 'Apply to this job', job_job_applications_path(@job), data: {turbo_method: :post} %>
+  <p>Company: <%= @job.company.company_name %></p>
+  <p>Job title: <%= @job.job_title %></p>
+  <p>Job description: <%= @job.job_description %></p>
+  <p>Salary: <%= @job.salary %></p>
 
-<div>
-  <%= simple_form_for [@job, @saved_job] do |f| %>
-    <%= f.submit 'Save this Job!' %>
-  <% end %>
+
+
+  <div>
+    <%= simple_form_for [@job, @saved_job] do |f| %>
+      <%= f.submit 'Save this Job!' %>
+    <% end %>
+  </div>
 </div>
