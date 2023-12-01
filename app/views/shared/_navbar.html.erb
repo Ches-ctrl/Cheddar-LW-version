@@ -1,18 +1,21 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
+    <div class="d-flex justify-content-start">
     <%= link_to "/#", class: "navbar-brand" do %>
-      <%= image_tag("logo.svg", alt: "Logo") %>
+      <%= image_tag("cheddar_logo.png", alt: "Logo") %>
     <% end %>
-
+      <%= image_tag("cheddar_brand.png", alt: "logo", class: "larger-image mt-3") %>
+  </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-          <li class="nav-item active">
-            <%= link_to "All Jobs", jobs_path, class: "nav-link" %>
-          </li>
+        <li class="nav-item active">
+          <%= link_to "All Jobs", jobs_path, class: "nav-link" %>
+        </li>
+
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "My Jobs", jobs_path, class: "nav-link" %>
@@ -24,13 +27,14 @@
             <%= link_to "My Applications", job_applications_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if current_user.photo.key %>
-              <%= cl_image_tag current_user.photo.key, class: "avatar" %>
-            <% else %>
-              <%= image_tag "avatar_default.png", class: "avatar", alt: "dropdown menu" %>
-            <% end %>
-          </a>
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if current_user.photo.key %>
+                <%= cl_image_tag current_user.photo.key, class: "avatar" %>
+              <% else %>
+                <%= image_tag "avatar_default.png", class: "avatar", alt: "dropdown menu" %>
+              <% end %>
+            </a>
+
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My Profile", profile_path(current_user), class: "dropdown-item" %>
               <%= link_to "Job Preferences", profile_path(current_user), class: "dropdown-item" %>
