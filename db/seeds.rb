@@ -133,7 +133,7 @@ Job.create(
       interaction: :listbox,
       locators: ['ul#location_autocomplete-items-popup']
     },
-    cv_upload: {
+    resume: {
       interaction: :upload,
       locators: ['button[aria-describedby="resume-allowable-file-types"']
     },
@@ -188,7 +188,7 @@ Job.create(
       interaction: :listbox,
       locators: ['ul#location_autocomplete-items-popup']
     },
-    cv_upload: {
+    resume: {
       interaction: :upload,
       locators: ['button[aria-describedby="resume-allowable-file-types"']
     },
@@ -404,7 +404,7 @@ PgSearch::Multisearch.rebuild(Company)
 #       interaction: :input,
 #       locators: XXX
 #     },
-#     cv_upload: {
+#     resume: {
 #       interaction: :upload,
 #       locators: XXX
 #     },
