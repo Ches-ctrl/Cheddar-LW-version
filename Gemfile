@@ -64,7 +64,8 @@ gem "sidekiq-failures", "~> 1.0"
 # Additional Gems for API and Scrape features
 gem "cloudinary"
 gem "pg_search"
-# gem "open-uri" # needs to be installed?
+gem "nokogiri"
+# gem "open-uri"
 
 group :development, :test do
   gem "dotenv-rails"
