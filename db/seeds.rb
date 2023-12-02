@@ -48,53 +48,53 @@ Job.create(
   application_criteria: {
     first_name: {
       interaction: :input,
-      locators: ['firstname']
+      locators: 'firstname'
     },
     last_name: {
       interaction: :input,
-      locators: ['lastname']
+      locators: 'lastname'
     },
     email: {
       interaction: :input,
-      locators: ['email']
+      locators: 'email'
     },
     phone_number: {
       interaction: :input,
-      locators: ['phone']
+      locators: 'phone'
     },
     resume: {
       interaction: :upload,
-      locators: ['input[type="file"]']
+      locators: 'input[type="file"]'
     },
     salary_expectation_text: {
       interaction: :input,
-      locators: ['CA_18698']
+      locators: 'CA_18698'
     },
     right_to_work: {
       interaction: :radiogroup,
-      locators: ['fieldset[data-ui="QA_6308627"]'],
+      locators: 'fieldset[data-ui="QA_6308627"]',
       option: "label",
     },
     salary_expectation_figure: {
       interaction: :input,
-      locators: ['QA_6308628']
+      locators: 'QA_6308628'
     },
     notice_period: {
       interaction: :input,
-      locators: ['QA_6308629']
+      locators: 'QA_6308629'
     },
     preferred_pronoun_select: {
       interaction: :combobox,
-      locators: ['input#input_QA_6308630_input'],
+      locators: 'input#input_QA_6308630_input',
       option: "li"
     },
     preferred_pronoun_text: {
       interaction: :input,
-      locators: ['QA_6308631'],
+      locators: 'QA_6308631',
     },
     employee_referral: {
       interaction: :input,
-      locators: ['QA_6427777']
+      locators: 'QA_6427777'
     }
   },
   application_deadline: Date.today + 30,
@@ -111,44 +111,44 @@ Job.create(
   application_criteria: {
     first_name: {
       interaction: :input,
-      locators: ['first_name']
+      locators: 'first_name'
     },
     last_name: {
       interaction: :input,
-      locators: ['last_name']
+      locators: 'last_name'
     },
     email: {
       interaction: :input,
-      locators: ['email']
+      locators: 'email'
     },
     phone_number: {
       interaction: :input,
-      locators: ['phone']
+      locators: 'phone'
     },
     city: {
       interaction: :input,
-      locators: ['job_application[location]']
+      locators: 'job_application[location]'
     },
     location_click: {
       interaction: :listbox,
-      locators: ['ul#location_autocomplete-items-popup']
+      locators: 'ul#location_autocomplete-items-popup'
     },
     resume: {
       interaction: :upload,
-      locators: ['button[aria-describedby="resume-allowable-file-types"']
+      locators: 'button[aria-describedby="resume-allowable-file-types"'
     },
     linkedin_profile: {
       interaction: :input,
-      locators: ['job_application_answers_attributes_0_text_value']
+      locators: 'job_application_answers_attributes_0_text_value'
     },
     require_visa?: {
       interaction: :select,
-      locators: ['select#job_application_answers_attributes_1_boolean_value'],
+      locators: 'select#job_application_answers_attributes_1_boolean_value',
       option: 'option'
     },
     heard_of_company?: {
       interaction: :select,
-      locators: ['select#job_application_answers_attributes_2_boolean_value'],
+      locators: 'select#job_application_answers_attributes_2_boolean_value',
       option: 'option'
     }
   },
@@ -166,52 +166,52 @@ Job.create(
   application_criteria: {
     first_name: {
       interaction: :input,
-      locators: ['first_name']
+      locators: 'first_name'
     },
     last_name: {
       interaction: :input,
-      locators: ['last_name']
+      locators: 'last_name'
     },
     email: {
       interaction: :input,
-      locators: ['email']
+      locators: 'email'
     },
     phone_number: {
       interaction: :input,
-      locators: ['phone']
+      locators: 'phone'
     },
     city: {
       interaction: :input,
-      locators: ['job_application[location]']
+      locators: 'job_application[location]'
     },
     location_click: {
       interaction: :listbox,
-      locators: ['ul#location_autocomplete-items-popup']
+      locators: 'ul#location_autocomplete-items-popup'
     },
     resume: {
       interaction: :upload,
-      locators: ['button[aria-describedby="resume-allowable-file-types"']
+      locators: 'button[aria-describedby="resume-allowable-file-types"'
     },
     linkedin_profile: {
       interaction: :input,
-      locators: ['job_application_answers_attributes_0_text_value']
+      locators: 'job_application_answers_attributes_0_text_value'
     },
     personal_website: {
       interaction: :input,
-      locators: ['job_application_answers_attributes_1_text_value']
+      locators: 'job_application_answers_attributes_1_text_value'
     },
     heard_from: {
       interaction: :input,
-      locators: ['job_application_answers_attributes_2_text_value']
+      locators: 'job_application_answers_attributes_2_text_value'
     },
     right_to_work: {
       interaction: :select,
-      locators: ['select#job_application_answers_attributes_3_boolean_value'],
+      locators: 'select#job_application_answers_attributes_3_boolean_value',
       option: 'option'
     },
     require_visa?: {
       interaction: :select,
-      locators: ['select#job_application_answers_attributes_4_boolean_value'],
+      locators: 'select#job_application_answers_attributes_4_boolean_value',
       option: 'option'
     }
   },
