@@ -2,6 +2,8 @@ require "uri"
 require "json"
 require "net/http"
 
+# NB. Not yet tested to be working
+
 # TODO: Test API Request
 # TODO: Add error handling
 # TODO: Add logging
@@ -9,6 +11,7 @@ require "net/http"
 # TODO: Save data to job table
 # TODO: Create company if company doesn't exist
 # TODO: Create industry table
+# TODO: Evaluate Job vs Service and implications on application performance
 
 class JobApiService
   def fetch_and_save_jobs
@@ -77,7 +80,6 @@ end
 #   "country": "string",
 #   "industry": "string"
 # }
-
 
 
 # ---------------------
