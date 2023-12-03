@@ -1,21 +1,14 @@
 class FormFiller
   include Capybara::DSL
 
-  # TODO: Move to config intializers
   # TODO: Review code for inefficient loops and potential optimisations
   # TODO: Add ruby monitoring tools to monitor performance and execution
   # TODO: Implement caching for both user and form inputs. At the moment we request the database every time we want an input
   # TODO: Cache values at beginning of session and then update cache when user changes values
   # TODO: Enable multi-job application support in form_filler and cache before all applications are submitted
+  # TODO: Restrict search to certain portions of the page
 
   # Could we implement caching for form inputs? So once you've done it once it becomes less intensive
-  # Could change to a more lighweight browser e.g. firefox to speed up the process
-
-  # TODO: Move to application jobs controller when complete. This will run as a background job.
-  # TODO: Find all available locators before running the function, then run through
-  # TODO: Restrict search to certain portions of the page
-  # TODO: Redo temporary save and open for screenshots
-  # TODO: Set locators and then don't rerun function every time
 
   def fill_out_form(url, fields, job_application_id)
     visit(url)
@@ -95,6 +88,11 @@ class FormFiller
   end
 
   # TODO: Decide whether to include screenshot. Auto-email from the company may be sufficient evidence
+  # TODO: Check whether new screenshot method works
+
+  # ------------
+  # New method for taking screenshots - saves screenshot in memory rather than to disk
+  # ------------
 
   def take_screenshot_and_store(job_application_id)
     screenshot_path = Rails.root.join('tmp', "screenshot-#{job_application_id}.png")
@@ -108,45 +106,22 @@ class FormFiller
     # Clean up temporary screenshot file
     File.delete(screenshot_path)
   end
-end
 
-  # def perform(url, fields, job_application_id)
-  #   visit(url)
-  #   find_apply_button.click
 
-  #   fields.each do |field|
-  #     field = field[1]
-  #     case field['interaction']
-  #     when 'input'
-  #       selected_locator = find_available_locator(field["locators"])
-  #       p selected_locator
-  #       fill_in(selected_locator, with: field['value']) if selected_locator
-  #     when 'combobox'
-  #       combobox_locator = find_combobox_locator(field["locators"])
-  #       option_locator = field['option']
-  #       option_text = field['value']
-  #       select_option_from_combobox(combobox_locator, option_locator, option_text) if combobox_locator
-  #     when 'radiogroup'
-  #       radiogroup_locator = find_radiogroup_locator(field["locators"])
-  #       option_locator = field['option']
-  #       option_text = field['value']
-  #       select_option_from_radiogroup(radiogroup_locator, option_locator, option_text) if radiogroup_locator
-  #     when 'listbox'
-  #       listbox_locator = find_listbox_locator(field["locators"])
-  #       select_option_from_listbox(listbox_locator) if listbox_locator
-  #     when 'select'
-  #       select_locator = find_select_locator(field["locators"])
-  #       option_locator = field['option']
-  #       option_text = field['value']
-  #       select_option_from_select(select_locator, option_locator, option_text) if select_locator
-  #     when 'upload'
-  #       upload_locator = find_upload_locator(field["locators"])
-  #       option_locator = field['value']
-  #       upload_file(upload_locator, option_locator) if upload_locator
-  #     end
-  #   end
-  #   # TODO: Return a screenshot of the submitted form
-  #   take_screenshot_and_store(job_application_id)
-  #   sleep 5
-  #   close_session
+  # ------------
+  # New method for taking screenshots - saves screenshot in memory rather than to disk
+  # ------------
+
+  # def take_screenshot_and_store(job_application_id)
+  #   # Capture screenshot directly into memory
+  #   screenshot = StringIO.new(page.screenshot(full: true))
+
+  #   # Find the job application record
+  #   job_app = JobApplication.find(job_application_id) # Replace with your actual job_app using the id from the initialize method
+
+  #   # Attach the screenshot directly from memory
+  #   job_app.screenshot.attach(io: screenshot, filename: "screenshot-#{job_application_id}.png", content_type: 'image/png')
+
+  #   # No need to clean up temporary files since we didn't create any
   # end
+end
