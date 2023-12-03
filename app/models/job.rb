@@ -10,11 +10,12 @@ class Job < ApplicationRecord
   # def application_criteria
   #   super.transform_keys(&:to_sym)
   # end
-  
+
   include PgSearch::Model
 
   multisearchable against: [:job_title, :job_description, :application_criteria]
 
+  # Old search method - not required? Ask Charlotte
   # pg_search_scope :search_all_strings,
   #   against: [:job_title, :job_description, :application_criteria],
   #   using: {
