@@ -1,4 +1,4 @@
-# require 'nokogiri'
+require 'nokogiri'
 # require 'open-uri'
 # require 'net/http'
 
@@ -23,74 +23,191 @@ class AiFindFormFieldsJob < ApplicationJob
   # -------
 
   def perform(url)
-    # Visit the specified URL
     visit(url)
     find_apply_button.click
 
-    # Wait for the page to load and for the form to appear
-    # Adjust the wait time as needed
+    # page_html = page.html
+    form = find('form')
 
-    p page.html
+    # Extract form HTML from Capybara element
+    form_html = page.evaluate_script("arguments[0].outerHTML", form.native)
 
-    form = page.has_css?('form', wait: 10) ? page.find('form') : nil
+    # Alternative way of getting form HTML:
+    # form_html = page.evaluate_script("document.querySelector('form').outerHTML")
+    # p "Other form: #{form_html}"
 
-    # Check if the form is found
-    if form.nil?
-      puts "Form not found. It might not be present, or it's loaded dynamically."
-    else
-      puts "Form found."
-      p form
+    # Convert Capybara element to a Nokogiri element
+    nokogiri_form = Nokogiri::HTML.fragment(form_html)
 
-      # Convert the form to HTML
-      # parsed_html_form = form.native.inner_html
-      # p parsed_html_form
-    end
-  end
+    # ---------------
+    # Prior to this doesn't need to be touched
+    # ---------------
 
+    # ---------------
+    # OpenAI Attempt III
+    # ---------------
 
-  # -------
-  # Nokogiri Attempt
-  # -------
+    # form_elements = []
 
-  # def perform(url)
-  #   # Go to webpage and parse
-  #   html = URI.open(url).read
-  #   p html
+    # nokogiri_form.css('input, select, textarea, label').each do |element|
+    #   case element.name
+    #   when 'label'
+    #     # Find the associated input/select/textarea element
+    #     input_id = element['for']
+    #     input_element = nokogiri_form.at_css("[id='#{input_id}']")
 
-  #   parsed_nokogiri = Nokogiri::HTML.parse(html)
-  #   p parsed_nokogiri
-
-  #   # Take the form tag (assuming first form in the page)
-  #   # form = parsed_nokogiri.at_css('form')
-  #   form = parsed_nokogiri.search('form')
-  #   p form
-
-  #   if form.nil?
-  #     puts "Form not found. HTML might not have it or it's loaded dynamically."
-  #   else
-  #     puts "Form found."
-  #   end
-
-  #   parsed_html_form = form.to_html
-  #   p parsed_html_form
-
-  #   return 'failure' unless form
-
-    # Pass form to OpenAI API (pseudo-implementation)
-    # form_fields = get_form_fields_from_openai(form.to_s)
-    # return 'failure' unless form_fields
-
-    # # Test filling out the form fields (pseudo-implementation)
-    # 3.times do
-    #   success = test_filling_form(url, form_fields)
-    #   return 'success' if success
-
-    #   # Get updated form fields from OpenAI (if not successful)
-    #   form_fields = get_form_fields_from_openai(form.to_s, false)
+    #     if input_element
+    #       form_elements << {
+    #         label: element.text.strip,
+    #         type: input_element.name, # 'input', 'select', or 'textarea'
+    #         id: input_element['id'],
+    #         name: input_element['name'],
+    #         input_type: input_element['type'], # for 'input' elements, e.g., 'text', 'checkbox'
+    #         required: input_element['required'],
+    #         value: input_element['value']
+    #       }
+    #     end
+    #   end
     # end
 
-    # 'failure'
-  # end
+    # # Output the extracted elements
+    # puts "Form Elements:"
+    # form_elements.each { |element| p element }
+
+    # ---------------
+    # OpenAI Attempt II - works
+    # ---------------
+
+    user_inputs = nokogiri_form.css('input, select, textarea').map do |element|
+      {
+        type: element.name, # 'input', 'select', or 'textarea'
+        id: element['id'],
+        name: element['name'],
+        input_type: element['type'], # for 'input' elements, e.g., 'text', 'checkbox'
+        required: element['required'],
+        value: element['value']
+      }
+    end
+
+    # Extract labels and associate them with inputs
+    labels = nokogiri_form.css('label').map do |label|
+      input_id = label['for']
+      input_element = user_inputs.find { |input| input[:id] == input_id }
+
+      {
+        label_text: label.text.strip,
+        associated_input: input_element
+      }
+    end
+
+    # Output the extracted elements
+    puts "User Inputs:"
+    user_inputs.each { |input| p input }
+
+    puts "Labels with Associated Inputs:"
+    labels.each { |label| p label }
+
+
+    # ---------------
+    # OpenAI Attempt I - ? status
+    # ---------------
+
+    # required_elements = nokogiri_form.css('label, input, select, textarea').each_with_object([]) do |element, arr|
+    #   if element.name == 'label'
+    #     # Extract label text and corresponding input details
+    #     input_id = element['for']
+    #     input_element = nokogiri_form.at_css("##{input_id}")
+
+    #     if input_element
+    #       arr << {
+    #         label: element.text.strip,
+    #         input_id: input_id,
+    #         input_name: input_element['name'],
+    #         input_type: input_element['type'],
+    #         required: input_element['required']
+    #       }
+    #     end
+    #   end
+    # end
+
+    # required_elements.each { |element| p element }
+
+    # ---------------
+    # Old Working Method but that is too long for OpenAI
+
+    # # Remove style attributes from all elements
+    # nokogiri_form.traverse { |node| node.delete('style') }
+
+    # # Get the HTML content of the form element without style properties
+    # # cleaned_html = nokogiri_form.to_html
+
+    # # puts "Cleaned HTML:"
+    # # puts cleaned_html
+
+    # simplified_form = Nokogiri::HTML::DocumentFragment.parse("")
+
+    # nokogiri_form.css('input, select, textarea, label').each do |element|
+    #   # Clone the element to modify it
+    #   cloned_element = element.clone
+
+    #   # Remove all attributes except the essentials
+    #   cloned_element.attributes.each do |name, _|
+    #     unless ['id', 'name', 'type', 'aria-labelledby', 'for', 'value'].include?(name)
+    #       cloned_element.remove_attribute(name)
+    #     end
+    #   end
+
+    #   # Add to simplified form
+    #   simplified_form.add_child(cloned_element)
+    # end
+
+    # # puts "Simplified form:"
+    # # puts simplified_form
+
+    # simplified_html = simplified_form.to_html
+
+    # puts "Simplified HTML:"
+    # puts simplified_html
+
+    # puts "Length: #{cleaned_html.size} characters"
+    # puts "Length: #{simplified_html.size} characters"
+    # puts "Tokens required: #{OpenAI.rough_token_count(simplified_html)}"
+
+    p "(1) Sending cleaned HTML to OpenAI..."
+
+    # TODO: Install TikToken gem to check for number of tokens in message
+    # TODO: OR call OpenAI API directly to check for number of tokens in message
+    # TODO: Batch processing if number of tokens exceeds limit
+
+    # OpenAI HTTP Error (spotted in ruby-openai 6.3.0): {"error"=>{"message"=>"This model's maximum context length is 16385 tokens. However, your messages resulted in 30810 tokens. Please reduce the length of the messages.", "type"=>"invalid_request_error", "param"=>"messages", "code"=>"context_length_exceeded"}}
+
+    ai_response = GetAiResponseJob.perform_now(user_inputs, labels)
+    application_criteria_string = ai_response["choices"][0]["message"]["content"]
+    application_criteria = JSON.parse(application_criteria_string)
+
+    puts application_criteria
+    puts application_criteria["application_criteria"]
+    # puts application_criteria.dig["application_criteria"]
+
+    Job.create(
+      job_title: "Software Engineer-Full stack (Junior Level)",
+      job_description: "Kroo has a big vision. To be the first bank that is both trusted and loved by its customers.We’re helping people take control of their financial future and achieve their goals, whilst making a positive impact on the planet. Here at Kroo, doing what is right is in our DNA. We act with integrity, transparency and honesty. We think big, dream big, and relentlessly pursue our goals. We like to be bold, break new ground, and we never stop learning. But most importantly, we are on this journey together.",
+      salary: 30000,
+      date_created: Date.today,
+      application_criteria: application_criteria["application_criteria"],
+      application_deadline: Date.today + 30,
+      job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
+      company_id: Company.first.id)
+
+    JobApplication.create(
+      status: "Pre-test",
+      user_id: User.first.id,
+      job_id: Job.last.id
+    )
+    puts "Created job application for #{User.first.first_name} for #{Job.first.job_title}"
+
+    ApplyJob.perform_now(JobApplication.last.id, User.first.id)
+  end
 
   private
 
