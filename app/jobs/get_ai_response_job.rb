@@ -16,7 +16,7 @@ class GetAiResponseJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo-1106",
         response_format: { type: "json_object" },
-        messages: [{ role: "user", content: "This data is extracted from an HTML form element for a job application. Please go through it and identify (1) the form fields that need to be inputted by the user and (2) the HTML selectors that I can use capybara against to find them. Ensure the HTML selectors identify the elements uniquely. Output the response as a JSON in the following format:
+        messages: [{ role: "user", content: "This data is extracted from an HTML form element for a job application. Please go through it and identify (1) the form fields that need to be inputted by the user and (2) the HTML selectors that I can use capybara against to find them. Ensure the HTML selectors identify the elements uniquely. Add any additional keys required. Output the response as a JSON in the following format:
         application_criteria: {
           first_name: {
             interaction: :input,
@@ -68,9 +68,9 @@ class GetAiResponseJob < ApplicationJob
             interaction: :input,
             locators: 'QA_6427777'
           }
-        },
-          ... etc.
-        #{user_inputs} #{labels}"}],
+        }
+        ...etc. User inputs:
+        #{user_inputs}. Labels: #{labels}"}],
         temperature: 0.7,
     })
   end
