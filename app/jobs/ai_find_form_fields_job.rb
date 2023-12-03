@@ -17,7 +17,10 @@ class AiFindFormFieldsJob < ApplicationJob
     find_apply_button.click
 
     # page_html = page.html
-    form = find('form')
+    # form = find('form', id: 'application')
+    # form = find('form#application')
+    # form = find('form', text: 'appl')
+    form = find('form', visible: true)
 
     # Extract form HTML from Capybara element
     form_html = page.evaluate_script("arguments[0].outerHTML", form.native)
@@ -81,7 +84,7 @@ class AiFindFormFieldsJob < ApplicationJob
       date_created: Date.today,
       application_criteria: application_criteria["application_criteria"],
       application_deadline: Date.today + 30,
-      job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
+      job_posting_url: "https://boards.greenhouse.io/nobellfoods/jobs/4131621006",
       company_id: Company.first.id)
 
     JobApplication.create(

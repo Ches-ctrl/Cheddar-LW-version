@@ -7,6 +7,7 @@ class GetHtmlJob < ApplicationJob
 
   def perform(url)
     Capybara.default_max_wait_time = 10
+    # Capybara.current_session.driver.header('User-Agent', 'cordova')
 
     visit(url)
 
