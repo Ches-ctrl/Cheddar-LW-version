@@ -41,8 +41,13 @@ export default class extends Controller {
 
   revealCompanies(event) {
     event.preventDefault()
-    this.indexTarget.classList.toggle('d-none')
-    this.buttonTarget.innerText = 'Hide Companies'
+    if (this.buttonTarget.innerText == 'Show all') {
+      this.indexTarget.classList.remove('d-none')
+      this.buttonTarget.innerText = 'Hide all'
+    } else {
+      this.indexTarget.classList.add('d-none')
+      this.buttonTarget.innerText = 'Show all'
+    } end
   }
 
 }
