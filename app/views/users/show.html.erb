@@ -8,8 +8,16 @@
     <h2><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
     <h2 style="color: rgba(0, 0, 0, 0.5);">He/Him</h2>
   </div>
-  <h1 style="color: #0a66c2"><i class="fa-brands fa-linkedin"></i></h1>
-  <h1><i class="fa-brands fa-github"></i></h1>
+  <h1>
+    <%= link_to current_user.linkedin_profile, target: "_blank", style: "color: #0a66c2" do %>
+      <i class="fa-brands fa-linkedin"></i>
+    <% end %>
+  </h1>
+  <h1>
+    <%= link_to current_user.github_profile_url, target: "_blank", style: "color: black" do %>
+      <i class="fa-brands fa-github"></i>
+    <% end %>
+  </h1>
 </div>
 
 <div id="profile-scroll-boxes">

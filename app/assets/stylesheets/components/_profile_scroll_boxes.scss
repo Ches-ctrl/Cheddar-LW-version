@@ -39,11 +39,16 @@
     margin: 0 16px;
     justify-content: center;
     gap: 5px;
+    margin-left: 0;
   }
 
   .education-card h6 {
     margin-bottom: 0;
     margin-top: 0;
+  }
+
+  .btn-apply {
+    margin-left: 16px;
   }
 }
 
