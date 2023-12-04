@@ -18,6 +18,10 @@
       // justify-content: center;
       text-align: left;
     }
+      // .role {
+      //   width: 200px !important;
+      //   flex-grow: 1;
+      // }
   }
 }
 
@@ -42,9 +46,9 @@
 
 // Custom checkbox styles
 input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  // -webkit-appearance: none;
+  // -moz-appearance: none;
+  // appearance: none;
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -55,8 +59,7 @@ input[type="checkbox"] {
   cursor: pointer;
 
   &:checked {
-    background-color: #007bff;
-    border-color: #007bff;
+    // border-color: #007bff;
   }
 }
 
@@ -72,4 +75,14 @@ input[type="checkbox"] {
     height: 80vh;
     overflow-y: auto;
   }
+}
+
+.saved-job-heart-icon {
+  font-size: 20px;
+  color: $red;
+}
+
+.not-saved-job-heart-icon {
+  font-size: 20px;
+  color: $red;
 }

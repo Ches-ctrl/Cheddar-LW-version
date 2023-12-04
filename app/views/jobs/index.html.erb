@@ -1,32 +1,86 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
 
-      <%= render 'search' %>
+    <div id="jobs-index-second-section" class="container">
 
-      <% if params[:query].present? %>
-        <h3>Your Jobs Search</h3>
-      <% else %>
-        <h3>All Jobs</h3>
-      <% end %>
+      <div id="jobs-index-left-section">
+        <h3 id="jobs-index-left-section-title"><%= @jobs.count %> Jobs</h3>
+        <%= render 'search' %>
+      </div>
 
-        <%= render 'jobs_header' %>
+      <div id="jobs-index-right-section">
+        <%= form_tag apply_jobs_path, method: :post do %>
+          <div class="d-flex flex-row-reverse">
+            <%= submit_tag "Apply to Selected Jobs", class: "btn btn-apply" %>
+          </div>
 
-        <% if params[:query].present? %>
-          <% @results.each do | result | %>
-            <% if result.searchable.is_a? Job %>
-              <%= render 'job_card', job: Job.find(result.searchable_id) %>
-            <% end %>
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="card job-list-header">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">Company</div>
+                    <div class="col">Role</div>
+                    <div class="col">Est. Salary</div>
+                    <div class="col">Status</div>
+                    <div class="col">Deadline</div>
+                    <div class="col">CV</div>
+                    <div class="col">Cover Letter</div>
+                    <div class="col">Job Details</div>
+                    <div class="col">Saved Jobs</div>
+                    <div class="col">Select Job</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% @jobs.each do |job| %>
+            <div class="row mb-3">
+              <div class="col-12">
+                <div class="card job-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col"><%= job.company.company_name %></div>
+                      <div class="col role"><%= link_to job.job_title, job_path(job) %></div>
+                      <div class="col">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
+                      <div class="col">
+                        <% if (Time.now.next_day(7)) >= job.application_deadline %>
+                          CLOSING SOON
+                        <% elsif Time.now < job.application_deadline %>
+                          OPEN
+                        <% else %>
+                          CLOSED
+                        <% end %>
+                      </div>
+                      <div class="col"><%= job.application_deadline %></div>
+                      <div class="col text-center"><input type="checkbox"></div>
+                      <div class="col text-center"><input type="checkbox"></div>
+                      <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
+                      <div class="col text-center">
+                        <% if SavedJob.where(job_id: job.id).present? %>
+                          <i class="fa-solid fa-heart saved-job-heart-icon"></i>
+                        <% else %>
+                          <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
+                        <% end %>
+                      </div>
+                      <div class="col text-center">
+                        <%= check_box_tag "job_ids[]", job.id %>
+                      </div>
+                      <%# <div class="col text-center submit"><input type="checkbox"></div> %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
-
-        <% else %>
-            <%= render 'job_card' %>
         <% end %>
+      </div>
+    </div>
 
-        <div data-controller="new-job-form">
-          <button id="btn-add-job" data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
-          <%= render 'form', job: @job %>
-        </div>
+    <div data-controller="new-job-form">
+      <button id="btn-add-job" class="d-none" data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
+      <%= render 'form', job: @job %>
     </div>
   </div>
 </div>

@@ -25,6 +25,16 @@ Company.create(
   company_category: "Tech",
   company_website_url: "https://bcgdv.com/")
 
+Company.create(
+  company_name: "Slack",
+  company_category: "Tech",
+  company_website_url: "#")
+
+Company.create(
+  company_name: "Facebook",
+  company_category: "Tech",
+  company_website_url: "#")
+
 puts "Created company - #{Company.last.company_name}"
 
 puts "Creating new jobs..."
@@ -155,6 +165,126 @@ Job.create(
   application_deadline: Date.today + 30,
   job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
   company_id: Company.second.id)
+
+Job.create(
+  job_title: "Software Engineer-Full stack (Junior Level)",
+  job_description: "Kroo has a big vision. To be the first bank that is both trusted and loved by its customers.We’re helping people take control of their financial future and achieve their goals, whilst making a positive impact on the planet. Here at Kroo, doing what is right is in our DNA. We act with integrity, transparency and honesty. We think big, dream big, and relentlessly pursue our goals. We like to be bold, break new ground, and we never stop learning. But most importantly, we are on this journey together.",
+  salary: 30000,
+  date_created: Date.today,
+
+  # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
+
+  application_criteria: {
+    first_name: {
+      interaction: :input,
+      locators: ['firstname']
+    },
+    last_name: {
+      interaction: :input,
+      locators: ['lastname']
+    },
+    email: {
+      interaction: :input,
+      locators: ['email']
+    },
+    phone_number: {
+      interaction: :input,
+      locators: ['phone']
+    },
+    resume: {
+      interaction: :upload,
+      locators: ['input[type="file"]']
+    },
+    salary_expectation_text: {
+      interaction: :input,
+      locators: ['CA_18698']
+    },
+    right_to_work: {
+      interaction: :radiogroup,
+      locators: ['fieldset[data-ui="QA_6308627"]'],
+      option: "label",
+    },
+    salary_expectation_figure: {
+      interaction: :input,
+      locators: ['QA_6308628']
+    },
+    notice_period: {
+      interaction: :input,
+      locators: ['QA_6308629']
+    },
+    preferred_pronoun_select: {
+      interaction: :combobox,
+      locators: ['input#input_QA_6308630_input'],
+      option: "li"
+    },
+    preferred_pronoun_text: {
+      interaction: :input,
+      locators: ['QA_6308631'],
+    },
+    employee_referral: {
+      interaction: :input,
+      locators: ['QA_6427777']
+    }
+  },
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
+  company_id: Company.first.id)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "DevOps Engineer - Back End",
+  job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivalled network to bring incredible convenience and selection to our customers.",
+  salary: 31000,
+  date_created: Date.today,
+  application_criteria: {
+    first_name: {
+      interaction: :input,
+      locators: ['first_name']
+    },
+    last_name: {
+      interaction: :input,
+      locators: ['last_name']
+    },
+    email: {
+      interaction: :input,
+      locators: ['email']
+    },
+    phone_number: {
+      interaction: :input,
+      locators: ['phone']
+    },
+    city: {
+      interaction: :input,
+      locators: ['job_application[location]']
+    },
+    location_click: {
+      interaction: :listbox,
+      locators: ['ul#location_autocomplete-items-popup']
+    },
+    resume: {
+      interaction: :upload,
+      locators: ['button[aria-describedby="resume-allowable-file-types"']
+    },
+    linkedin_profile: {
+      interaction: :input,
+      locators: ['job_application_answers_attributes_0_text_value']
+    },
+    require_visa?: {
+      interaction: :select,
+      locators: ['select#job_application_answers_attributes_1_boolean_value'],
+      option: 'option'
+    },
+    heard_of_company?: {
+      interaction: :select,
+      locators: ['select#job_application_answers_attributes_2_boolean_value'],
+      option: 'option'
+    }
+  },
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
+  company_id: Company.second.id)
+
 
 puts "Created job - #{Job.last.job_title}"
 

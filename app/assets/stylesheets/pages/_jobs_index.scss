@@ -1,0 +1,21 @@
+#jobs-index-second-section{
+  display: flex;
+  margin-top: 48px;
+}
+
+#jobs-index-left-section{
+  margin-top: 75px;
+  width: 400px;
+  justify-content: flex-start;
+}
+
+#jobs-index-right-section{
+  width: 900px;
+  justify-content: flex-end;
+}
+
+#jobs-search-buttons {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -10,14 +10,17 @@ class Job < ApplicationRecord
   # def application_criteria
   #   super.transform_keys(&:to_sym)
   # end
-  
+
   include PgSearch::Model
 
-  multisearchable against: [:job_title, :job_description, :application_criteria]
+  # multisearchable against: [:job_title, :job_description, :application_criteria]
 
-  # pg_search_scope :search_all_strings,
-  #   against: [:job_title, :job_description, :application_criteria],
-  #   using: {
-  #     tsearch: { prefix: true }
-  #   }
+  pg_search_scope :global_search,
+    against: [:job_title, :salary, :job_description],
+    associated_against: {
+      company: [ :company_name, :company_category ]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
 end

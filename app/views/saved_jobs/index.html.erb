@@ -2,17 +2,60 @@
   <div class="row">
     <div class="col-sm-12">
       <h3 id="saved-jobs-index-title">My Saved Jobs</h3>
-      <% @saved_jobs.each do |saved_job| %>
-        <p>
-          <%= link_to saved_job.job.job_title, job_path(saved_job.job) %>
-          for
-          <%= saved_job.job.company.company_name %>
-          |
-          <%= link_to saved_job_path(saved_job), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this job from your list?"} do %>
-            <i class="fa-solid fa-trash"></i>
-          <% end %>
-        </p>
-      <% end %>
+
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card job-list-header">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">Company</div>
+                  <div class="col">Role</div>
+                  <div class="col">Est. Salary</div>
+                  <div class="col">Status</div>
+                  <div class="col">Deadline</div>
+                  <div class="col">CV</div>
+                  <div class="col">Cover Letter</div>
+                  <div class="col">Job Details</div>
+                  <div class="col">Remove</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% @saved_jobs.each do |saved_job| %>
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="card job-card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col"><%= saved_job.job.company.company_name %></div>
+                    <div class="col"><%= link_to saved_job.job.job_title, job_path(saved_job) %></div>
+                    <div class="col">£<%= number_with_delimiter(saved_job.job.salary, :delimiter => ',') %></div>
+                    <div class="col">
+                      <% if (Time.now.next_day(7)) >= saved_job.job.application_deadline %>
+                        CLOSING SOON
+                      <% elsif Time.now < saved_job.job.application_deadline %>
+                        OPEN
+                      <% else %>
+                        CLOSED
+                      <% end %>
+                    </div>
+                    <div class="col"><%= saved_job.job.application_deadline %></div>
+                    <div class="col text-center"><input type="checkbox"></div>
+                    <div class="col text-center"><input type="checkbox"></div>
+                    <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
+                    <div class="col text-center">
+                      <%= link_to saved_job_path(saved_job), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this job from your list?"} do %>
+                        <i class="fa-solid fa-trash"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
     </div>
   </div>
 </div>
