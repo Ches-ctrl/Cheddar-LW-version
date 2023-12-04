@@ -1,0 +1,81 @@
+#profile-scroll-boxes {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px auto;
+}
+
+.scroll-box {
+  width: 600px;
+  height: 600px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e3e6f0;
+  padding: 16px;
+  overflow: auto;
+
+  p {
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-left: 16px;
+  }
+
+  h5, h6 {
+    margin: 0;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+
+  h6 {
+    margin-left: 16px;
+  }
+
+  .education-card {
+    display: flex;
+    flex-direction: column;
+    margin: 0 16px;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .education-card h6 {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+.application-card-small {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: space-between;
+
+  .progress-container {
+    position: relative;
+    width: 100px;
+    height: 50px;
+  }
+
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    background-color: #3498db; /* Change the color as needed */
+  }
+
+  .progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333; /* Change the color as needed */
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
