@@ -35,4 +35,9 @@ class Job < ApplicationRecord
     end
   end
 
+  # TODO: Add validations to job model
+
+  def application_criteria
+    read_attribute(:application_criteria).with_indifferent_access
+  end
 end

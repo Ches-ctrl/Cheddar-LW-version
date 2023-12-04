@@ -1,0 +1,45 @@
+<%= provide(:title, 'New Job Application') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="companies d-flex flex-column justify-content-start mb-4">
+        <%# Dynamically load the company logos based on selected jobs %>
+        <p>You're applying to the following companies:</p>
+        <div>
+          <% @selected_jobs.each do |job| %>
+            <div class="apply-company-logo mr-3">
+              <%= image_tag('company_logo_default.jpeg', class: 'img-fluid') %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# Iterate over each selected job %>
+  <div class="all-application-forms" data-controller="job-application-forms">
+    <% @job_applications.each do |job| %>
+      <div class="application-form mb-5">
+        <h2>Application Information for <%= job.first.job_title %></h2>
+        <%= simple_form_for job, html: { class: 'needs-validation', 'data-controller': 'application-form', 'data-application-form-target': 'form', novalidate: true } do |f| %>
+
+          <%# Dynamically create form elements based on application_criteria %>
+          <%# Convert to simple_fields_for application_responses. Then use those to create the input fields below. %>
+          <%# Convert to simple_fields_for application_responses. Then use those to create the input fields below. %>
+          <% job.last.application_responses.each do |response| %>
+            <%= f.simple_fields_for response do |ff| %>
+              <label for=""><%= response.field_name.humanize %></label>
+              <%= ff.input :field_value , label_html: { class: "d-none"}%>
+            <% end %>
+          <% end %>
+          <%# TODO: Map data types here.s %>
+
+
+          <%= f.submit 'Submit', class: 'btn btn-apply', 'data-action': 'click->application-form#submitForm' %>
+        <% end %>
+      </div>
+    <% end %>
+    <button class="btn btn-apply" data-action="click->all-application-forms#submitAllForms">Submit All Applications</button>
+  </div>
+</div>
