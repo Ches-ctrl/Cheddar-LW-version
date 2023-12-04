@@ -1,0 +1,60 @@
+<%= provide(:title, 'New Job Application') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="companies d-flex flex-column justify-content-start mb-4">
+        <%# Dynamically load the company logos based on selected jobs %>
+        <p>You're applying to the following companies:</p>
+        <div>
+          <% @selected_jobs.each do |job| %>
+            <div class="apply-company-logo mr-3">
+              <%= image_tag('company_logo_default.jpeg', class: 'img-fluid') %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# Iterate over each selected job %>
+  <div class="all-application-forms" data-controller="job-application-forms">
+    <% @selected_jobs.each do |job| %>
+      <div class="application-form mb-5">
+        <h2>Application Information for <%= job.job_title %></h2>
+        <%= simple_form_for [@job, @job_application], html: { class: 'needs-validation', 'data-controller': 'application-form', 'data-application-form-target': 'form', novalidate: true } do |f| %>
+
+          <%# Dynamically create form elements based on application_criteria %>
+          <% job.application_criteria.each do |field, details| %>
+              <% case details["interaction"] %>
+              <% when "input" %>
+                <div class="form-group">
+                  <%= f.label field.to_sym %>
+                  <%= f.input field.to_sym, value: current_user.try(field.to_sym), class: "form-control" %>
+                </div>
+              <% when "listbox" %>
+                <div class="form-group">
+                  <%= f.label field %>
+                  <%# Implementation depends on the data source for listbox items %>
+                  <%= f.input field.to_sym, collection: details["options"] || [], class: 'form-control' %>
+                </div>
+              <% when "upload" %>
+                <div class="form-group">
+                  <%= f.label field %>
+                  <%= f.input field.to_sym, class: 'form-control' %>
+                </div>
+              <% when "select" %>
+                <div class="form-group">
+                  <%= f.label field %>
+                  <%= f.input field.to_sym, collection: details["options"] || [], class: 'form-control' %>
+                </div>
+              <% end %>
+          <% end %>
+
+          <%= f.submit 'Submit', class: 'btn btn-apply', 'data-action': 'click->application-form#submitForm' %>
+        <% end %>
+      </div>
+    <% end %>
+    <button class="btn btn-apply" data-action="click->all-application-forms#submitAllForms">Submit All Applications</button>
+  </div>
+</div>

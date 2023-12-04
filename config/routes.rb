@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get "about" => "pages#about"
   get "test" => "pages#test"
   get "faqs" => "pages#faqs"
-  post 'apply_jobs' => 'jobs#apply_to_selected_jobs', as: :apply_jobs
 
   # Defines the root path route ("/")
   # root "posts#index"
@@ -18,9 +17,14 @@ Rails.application.routes.draw do
   resources :companies, only: [:index, :show]
   resources :jobs, only: [:index, :show, :create] do
     resources :saved_jobs, only: [:create]
-    resources :job_applications, only: [:create]
+    collection do
+      post :apply_to_selected_jobs, as: :apply
+    end
+    # TODO: fix app if breaking because you'll now need to specify the job in params
   end
-  resources :job_applications, only: [:index, :show]
+
+  resources :job_applications, only: [:index, :show, :new, :create]
+
   resources :saved_jobs, only: [:index, :show, :destroy]
   resources :educations, only: [:new, :create]
 
