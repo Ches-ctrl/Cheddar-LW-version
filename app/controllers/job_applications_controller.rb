@@ -10,21 +10,27 @@ class JobApplicationsController < ApplicationController
     # Retrieve the selected job IDs from the session
     @selected_jobs = Job.find(session[:selected_job_ids])
 
-    @job_application = JobApplication.new
-    @job_application.user = current_user
-    @job_application.status = "Pre-application"
+    @job_applications = @selected_jobs.map do |job|
+      job_application = JobApplication.new(user: current_user, status: "Pre-application")
 
-    # TODO: only be able to make a job application if you haven't already applied to the job
-    # TODO: Add application criteria values to the instance of the job
-    # TODO: Split out core application criteria that is common to all job applications
-    # TODO: Split out additional application criteria that is specific to the job
-    # TODO: Add forms to submit all jobs or only a subset of the jobs
+      job.application_criteria.each do |field, details|
+        application_response = job_application.application_responses.build
+        application_response.field_name = field
+        application_response.field_locator = details["locators"]
+        application_response.interaction = details["interaction"]
+        application_response.field_value = current_user.try(field) || ""
+        application_response.field_option = details["option"]
+      end
 
-    # We have the selected jobs, we want to render a separate form for each job
-    #
-
+      [job, job_application]
+    end
+    # raise
     # Renders the staging page where the user can review and confirm applications
   end
+
+  # TODO: Split out core application criteria that is common to all job applications
+  # TODO: Split out additional application criteria that is specific to the job
+  # TODO: only be able to make a job application if you haven't already applied to the job
 
   def create
     # Retrieve user inputs from the form
@@ -99,6 +105,35 @@ end
 #   else
 #     redirect_to job_path(@job), alert: 'Something went wrong, please try again.'
 #   end
+# end
+
+# -----------------------------
+# Old New Method that partially worked
+# -----------------------------
+
+
+# def new
+#   # Retrieve the selected job IDs from the session
+#   @selected_jobs = Job.find(session[:selected_job_ids])
+
+#   @job_application = JobApplication.new
+#   @job_application.user = current_user
+#   @job_application.status = "Pre-application"
+
+#   # TODO: Fill application response based on the job application criteria, which is listed as a JSON in the field application_criteria on the job model
+#   # TODO: Pull the user input values from the user model
+#   # TODO: Add the user input values to the application response
+
+#   @selected_jobs.each do |job|
+#     application_response = ApplicationResponse.new
+#     job.application_criteria.each do |field, type|
+#       application_response[field] = current_user.send(field)
+#     end
+#     job.application_response = application_response
+#   end
+
+#   # We have the selected jobs, we want to render a separate form for each job
+#   # Renders the staging page where the user can review and confirm applications
 # end
 
 

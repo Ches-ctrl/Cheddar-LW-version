@@ -1,6 +1,7 @@
 class JobApplication < ApplicationRecord
   belongs_to :user
   belongs_to :job
+  has_many :application_responses, dependent: :destroy
 
   has_one_attached :screenshot
 

@@ -21,9 +21,10 @@ Rails.application.routes.draw do
       post :apply_to_selected_jobs, as: :apply
     end
     # TODO: fix app if breaking because you'll now need to specify the job in params
+    resources :job_applications, only: [:create]
   end
 
-  resources :job_applications, only: [:index, :show, :new, :create]
+  resources :job_applications, only: [:index, :show, :new]
 
   resources :saved_jobs, only: [:index, :show, :destroy]
   resources :educations, only: [:new, :create]
