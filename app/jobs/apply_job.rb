@@ -79,9 +79,6 @@ Defaults = {
   'post_code' => {
     'value' => "M1 1MM"
   },
-  'city' => {
-    'value' => "Missingdon"
-  },
   'resume' => {
     'value' => 'public/Obretetskiy_cv.pdf'
   },
@@ -109,6 +106,9 @@ Defaults = {
   'city' => {
     'value' => 'London'
   },
+  'address' => {
+    'value' => '8 Hawksmoor Mews, E1 0DG, London, United Kingdom'
+  },
   'linkedin_profile' => {
     'value' => "https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/"
   },
@@ -116,7 +116,7 @@ Defaults = {
     'value' => "https://www.ilya.com"
   },
   'require_visa?' => {
-    'value' => /no/i,
+    'value' => 'No',
   },
   'heard_of_company?' => {
     'value' => /yes/i
