@@ -10,8 +10,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <%# TODO: Fix spacing on elements when hovered %>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
+        <li class="nav-item active">
+          <%= link_to "How It Works", how_it_works_path, class: "nav-link" %>
+        </li>
         <li class="nav-item active">
           <%= link_to "All Jobs", jobs_path, class: "nav-link" %>
         </li>

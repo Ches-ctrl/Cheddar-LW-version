@@ -1,0 +1,25 @@
+<div class="confirmation-container">
+  <div class="success-box">
+    <div class="confirmation-header">
+        <h1>🎉 Well done 🎉</h1>
+        <p>You just applied to <strong>[4]</strong> jobs at once!</p>
+        <p>Biscuit is really proud of you</p>
+        <p>Look in your inbox for confirmation emails from each company.</p>
+    </div>
+    <div class="confirmation-body">
+        <%# TODO: Add new dog on each refresh of the page from an online directory like amazon does with its 404 links %>
+        <%= image_tag 'happy_dog.jpeg', alt: 'Happy dog celebrating', class: 'confirmation-body-img' %>
+    </div>
+    <div class="confirmation-actions d-flex flex-column align-items-center">
+      <p>Next steps:</p>
+      <%= link_to 'Apply to more jobs', new_job_application_path, class: "btn btn-apply" %>
+      <br>
+      <%= link_to 'Track Your Applications', job_applications_path, class: "btn btn-apply" %>
+      <br>
+      <%= link_to 'Tell a friend', '#', class: "btn btn-apply" %>
+      <br>
+    </div>
+    <button id="confetti-btn" class="btn btn-apply">Confetti</button>
+    <%= javascript_include_tag 'confetti' %>
+  </div>
+</div>

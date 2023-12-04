@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "about" => "pages#about"
   get "test" => "pages#test"
   get "faqs" => "pages#faqs"
+  get "howitworks" => "pages#how_it_works", as: :how_it_works
+  get "success" => "pages#success", as: :success
 
   # Defines the root path route ("/")
   # root "posts#index"
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
     resources :job_applications, only: [:create]
   end
 
-  resources :job_applications, only: [:index, :show, :new]
+  resources :job_applications, only: [:index, :show, :new, :success]
 
   resources :saved_jobs, only: [:index, :show, :destroy]
   resources :educations, only: [:new, :create]
