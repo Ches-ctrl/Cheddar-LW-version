@@ -12,10 +12,19 @@ class GetHtmlJob < ApplicationJob
     visit(url)
 
     begin
+      # TODO: Evaluate impact of headless chrome on memory consumption in production
+
+      # ---------------
+      # 1. Extract the HTML of a specific element (by a tag)
+      # ---------------
+
       # page_html = page.html
       # element = find(required_html_element)
 
-      # TODO: Impersonate a user agent to get the full HTML as currently appears to be 'locked'
+
+      # ---------------
+      # 2. Extract the HTML of a specific element (by a class)
+      # ---------------
 
       # First solution:
       # class_arr_of_required_html_element = ['col-12', 'col-sm-12', 'col-md-10', 'col-lg-8', 'col-xl-8']
@@ -26,20 +35,11 @@ class GetHtmlJob < ApplicationJob
       selector = class_arr_of_required_html_element.map { |cls| ".#{cls}" }.join
       element = find(selector, visible: :all)
 
-      # p "Element:"
-      # p element
-
       # Extract element HTML from Capybara element
       element_html = page.evaluate_script("arguments[0].outerHTML", element.native)
 
-      # p "Element HTML:"
-      # p element_html
-
       # Convert Capybara element to a Nokogiri element
       nokogiri_element = Nokogiri::HTML.fragment(element_html)
-
-      # p "Nokogiri element:"
-      # p nokogiri_element
 
       # # Remove style attributes from all elements
       nokogiri_element.traverse { |node| node.delete('style') }

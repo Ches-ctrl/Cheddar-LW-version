@@ -5,6 +5,7 @@ class ApplyJob < ApplicationJob
   # TODO: Add a callback option so that the user inputs all the information required for the job before submitting
   # TODO: Notify the user of the application steps so that they're kept in the loop
   # TODO: Default value of Prefer Not To Say
+  # TODO: Add defaults to cache for easy access
 
   def perform(job_application_id, user_id)
     # p Setting job and user variables
