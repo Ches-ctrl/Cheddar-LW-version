@@ -1879,8 +1879,8 @@ puts JobApplication.all
 
 puts "Done!"
 
-PgSearch::Multisearch.rebuild(Job)
-PgSearch::Multisearch.rebuild(Company)
+# PgSearch::Multisearch.rebuild(Job)
+# PgSearch::Multisearch.rebuild(Company)
 
 
 # -----------------------
