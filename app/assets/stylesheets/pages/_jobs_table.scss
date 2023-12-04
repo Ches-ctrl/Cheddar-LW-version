@@ -93,20 +93,6 @@ input[type="checkbox"] {
   }
 }
 
-// Logo sizing
-.img-fluid {
-  max-width: 50px; // Adjust as needed
-  height: auto;
-}
-
-// Responsive adjustments
-@media (max-height: 800px) {
-  .container {
-    height: 80vh;
-    overflow-y: auto;
-  }
-}
-
 .saved-job-heart-icon {
   font-size: 20px;
   color: $red;
@@ -116,3 +102,19 @@ input[type="checkbox"] {
   font-size: 20px;
   color: $red;
 }
+
+// Logo sizing
+.img-fluid {
+  max-width: 50px; // Adjust as needed
+  height: auto;
+}
+
+// Responsive adjustments
+
+// @media (max-height: 800px) {
+//   .container {
+//     height: 80vh;
+//     overflow-y: auto;
+//   }
+// }
+
