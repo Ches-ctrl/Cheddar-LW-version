@@ -1,0 +1,40 @@
+.my-applications-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  height: 450px;
+  overflow: hidden;
+  margin: 16px auto;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e3e6f0;
+
+  .my-applications-details {
+    width: 50%;
+    margin-right: 32px;
+  }
+
+  .my-applications-screenshot {
+    width: 50%;
+    margin-right: 32px;
+    border: 1px solid #e3e6f0;
+    border-radius: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  img {
+    object-fit: contain;
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  ul li{
+    margin-bottom: 10px;
+  }
+}

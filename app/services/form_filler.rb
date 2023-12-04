@@ -12,24 +12,48 @@ class FormFiller
 
   def fill_out_form(url, fields, job_application_id)
     visit(url)
-    find_apply_button.click
+    find_apply_button.click rescue nil
 
     fields.each do |field|
       field = field[1]
       case field['interaction']
       when 'input'
-        # p "Inputting #{field['value']} based on locator: #{field['locators']}"
-        fill_in(field['locators'], with: field['value'])
+        begin
+          fill_in(field['locators'], with: field['value'])
+        rescue Capybara::ElementNotFound
+          p "Field locator #{field['locators']} is not found"
+          find(field['locators']).set(field['value']) rescue nil
+        end
       when 'combobox'
-        select_option_from_combobox(field['locators'], field['option'], field['value'])
+        begin
+          select_option_from_combobox(field['locators'], field['option'], field['value'])
+        rescue Capybara::ElementNotFound
+          p "Field locator #{field['locators']} is not found"
+        end
       when 'radiogroup'
-        select_option_from_radiogroup(field['locators'], field['option'], field['value'])
+        begin
+          select_option_from_radiogroup(field['locators'], field['option'], field['value'])
+        rescue Capybara::ElementNotFound
+          p "Field locator #{field['locators']} is not found"
+        end
       when 'listbox'
-        select_option_from_listbox(field['locators'])
+        begin
+          select_option_from_listbox(field['locators'])
+        rescue NoMethodError
+          p "Field locator #{field['locators']} is not found"
+        end
       when 'select'
-        select_option_from_select(field['locators'], field['option'], field['value'])
+        begin
+          select_option_from_select(field['locators'], field['option'], field['value'])
+        rescue Capybara::ElementNotFound
+          p "Field locator #{field['locators']} is not found"
+        end
       when 'upload'
-        upload_file(field['locators'], field['value'])
+        begin
+          upload_file(field['locators'], field['value'])
+        rescue Capybara::ElementNotFound
+          p "Field locator #{field['locators']} is not found"
+        end
       end
     end
     # Return a screenshot of the submitted form

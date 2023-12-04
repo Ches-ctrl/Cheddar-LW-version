@@ -17,7 +17,7 @@ class AiFindFormFieldsJob < ApplicationJob
     find_apply_button.click
 
     # page_html = page.html
-    form = find('form')
+    form = find('form', text: /apply|application/i)
 
     # Extract form HTML from Capybara element
     form_html = page.evaluate_script("arguments[0].outerHTML", form.native)

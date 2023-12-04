@@ -14,7 +14,7 @@ class SavedJobsController < ApplicationController
     @job = Job.find(params[:job_id])
     @saved_job.job = @job
     if @saved_job.save
-      redirect_to saved_jobs_path, notice: 'Job successfully saved!'
+      redirect_to jobs_path, notice: 'Job successfully saved!'
     else
       redirect_to job_path(@job), alert: 'Something went wrong, please try again'
     end

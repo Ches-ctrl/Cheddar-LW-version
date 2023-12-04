@@ -4,7 +4,7 @@ class Company < ApplicationRecord
   validates :company_name, :company_category, presence: true
   validates :company_name, uniqueness: true
 
-  include PgSearch::Model
+  # include PgSearch::Model
 
-  multisearchable against: [:company_name]
+  # multisearchable against: [:company_name]
 end
