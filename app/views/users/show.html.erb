@@ -44,11 +44,6 @@
 </div>
 
 
-
-
-    <%# <div class="col-sm-12"> %>
-
-
 <div class="container" id="profile-second-section">
   <div class="col-md-6">
     <div id="profile-second-section-sub-left" class="m-2 p-4 shadow">
@@ -58,8 +53,9 @@
           <i class="fa-solid fa-plus"></i>
         <% end %>
       </div>
-
-      <p>Nothing yet...</p>
+      <% if current_user.educations.present? %>
+        <p><%= current_user.educations.first.degree %> from <%= current_user.educations.first.university %></p>
+      <% end %>
       <%# <h5>My Documents</h5> %>
     </div>
 

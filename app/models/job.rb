@@ -16,14 +16,15 @@ class Job < ApplicationRecord
 
   include PgSearch::Model
 
-  multisearchable against: [:job_title, :job_description, :application_criteria]
+  pg_search_scope :global_search,
+    against: [:job_title, :salary, :job_description],
+    associated_against: {
+      company: [ :company_name, :company_category ]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
 
-  # Old search method - not required? Ask Charlotte
-  # pg_search_scope :search_all_strings,
-  #   against: [:job_title, :job_description, :application_criteria],
-  #   using: {
-  #     tsearch: { prefix: true }
-  #   }
   def set_application_criteria
     if job_posting_url.include?('greenhouse')
       self.application_criteria = Job::GREENHOUSE_FIELDS
@@ -33,4 +34,5 @@ class Job < ApplicationRecord
       self.application_criteria = {}
     end
   end
+
 end

@@ -286,7 +286,6 @@ Company.create(
     company_website_url: "https://brainstation.com/")
 
 
-
 puts "Created company - #{Company.last.company_name}"
 
 puts "Creating new jobs..."
@@ -1491,8 +1490,11 @@ Job.create(
     }
   },
   application_deadline: Date.today + 30,
+
+
   job_posting_url: "https://boards.greenhouse.io/joinforage/jobs/4155367007?utm_source=trueup&utm_medium=website&ref=trueup#app",
   company_id: Company.find_by(company_name: 'Forage').id)
+
 puts "Created job - #{Job.last.job_title}"
 
 Job.create(
