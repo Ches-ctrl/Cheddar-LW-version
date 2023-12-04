@@ -12,7 +12,7 @@ class FormFiller
 
   def fill_out_form(url, fields, job_application_id)
     visit(url)
-    find_apply_button.click
+    find_apply_button.click rescue nil
 
     fields.each do |field|
       field = field[1]
