@@ -1,8 +1,11 @@
 class Job < ApplicationRecord
+  include Ats::Greenhouse
+  include Ats::Workable
   serialize :application_criteria, JSON
   belongs_to :company
   has_many :job_applications, dependent: :destroy
   has_many :saved_jobs, dependent: :destroy
+  before_create :set_application_criteria
 
   validates :job_title, :job_description, :application_deadline, presence: true
 
@@ -21,4 +24,13 @@ class Job < ApplicationRecord
   #   using: {
   #     tsearch: { prefix: true }
   #   }
+  def set_application_criteria
+    if job_posting_url.include?('greenhouse')
+      self.application_criteria = Job::GREENHOUSE_FIELDS
+    elsif job_posting_url.include?('workable')
+      self.application_criteria = Job::WORKABLE_FIELDS
+    else
+      self.application_criteria = {}
+    end
+  end
 end

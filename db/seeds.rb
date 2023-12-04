@@ -9,21 +9,70 @@ puts "Creating new companies..."
 Company.create(
   company_name: "Kroo",
   company_category: "Tech",
-  company_website_url: "https://kroo.com/")
+  company_website_url: "https://kroo.com/"
+)
 
 puts "Created company - #{Company.last.company_name}"
 
 Company.create(
   company_name: "Deliveroo",
   company_category: "Tech",
-  company_website_url: "https://deliveroo.co.uk/")
+  company_website_url: "https://deliveroo.co.uk/"
+)
 
 puts "Created company - #{Company.last.company_name}"
 
 Company.create(
   company_name: "BCG Digital Ventures",
   company_category: "Tech",
-  company_website_url: "https://bcgdv.com/")
+  company_website_url: "https://bcgdv.com/"
+)
+
+puts "Created company - #{Company.last.company_name}"
+
+Company.create(
+  company_name: "Cleo",
+  company_category: "FinTech",
+  company_website_url: "https://web.meetcleo.com/"
+)
+
+puts "Created company - #{Company.last.company_name}"
+
+Company.create(
+  company_name: "BrainStation",
+  company_category: "Tech",
+  company_website_url: "https://brainstation.io/?utm_keyword=brainstation&utm_network=g&utm_matchtype=e&utm_creative=482902487505&utm_target=&utm_placement=&utm_device=c&utm_campaign=11729367089&utm_adgroup=116579494489&utm_source=AdWords&utm_target_id=kwd-296950415241&gad_source=1&gclid=CjwKCAiAjrarBhAWEiwA2qWdCAxXKzc0tpASTlQ_0z5xoqcHoLPvvpcmvMNYN0eSJ8A_t8BxnLK_EBoCBRUQAvD_BwE"
+)
+
+Company.create(
+  company_name: "Blink",
+  company_category: "Tech",
+  company_website_url: "https://www.joinblink.com/"
+)
+
+puts "Created company - #{Company.last.company_name}"
+
+Company.create(
+  company_name: "Builder.ai",
+  company_category: "Tech",
+  company_website_url: "https://www.builder.ai/"
+)
+
+puts "Created company - #{Company.last.company_name}"
+
+Company.create(
+  company_name: "9fin",
+  company_category: "Tech",
+  company_website_url: "https://9fin.com/"
+)
+
+puts "Created company - #{Company.last.company_name}"
+
+Company.create(
+  company_name: "Quantexa",
+  company_category: "Tech",
+  company_website_url: "https://www.quantexa.com/"
+)
 
 puts "Created company - #{Company.last.company_name}"
 
@@ -99,7 +148,8 @@ Job.create(
   },
   application_deadline: Date.today + 30,
   job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
-  company_id: Company.first.id)
+  company_id: Company.find_by(company_name: 'Kroo').id
+)
 
 puts "Created job - #{Job.last.job_title}"
 
@@ -154,7 +204,8 @@ Job.create(
   },
   application_deadline: Date.today + 30,
   job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5447359",
-  company_id: Company.second.id)
+  company_id: Company.find_by(company_name: 'Deliveroo').id
+)
 
 puts "Created job - #{Job.last.job_title}"
 
@@ -217,7 +268,93 @@ Job.create(
   },
   application_deadline: Date.today + 30,
   job_posting_url: "https://boards.greenhouse.io/bcgdv/jobs/6879714002?gh_jid=6879714002",
-  company_id: Company.third.id)
+  company_id: Company.find_by(company_name: 'BCG Digital Ventures').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Software Engineer - Golang",
+  job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivaled network to bring incredible convenience and selection to our customers.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5094403?utm_source=trueup&utm_medium=website&ref=trueup",
+  company_id: Company.find_by(company_name: 'Deliveroo').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Backend Ruby Engineer",
+  job_description: "Most people come to Cleo to do work that matters. Every day, we empower people to build a life beyond their next paycheck, building a beloved AI that enables you to forge your own path toward financial well-being.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://boards.greenhouse.io/cleoai/jobs/5033034002?utm_source=trueup&utm_medium=website&ref=trueup",
+  company_id: Company.find_by(company_name: 'Cleo').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Educator, Web Developer",
+  job_description: "BrainStation is a global leader in digital skills training and development, offering a 12-week bootcamp program in Web Development. BrainStation is currently hiring a Senior Web Developer to teach our program through online and in-person teaching. BrainStation Educators are given the unique opportunity to teach, research, and further develop their skills, while teaching in a dynamic, project-based setting.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://boards.greenhouse.io/brainstation/jobs/5802728003?utm_source=trueup&utm_medium=website&ref=trueup",
+  company_id: Company.find_by(company_name: 'BrainStation').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Frontend Engineer",
+  job_description: "Blink is the world’s first workplace tool designed for frontline employees. Our award-winning platform transforms the working lives of society's most relied-on members.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://apply.workable.com/joinblink/j/C75195FF87/",
+  company_id: Company.find_by(company_name: 'Blink').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Full Stack Software Engineer - React/Node",
+  job_description: "We’re on a mission to make app building so easy everyone can do it – regardless of their background, tech knowledge or budget. We’ve already helped thousands of entrepreneurs, small businesses and even global brands, like the BBC, Makro and Pepsi achieve their software goals and we’ve only just started.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://apply.workable.com/builderai/j/DD834B7F18/",
+  company_id: Company.find_by(company_name: 'Builder.ai').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Software Engineer (Backend-Web Platforms)",
+  job_description: "Technology has revolutionized equity markets with electronic trading, quant algos and instantaneous news. However, in debt capital markets, the picture is completely different. It still behaves like it’s in the 1980s; trillions of dollars of trades are placed over the phone, news is slow, and corporate credit information is imperfect and scattered.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://apply.workable.com/9fin/j/437E57E57C/",
+  company_id: Company.find_by(company_name: '9fin').id
+)
+
+puts "Created job - #{Job.last.job_title}"
+
+Job.create(
+  job_title: "Front End Engineer",
+  job_description: "At Quantexa we believe that people and organizations make better decisions when those decisions are put in context – we call this Contextual Decision Intelligence. Contextual Decision Intelligence is the new approach to data analysis that shows the relationships between people, places and organizations - all in one place - so you gain the context you need to make more accurate decisions, faster.",
+  salary: 40000,
+  date_created: Date.today,
+  application_deadline: Date.today + 30,
+  job_posting_url: "https://apply.workable.com/quantexa/j/BFDDA845A0/?utm_source=trueup&utm_medium=website&ref=trueup",
+  company_id: Company.find_by(company_name: 'Quantexa').id
+)
+
 puts "Created job - #{Job.last.job_title}"
 
 puts "Creating 5 users..."
