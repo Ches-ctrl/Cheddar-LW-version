@@ -9,13 +9,16 @@
 
           <h6 class="my-4">Search by Company</h5>
 
-          <ul id="companies-select" >
-            <% Company.all.each do |company| %>
-              <label for="<%= company.company_name %>" data-select-by-company-target="company" data-action="click->select-by-company#searchByCompany">
-              <input type="checkbox" name="<%= company.company_name %>" id="<%= company.company_name %>" <%= params[:company] && params[:company].downcase.include?(company.company_name.downcase) ? "checked" : "" %>>
-              <%= company.company_name %>
-              </label><br>
-            <% end %>
+          <ul id="companies-select">
+            <button class="btn mb-2" data-select-by-company-target="button" data-action="click->select-by-company#revealCompanies">Show all</button>
+            <div class="d-none" data-select-by-company-target="index">
+              <% Company.all.each do |company| %>
+                <label for="<%= company.company_name %>">
+                <input type="checkbox" name="<%= company.company_name %>" id="<%= company.company_name %>" <%= params[:company] && params[:company].downcase.include?(company.company_name.downcase) ? "checked" : "" %> data-action="change->select-by-company#searchByCompany" data-select-by-company-target="company">
+                <%= company.company_name %>
+                </label><br>
+              <% end %>
+            </div>
           </ul>
 
           <h6 class="my-4 d-none">Search by Salary Range</h5>
