@@ -3,7 +3,7 @@
     <%= text_field_tag :query,
         params[:query],
         class: 'form-control',
-        placeholder: 'Filter your job search', id: 'search-jobs' %>
+        placeholder: 'Filter for a job, a company, ... ', style: 'font-style: italic;', id: 'search-jobs' %>
     <%= submit_tag 'Search', id: 'search-button' %>
   <% end %>
   <%= link_to 'Clear search', jobs_path, id: 'clear-search-button' %>

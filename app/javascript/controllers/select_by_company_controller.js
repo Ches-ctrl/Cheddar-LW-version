@@ -2,17 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="select-by-company"
 export default class extends Controller {
-  static targets = [ "company", "companyRow"]
+  static targets = [ "company", "companyRow", "salary"]
 
   connect() {
     console.log(this.companyTargets)
     console.log(this.companyRowTargets)
+    console.log(this.salaryTargets)
   }
 
-  search(e) {
-    console.log('hello from search')
+  searchByCompany(e) {
     console.log(e.target)
-
     console.log(this.companyTargets.indexOf(e.target))
 
     let company = e.target
@@ -28,13 +27,16 @@ export default class extends Controller {
 
 
     this.companyRowTargets.forEach((companyRow) => {
+
       if (companyRow.querySelector(".companyName").innerText == company.attributes.for.value) {
         companyRow.classList.remove('d-none')
       } else {
         companyRow.classList.add('d-none')
       }
     })
-
     // window.location.href = window.location.href.split("company=")[0] + "company=" + company.attributes.for.value + (window.location.href.split("company=")[1].split("&")[1] == undefined ? "" : "&" + window.location.href.split("company=")[1].split("&")[1] )
+
   }
+
+
 }

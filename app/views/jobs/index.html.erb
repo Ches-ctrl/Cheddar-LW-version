@@ -7,15 +7,37 @@
         <div id="jobs-index-left-section">
           <h3 id="jobs-index-left-section-title"><%= @jobs.count %> Jobs</h3>
 
-          <h5 class="my-4">Search by Company</h5>
+          <h6 class="my-4">Search by Company</h5>
 
           <ul id="companies-select" >
             <% Company.all.each do |company| %>
-              <label for="<%= company.company_name %>" data-select-by-company-target="company" data-action="click->select-by-company#search">
+              <label for="<%= company.company_name %>" data-select-by-company-target="company" data-action="click->select-by-company#searchByCompany">
               <input type="checkbox" name="<%= company.company_name %>" id="<%= company.company_name %>" <%= params[:company] && params[:company].downcase.include?(company.company_name.downcase) ? "checked" : "" %>>
               <%= company.company_name %>
               </label><br>
             <% end %>
+          </ul>
+
+          <h6 class="my-4 d-none">Search by Salary Range</h5>
+          <ul id="salary-range" class="d-none" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
+            <label for="35000">
+              <input type="radio" name="35000" id="35000"> < 35,000
+            </label><br>
+            <label for="50000">
+              <input type="radio" name="50000" id="50000"> 36,000 < 50,000
+            </label><br>
+            <label for="65000">
+              <input type="radio" name="65000" id="65000"> 51,000 < 65,000
+            </label><br>
+            <label for="80000">
+              <input type="radio" name="80000" id="80000"> 66,000 < 80,000
+            </label><br>
+            <label for="99000">
+              <input type="radio" name="99000" id="99000"> 81,000 < 99,000
+            </label><br>
+            <label for="500000">
+              <input type="radio" name="500000" id="500000"> > 100,000
+            </label><br>
           </ul>
 
         </div>
@@ -23,7 +45,7 @@
         <div id="jobs-index-right-section">
           <%= form_tag apply_jobs_path, method: :post do %>
             <div class="d-flex flex-row-reverse">
-              <%= submit_tag "Apply to Selected Jobs", class: "btn btn-apply" %>
+              <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>
             </div>
 
             <div class="row mb-4">
@@ -55,14 +77,14 @@
                       <div class="row">
                         <div class="col companyName"><%= job.company.company_name %></div>
                         <div class="col role"><%= link_to job.job_title, job_path(job) %></div>
-                        <div class="col">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
+                        <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
                         <div class="col">
                           <% if (Time.now.next_day(7)) >= job.application_deadline %>
-                            CLOSING SOON
+                            <button class="btn btn-closing-soon">CLOSING SOON</button>
                           <% elsif Time.now < job.application_deadline %>
-                            OPEN
+                            <button class="btn btn-status">OPEN</button>
                           <% else %>
-                            CLOSED
+                            <button class="btn btn-closed">CLOSED</button>
                           <% end %>
                         </div>
                         <div class="col"><%= job.application_deadline %></div>
