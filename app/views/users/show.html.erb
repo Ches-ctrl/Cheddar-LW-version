@@ -36,8 +36,8 @@
     <div id="contact-info">
       <h5>Contact Information</h5>
       <h6>Address</h6>
-      <p><%= current_user.address_first %>, <%= "#{current_user.address_second}," unless current_user.address_second.empty? %> <%= current_user.city %></p>
-      <p><%= current_user.post_code %></p>
+      <p><%= current_user.address_first %>, <%= "#{current_user.address_second}" %></p>
+      <p><%= current_user.city %>, <%= current_user.post_code %></p>
       <h6>Email</h6>
       <p><%= current_user.email %></p>
       <h6>Phone</h6>
