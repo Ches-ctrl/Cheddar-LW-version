@@ -128,8 +128,8 @@
 
                         <%# <div class="col text-center"><input type="checkbox"></div> %>
 
-                        <div class="col "><a href="https://external-link.com" target="_blank">Details</a></div>
-                        <div class="col ">
+                        <div class="col"><a href="https://external-link.com" target="_blank">Details</a></div>
+                        <div class="col">
                           <% if SavedJob.where(job_id: job.id).present? %>
                             <i class="fa-solid fa-heart saved-job-heart-icon"></i>
                           <% else %>
@@ -139,7 +139,7 @@
                           <% end %>
                         </div>
                         <div class="col selectBox">
-                          <%= check_box_tag "job_ids[]", job.id, data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
+                          <%= check_box_tag "job_ids[]", job.id, class: 'select-job-box', data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
                         </div>
                       </div>
                     </div>
