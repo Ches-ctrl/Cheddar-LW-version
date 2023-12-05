@@ -4,7 +4,7 @@
       <%= render 'search' %>
       <div id="jobs-index-second-section" class="container">
 
-        <div id="jobs-index-left-section">
+        <div id="jobs-index-left-section" data-controller="job-index-toggle">
           <h3 id="jobs-index-left-section-title"><%= @jobs.count %> Jobs</h3>
 
           <h6 class="my-4">Search by Company</h5>
@@ -22,6 +22,7 @@
           </ul>
 
           <h6 class="my-4 d-none">Search by Salary Range</h5>
+
           <ul id="salary-range" class="d-none" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
             <label for="35000">
               <input type="radio" name="35000" id="35000"> < 35,000
@@ -46,10 +47,13 @@
         </div>
 
         <div id="jobs-index-right-section">
-          <%= form_tag apply_jobs_path, method: :post do %>
-            <div class="d-flex flex-row-reverse">
-              <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>
-            </div>
+          <div class="d-flex justify-content-between">
+            <button id="hide-lhs-button" class="btn btn-cheddar-secondary" data-action="click->job-index-toggle#toggleLhs">Hide Filters</button>
+            <%= form_tag apply_jobs_path, method: :post do %>
+              <div>
+                <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>
+              </div>
+          </div>
 
             <div class="row mb-4">
               <div class="col-12">

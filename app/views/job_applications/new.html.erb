@@ -7,6 +7,7 @@
         <%# Dynamically load the company logos based on selected jobs %>
         <p>You're applying to the following companies:</p>
         <div>
+          <%# TODO: Update company logos once pulling from TrueUp (clearbit) %>
           <% @selected_jobs.each do |job| %>
             <div class="apply-company-logo mr-3">
               <%= image_tag('company_logo_default.jpeg', class: 'img-fluid') %>
@@ -26,7 +27,6 @@
 
           <%# Dynamically create form elements based on application_criteria %>
           <%# Convert to simple_fields_for application_responses. Then use those to create the input fields below. %>
-          <%# Convert to simple_fields_for application_responses. Then use those to create the input fields below. %>
           <% job.last.application_responses.each do |response| %>
             <%= f.simple_fields_for response do |ff| %>
               <label for=""><%= response.field_name.humanize %></label>
@@ -34,6 +34,7 @@
             <% end %>
           <% end %>
           <%# TODO: Map data types here.s %>
+          <%# TODO: Handle File uploads %>
 
 
           <%= f.submit 'Submit', class: 'btn btn-apply', 'data-action': 'click->application-form#submitForm' %>
