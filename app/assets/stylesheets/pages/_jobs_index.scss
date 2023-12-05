@@ -10,7 +10,7 @@
 }
 
 #jobs-index-left-section-title{
-  margin-bottom: 70px;
+  margin-bottom: 48px;
 }
 
 #jobs-index-right-section{
@@ -19,14 +19,22 @@
   margin-right: 0;
 }
 
-#companies-select, #job-types-select {
+#companies-select {
   height: 180px;
   width: 250px;
   overflow: scroll;
   padding: 16px 8px;
   box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
   border-radius: 20px;
+}
 
+#job-types-select {
+  height: 110px;
+  width: 250px;
+  overflow: scroll;
+  padding: 16px 8px;
+  box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
+  border-radius: 20px;
 }
 
 .companies-select-item {
@@ -36,16 +44,15 @@
   padding-bottom: 0;
 }
 
-.job-types-select-item {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
 .companies-select-item-label, .job-types-select-item-label {
   margin: 0;
+  padding: 0;
   display: flex;
   align-content: center;
+}
 
+.job-types-select-item-label {
+  margin-bottom: 6px;
 }
 
 .companies-select-item-checkbox, .job-types-select-item-checkbox {
@@ -53,5 +60,10 @@
   height: 1em;
   padding-right: 6px;
   margin-right: 6px;
+}
+
+.filter-category {
+  // margin: 24px 0;
+  padding: 23px 0;
 
 }
