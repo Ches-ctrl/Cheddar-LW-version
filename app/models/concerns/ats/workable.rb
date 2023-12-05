@@ -17,13 +17,13 @@ module Ats::Workable
       interaction: :input,
       locators: 'phone'
     },
+    resume: {
+      interaction: :upload,
+      locators: 'input[data-ui="resume"]'
+    },
     address: {
       interaction: :input,
       locators: 'address'
     },
-    resume: {
-      interaction: :upload,
-      locators: 'input[data-ui="resume"]'
-    }
   }
 end

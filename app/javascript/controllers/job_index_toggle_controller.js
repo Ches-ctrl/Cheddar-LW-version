@@ -6,10 +6,8 @@ export default class extends Controller {
   connect() {
     console.log("confetti");
   }
-
   toggleSearch() {
     this.searchTarget.classList.toggle('d-none');
     // TODO: toggle the classes of the RHS table to be full-width
-
   }
 }

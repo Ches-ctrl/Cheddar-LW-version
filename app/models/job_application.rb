@@ -1,4 +1,46 @@
 class JobApplication < ApplicationRecord
+  # -----------------------------
+# Core Application Criteria:
+# -----------------------------
+  CORE_APPLICATION_CRITERIA = {
+    first_name: {
+      interaction: :input,
+    },
+    last_name: {
+      interaction: :input,
+    },
+    email: {
+      interaction: :input,
+    },
+    phone_number: {
+      interaction: :input,
+    },
+    resume: {
+      interaction: :upload,
+    },
+    # city: {
+    #   interaction: :input,
+    # },
+    # location_click: {
+    #   interaction: :listbox,
+    # },
+    # linkedin_profile: {
+    #   interaction: :input,
+    # },
+    # personal_website: {
+    #   interaction: :input,
+    # },
+    # heard_from: {
+    #   interaction: :input,
+    # },
+    # # right_to_work: {
+    # #   interaction: :select,
+    # # },
+    # require_visa?: {
+    #   interaction: :select,
+    # },
+  }
+
   belongs_to :user
   belongs_to :job
   has_many :application_responses, dependent: :destroy

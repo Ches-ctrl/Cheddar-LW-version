@@ -1,6 +1,14 @@
 .companies {
   margin-bottom: 20px;
 }
+
+.company-apply-summary {
+  width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+}
+
 .apply-company-logo {
   display: inline-block;
   width: 50px; /* or the size your logos are */
@@ -16,12 +24,34 @@
 }
 .application-form {
   width: 100%;
-  background-color: #f9f9f9;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
 }
+
 .apply-form-group {
   margin-bottom: 15px;
+}
+
+.apply-label {
+  background: $quaternary-color;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+}
+
+.core-details {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
 }
 
 // input[type="text"],

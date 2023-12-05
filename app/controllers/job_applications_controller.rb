@@ -18,8 +18,13 @@ class JobApplicationsController < ApplicationController
         application_response.field_name = field
         application_response.field_locator = details["locators"]
         application_response.interaction = details["interaction"]
-        application_response.field_value = current_user.try(field) || ""
         application_response.field_option = details["option"]
+        # TODO: Check with TA if this is the correct approach
+        if field == "resume" && current_user.resume.attached?
+          application_response.field_value = rails_blob_url(current_user.resume, only_path: true)
+        else
+          application_response.field_value = current_user.try(field) || ""
+        end
       end
 
       [job, job_application]
@@ -138,47 +143,3 @@ end
 #   # We have the selected jobs, we want to render a separate form for each job
 #   # Renders the staging page where the user can review and confirm applications
 # end
-
-
-# -----------------------------
-# Core Application Criteria:
-# -----------------------------
-
-CoreApplicationCriteria = {
-  first_name: {
-    interaction: :input,
-  },
-  last_name: {
-    interaction: :input,
-  },
-  email: {
-    interaction: :input,
-  },
-  phone_number: {
-    interaction: :input,
-  },
-  city: {
-    interaction: :input,
-  },
-  location_click: {
-    interaction: :listbox,
-  },
-  resume: {
-    interaction: :upload,
-  },
-  linkedin_profile: {
-    interaction: :input,
-  },
-  personal_website: {
-    interaction: :input,
-  },
-  heard_from: {
-    interaction: :input,
-  },
-  right_to_work: {
-    interaction: :select,
-  },
-  require_visa?: {
-    interaction: :select,
-  }
-}
