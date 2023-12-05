@@ -19,7 +19,6 @@
       <%= link_to 'Tell a friend', '#', class: "btn btn-apply" %>
       <br>
     </div>
-    <button id="confetti-btn" class="btn btn-apply">Confetti</button>
-    <%= javascript_include_tag 'confetti' %>
+    <button id="confetti-btn" data-controller="confetti" data-action="click->confetti#click"class="btn btn-apply">Confetti</button>
   </div>
 </div>
