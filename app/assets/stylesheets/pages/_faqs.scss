@@ -16,7 +16,7 @@
   left: 50%;
   width: 60px;
   height: 2px;
-  background: #E91E63;
+  background-color: #6007C6;
   bottom: -25px;
   margin-left: -30px;
 }
@@ -26,7 +26,7 @@
 }
 
 .faq {
-  background: #FFFFFF;
+  background: #fdfdfd;
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.06);
   border-radius: 4px;
 }
@@ -48,7 +48,7 @@
 }
 
 .faq .card .card-header:hover {
-  background: rgba(233, 30, 99, 0.1);
+  background: rgba(136, 66, 216, 0.8);
   padding-left: 10px;
 }
 .faq .card .card-header .faq-title {
@@ -81,7 +81,7 @@
   -moz-border-radius: 100px;
   border-radius: 100px;
   text-align: center;
-  background: #E91E63;
+  background: #FFEC00;
   color: #fff;
   font-size: 12px;
   margin-right: 20px;

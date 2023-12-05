@@ -1,8 +1,8 @@
 <div id="profile-info">
   <% if current_user.photo.key %>
-    <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+    <%= image_tag current_user.photo, class: "avatar-large" %>
   <% else %>
-    <%= image_tag "avatar_default.png", class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+    <%= image_tag "avatar_default.png", class: "avatar-large" %>
   <% end %>
   <div class="name-status">
     <h2><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
