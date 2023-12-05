@@ -15,6 +15,7 @@ class GetHtmlJob < ApplicationJob
       # element = find(required_html_element)
 
       # TODO: Impersonate a user agent to get the full HTML as currently appears to be 'locked'
+      # TODO: Refactor into separate methods for readability and to make it more efficient
 
       # First solution:
       # class_arr_of_required_html_element = ['col-12', 'col-sm-12', 'col-md-10', 'col-lg-8', 'col-xl-8']
