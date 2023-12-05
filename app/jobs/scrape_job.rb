@@ -15,47 +15,32 @@ class ScrapeJob < ApplicationJob
   # TODO: Work out why the CSS selectors are not working
   # Repeat for other search criteria or URLs if necessary
 
-  def perform(url, search_criteria)
+  def perform
     Capybara.default_max_wait_time = 10
 
-    url = ['https://www.trueup.io/jobs']
+    url = [ENV['SCRAPE_URL_1'], ENV['SCRAPE_URL_2'], ENV['SCRAPE_URL_3'], ENV['SCRAPE_URL_4'], ENV['SCRAPE_URL_5'], ENV['SCRAPE_URL_6']]
     search_criteria = ['London Developer', 'London Full Stack', 'London Product Management', 'London Data Science', 'London Data Engineering', 'London Design']
 
     p "URL Options: #{url}"
     p "Search Criteria Options: #{search_criteria}"
     p "Which URL and search criteria would you like to scrape?"
-    p "1. #{url[0]} - #{search_criteria[0]}"
-    p "2. #{url[0]} - #{search_criteria[1]}"
-    p "3. #{url[0]} - #{search_criteria[2]}"
-    p "4. #{url[0]} - #{search_criteria[3]}"
-    p "5. #{url[0]} - #{search_criteria[4]}"
-    p "6. #{url[0]} - #{search_criteria[5]}"
-    user_input = gets.chomp.to_s
 
-    if user_input == '1'
-      url = url[0]
-      search_criteria = search_criteria[0]
-    elsif user_input == '2'
-      url = url[0]
-      search_criteria = search_criteria[1]
-    elsif user_input == '3'
-      url = url[0]
-      search_criteria = search_criteria[2]
-    elsif user_input == '4'
-      url = url[0]
-      search_criteria = search_criteria[3]
-    elsif user_input == '5'
-      url = url[0]
-      search_criteria = search_criteria[4]
-    elsif user_input == '6'
-      url = url[0]
-      search_criteria = search_criteria[5]
+    url.each_with_index do |u, index|
+      p "#{index + 1}. #{u} - #{search_criteria[index]}"
+    end
+
+    user_input = gets.chomp.to_i
+
+    if user_input.between?(1, url.length)
+      url = url[user_input - 1]
+      search_criteria = search_criteria[user_input - 1]
     else
       puts "Invalid input. Please try again."
       return
     end
 
-    # TODO: Show user potential inputs adn ask user to select url and search criteria (in console for now)
+    # TODO: Show user potential inputs and ask user to select url and search criteria (in console for now)
+    # TODO: Update either background job status or required console input given inability to run in the background with console input
 
     visit(url)
 
@@ -72,8 +57,8 @@ class ScrapeJob < ApplicationJob
       # doc = Nokogiri::HTML(get_html_job)
 
       # Login and fill in search criteria
-      log_in
-      fill_in '.ais-SearchBox-input', with: search_criteria
+      log_into_website
+      # fill_in '.ais-SearchBox-input', with: search_criteria
       sleep 1 # Wait for the search to be conducted
       click_show_more(times: 3)
 
@@ -88,7 +73,18 @@ class ScrapeJob < ApplicationJob
         Company.find_or_create_by(company) do |company|
           # TODO: Add company build details here
           # TODO: Add validations on company - if save and valid...
-          # p "Created company: #{company_name} posted #{time_since_posting} ago"
+          # TODO: Update company model to have industry
+          # new_company = Company.create(
+          #                         name: 'New Company',
+          #                         location: 'New Location',
+          #                         industry: 'New Industry')
+
+          # Check if the company was created successfully
+          # if new_company.persisted?
+          #   puts "New company created: #{new_company.name}"
+          # else
+          #   puts "Failed to create new company"
+          # end
         end
 
         Job.find_or_create_by(job_posting_url:job_posting_url, job_title: job_title, company:company) do |job|
@@ -103,27 +99,25 @@ class ScrapeJob < ApplicationJob
     rescue Capybara::ElementNotFound => e
       puts "Element not found: #{e.message}"
     end
-
-    private
-
-    def login
-      click_on 'Log in'
-      wait_for_selector = 'username'
-      find('#username')
-
-      # TODO: Add 4x scrape emails and passwords
-      # Randomly select an email and password from the scrape emails and passwords arrays
-      scrape_emails = [ENV['SCRAPE_EMAIL_1'], ENV['SCRAPE_EMAIL_2'], ENV['SCRAPE_EMAIL_3'], ENV['SCRAPE_EMAIL_4']]
-      scrape_passwords = [ENV['SCRAPE_PASSWORD_1'], ENV['SCRAPE_PASSWORD_2'], ENV['SCRAPE_PASSWORD_3'], ENV['SCRAPE_PASSWORD_4']]
-      random_index = rand(scrape_emails.length)
-
-      fill_in 'username', with: scrape_emails[random_index]
-      fill_in 'password', with: scrape_passwords[random_index]
-      find_button('Continue', class: 'c320322a4').click
-    end
   end
 
   private
+
+  def log_into_website
+    click_on 'Log in'
+    wait_for_selector = 'username'
+    find('#username')
+
+    # TODO: Add 4x scrape emails and passwords
+    # Randomly select an email and password from the scrape emails and passwords arrays
+    scrape_emails = [ENV['SCRAPE_EMAIL_1'], ENV['SCRAPE_EMAIL_2'], ENV['SCRAPE_EMAIL_3'], ENV['SCRAPE_EMAIL_4']]
+    scrape_passwords = [ENV['SCRAPE_PASSWORD_1'], ENV['SCRAPE_PASSWORD_2'], ENV['SCRAPE_PASSWORD_3'], ENV['SCRAPE_PASSWORD_4']]
+    random_index = rand(scrape_emails.length)
+
+    fill_in 'username', with: scrape_emails[random_index]
+    fill_in 'password', with: scrape_passwords[random_index]
+    find_button('Continue', class: 'c320322a4').click
+  end
 
   def click_show_more(times: 3)
     times.times do
