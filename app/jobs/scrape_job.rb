@@ -69,10 +69,14 @@ class ScrapeJob < ApplicationJob
       job_cards.each do |job_card|
         job_url = job_card.first('div.fw-bold.mb-1 a.text-dark')&.[](:href)
         job_title = job_card.first('div.fw-bold.mb-1 a.text-dark')&.text&.strip
-        company = job_card.first('div.mb-2.align-items-baseline a.text-dark')&.text&.strip
-        location = job_card.first("div.text-secondary[style='width: 100%; font-size: 12px; font-weight: 500;']")&.text&.strip
+        company_attributes = {
+          company_name: job_card.first('div.mb-2.align-items-baseline a.text-dark')&.text&.strip,
+          location: job_card.first("div.text-secondary[style='width: 100%; font-size: 12px; font-weight: 500;']")&.text&.strip,
+          industry: "Tech"
+        }
 
-        Company.find_or_create_by(company) do |company|
+        company = Company.find_or_initialize_by(name: company_attributes[:company_name])
+        company.update(company_attributes)
           # TODO: Add company build details here
           # TODO: Add validations on company - if save and valid...
           # TODO: Update company model to have industry
@@ -90,6 +94,7 @@ class ScrapeJob < ApplicationJob
         end
 
         Job.find_or_create_by(job_posting_url:job_posting_url, job_title: job_title, company:company) do |job|
+          # TODO: Split by question mark for UTM
           # TODO: Ask TA about how this creates a new job record and validating uniqueness
           # TODO: Add uniqueness condition that checks combination of job_posting_url, job_title and company
           # TODO: Add validations on job - if save and valid...
