@@ -94,7 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_180351) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "saved", default: false, null: false
     t.index ["company_id"], name: "index_jobs_on_company_id"
   end
 
