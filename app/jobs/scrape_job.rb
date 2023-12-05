@@ -18,26 +18,28 @@ class ScrapeJob < ApplicationJob
   def perform
     Capybara.default_max_wait_time = 10
 
-    url = [ENV['SCRAPE_URL_1'], ENV['SCRAPE_URL_2'], ENV['SCRAPE_URL_3'], ENV['SCRAPE_URL_4'], ENV['SCRAPE_URL_5'], ENV['SCRAPE_URL_6']]
-    search_criteria = ['London Developer', 'London Full Stack', 'London Product Management', 'London Data Science', 'London Data Engineering', 'London Design']
+    url = "https://lit-savannah-16798-1c35736be6e4.herokuapp.com/pages/contact"
 
-    p "URL Options: #{url}"
-    p "Search Criteria Options: #{search_criteria}"
-    p "Which URL and search criteria would you like to scrape?"
+    # url = [ENV['SCRAPE_URL_1'], ENV['SCRAPE_URL_2'], ENV['SCRAPE_URL_3'], ENV['SCRAPE_URL_4'], ENV['SCRAPE_URL_5'], ENV['SCRAPE_URL_6']]
+    # search_criteria = ['London Developer', 'London Full Stack', 'London Product Management', 'London Data Science', 'London Data Engineering', 'London Design']
 
-    url.each_with_index do |u, index|
-      p "#{index + 1}. #{u} - #{search_criteria[index]}"
-    end
+    # p "URL Options: #{url}"
+    # p "Search Criteria Options: #{search_criteria}"
+    # p "Which URL and search criteria would you like to scrape?"
 
-    user_input = gets.chomp.to_i
+    # url.each_with_index do |u, index|
+    #   p "#{index + 1}. #{u} - #{search_criteria[index]}"
+    # end
 
-    if user_input.between?(1, url.length)
-      url = url[user_input - 1]
-      search_criteria = search_criteria[user_input - 1]
-    else
-      puts "Invalid input. Please try again."
-      return
-    end
+    # user_input = gets.chomp.to_i
+
+    # if user_input.between?(1, url.length)
+    #   url = url[user_input - 1]
+    #   search_criteria = search_criteria[user_input - 1]
+    # else
+    #   puts "Invalid input. Please try again."
+    #   return
+    # end
 
     # TODO: Show user potential inputs and ask user to select url and search criteria (in console for now)
     # TODO: Update either background job status or required console input given inability to run in the background with console input
@@ -67,10 +69,14 @@ class ScrapeJob < ApplicationJob
       job_cards.each do |job_card|
         job_url = job_card.first('div.fw-bold.mb-1 a.text-dark')&.[](:href)
         job_title = job_card.first('div.fw-bold.mb-1 a.text-dark')&.text&.strip
-        company = job_card.first('div.mb-2.align-items-baseline a.text-dark')&.text&.strip
-        location = job_card.first("div.text-secondary[style='width: 100%; font-size: 12px; font-weight: 500;']")&.text&.strip
+        company_attributes = {
+          company_name: job_card.first('div.mb-2.align-items-baseline a.text-dark')&.text&.strip,
+          location: job_card.first("div.text-secondary[style='width: 100%; font-size: 12px; font-weight: 500;']")&.text&.strip,
+          industry: "Tech"
+        }
 
-        Company.find_or_create_by(company) do |company|
+        company = Company.find_or_initialize_by(name: company_attributes[:company_name])
+        company.update(company_attributes)
           # TODO: Add company build details here
           # TODO: Add validations on company - if save and valid...
           # TODO: Update company model to have industry
@@ -88,6 +94,7 @@ class ScrapeJob < ApplicationJob
         end
 
         Job.find_or_create_by(job_posting_url:job_posting_url, job_title: job_title, company:company) do |job|
+          # TODO: Split by question mark for UTM
           # TODO: Ask TA about how this creates a new job record and validating uniqueness
           # TODO: Add uniqueness condition that checks combination of job_posting_url, job_title and company
           # TODO: Add validations on job - if save and valid...

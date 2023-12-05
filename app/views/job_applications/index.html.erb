@@ -1,16 +1,27 @@
 <% @job_applications.each do |application| %>
   <div class="my-applications-card">
     <div class="my-applications-details">
-      <ul>
-        <li><strong>Position:</strong> <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %> " target="_blank"> <%= application.job.company.company_name %> </a></li>
-        <li><strong>Description:</strong> <%= application.job.job_description %></li>
-        <li><strong>Applications Close:</strong> <%= application.job.application_deadline.strftime('%d %B %Y') %></li>
-        <li><strong>Date Applied:</strong> <%= application.updated_at.strftime('%d %B %Y') %></li>
-        <li><strong>Application Status:</strong> <%= application.status %></li>
-      </ul>
+      <div class="application-title-bg">
+        <h2 class="application-title"><%= application.job.company.company_name %> - <%= application.job.job_title %></h2>
+      </div>
+      <p class="application-description"><%= application.job.job_description %></p>
+      <div class="application-meta d-flex flex-row justify-content-between">
+        <span class="meta-info">Applications Close: <%= application.job.application_deadline.strftime('%d %B %Y') %></span>
+        <span class="meta-info">Date Applied: <%= application.updated_at.strftime('%d %B %Y') %></span>
+        <span class="meta-info application-status"><%= application.status %></span>
+      </div>
     </div>
     <div class="my-applications-screenshot">
-      <%= image_tag(cl_image_path application.screenshot.key) if application.screenshot.attached? %>
+      <% if application.screenshot.attached? %>
+        <div class="image-overlay">
+          <%= image_tag(cl_image_path application.screenshot.key) %>
+          <div class="overlay-text">
+            <p>No image available - here's a happy doggo instead</p>
+          </div>
+        </div>
+      <% else %>
+        <%= image_tag("job_app_complete_default.jpg") %>
+      <% end %>
     </div>
   </div>
 <% end %>

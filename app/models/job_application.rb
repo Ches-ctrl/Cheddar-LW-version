@@ -45,6 +45,8 @@ class JobApplication < ApplicationRecord
   belongs_to :job
   has_many :application_responses, dependent: :destroy
 
+  accepts_nested_attributes_for :application_responses
+
   has_one_attached :screenshot
 
   # TODO: Add validations for the job application model

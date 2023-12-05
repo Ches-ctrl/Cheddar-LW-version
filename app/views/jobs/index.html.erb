@@ -67,73 +67,76 @@
         </div>
 
         <div id="jobs-index-right-section">
-          <div class="d-flex justify-content-between">
-            <button id="hide-lhs-button" class="btn btn-cheddar-secondary" data-job-index-toggle-target="button" data-action="click->job-index-toggle#toggleSearch">Hide Filters</button>
-            <%= form_tag apply_jobs_path, method: :post do %>
-              <div>
-                <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>
-              </div>
-          </div>
-
-            <div class="row">
-              <div class="col-12">
-                <div class="card job-list-header">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">Company</div>
-                      <div class="col">Role</div>
-                      <div class="col">Est. Salary</div>
-                      <div class="col">Status</div>
-                      <div class="col">Deadline</div>
-                      <div class="col">CV Required</div>
-                      <div class="col">Job Details</div>
-                      <div class="col">Saved Jobs</div>
-                      <div class="col">Select Job</div>
+          <%= form_tag apply_jobs_path, method: :post do %>
+            <div class="d-flex justify-content-between">
+              <button id="hide-lhs-button" class="btn btn-cheddar-secondary" data-job-index-toggle-target="button" data-action="click->job-index-toggle#toggleSearch">Hide Filters</button>
+                <div>
+                  <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>
+                </div>
+            </div>
+            <% @jobs.each do |job| %>
+              <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow" data-styling-selected-job-target="jobCard">
+                <div class="col-12">
+                  <div class="card job-list-header">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">Company</div>
+                        <div class="col">Role</div>
+                        <div class="col">Est. Salary</div>
+                        <div class="col">Status</div>
+                        <div class="col">Deadline</div>
+                        <div class="col">CV Required</div>
+                        <div class="col">Job Details</div>
+                        <div class="col">Saved Jobs</div>
+                        <div class="col">Select Job</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <% @jobs.each do |job| %>
-              <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow" data-styling-selected-job-target="jobCard">
-                <div class="col-12">
-                  <div class="card job-card">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col companyName"><%= job.company.company_name %></div>
-                        <div class="col role"><%= link_to job.job_title, job_path(job) %></div>
-                        <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
-                        <div class="col">
-                          <% if (Time.now.next_day(7)) >= job.application_deadline %>
-                            <button class="btn btn-closing-soon">CLOSING SOON</button>
-                          <% elsif Time.now < job.application_deadline %>
-                            <button class="btn btn-status">OPEN</button>
-                          <% else %>
-                            <button class="btn btn-closed">CLOSED</button>
-                          <% end %>
-                        </div>
-                        <div class="col"><%= job.application_deadline %></div>
-
-                        <div class="col ">
-                          <% if job.application_criteria["resume"].any? %>
-                            YES
-                          <% else %>
-                            NO
-                          <% end %>
-                        </div>
-
-                        <%# <div class="col text-center"><input type="checkbox"></div> %>
-
-                        <div class="col "><a href="https://external-link.com" target="_blank">Details</a></div>
-                        <div class="col ">
-                          <% if SavedJob.where(job_id: job.id).present? %>
-                            <i class="fa-solid fa-heart saved-job-heart-icon"></i>
-                          <% else %>
-                            <%= link_to job_saved_jobs_path(job), data: {turbo_method: :post} do %>
-                              <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
+              <% @jobs.each do |job| %>
+                <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow">
+                  <div class="col-12">
+                    <div class="card job-card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col companyName"><%= job.company.company_name %></div>
+                          <div class="col role"><%= link_to job.job_title, job_path(job) %></div>
+                          <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
+                          <div class="col">
+                            <% if (Time.now.next_day(7)) >= job.application_deadline %>
+                              <button class="btn btn-closing-soon">CLOSING SOON</button>
+                            <% elsif Time.now < job.application_deadline %>
+                              <button class="btn btn-status">OPEN</button>
+                            <% else %>
+                              <button class="btn btn-closed">CLOSED</button>
                             <% end %>
-                          <% end %>
+                          </div>
+                          <div class="col"><%= job.application_deadline %></div>
+
+                          <div class="col ">
+                            <% if job.application_criteria["resume"].any? %>
+                              YES
+                            <% else %>
+                              NO
+                            <% end %>
+                          </div>
+                        <%# <div class="col text-center"><input type="checkbox"></div> %>
+                          <div class="col "><a href="https://external-link.com" target="_blank">Details</a></div>
+                          <div class="col ">
+                            <% if SavedJob.where(job_id: job.id).present? %>
+                              <i class="fa-solid fa-heart saved-job-heart-icon"></i>
+                            <% else %>
+                              <%= link_to job_saved_jobs_path(job), data: {turbo_method: :post} do %>
+                                <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
+                              <% end %>
+                            <% end %>
+                          </div>
+                          <div class="col">
+                            <%= check_box_tag "job_ids[]", job.id %>
+                          </div>
+                          <%# <div class="col text-center submit"><input type="checkbox"></div> %>
                         </div>
                         <div class="col selectBox">
                           <%= check_box_tag "job_ids[]", job.id, data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
@@ -142,7 +145,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
             <% end %>
           <% end %>
         </div>
