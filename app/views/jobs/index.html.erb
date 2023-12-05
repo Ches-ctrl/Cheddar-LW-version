@@ -10,13 +10,18 @@
           <h6 class="my-4">Search by Company</h6>
 
           <ul id="companies-select">
-            <button class="btn mb-2" data-select-by-company-target="button" data-action="click->select-by-company#revealCompanies">Show all</button>
-            <div class="d-none" data-select-by-company-target="index">
+            <button class="btn mb-2 d-none" data-select-by-company-target="button" data-action="click->select-by-company#revealCompanies">Show all</button>
+            <div data-select-by-company-target="index">
+
               <% Company.all.each do |company| %>
-                <label for="<%= company.company_name %>">
-                <input type="checkbox" name="<%= company.company_name %>" id="<%= company.company_name %>" <%= params[:company] && params[:company].downcase.include?(company.company_name.downcase) ? "checked" : "" %> data-action="change->select-by-company#searchByCompany" data-select-by-company-target="company">
-                <%= company.company_name %>
-                </label><br>
+                <% if Job.where(company: company).any? %>
+                  <div class="companies-select-item">
+                    <label for="<%= company.company_name %>" class="companies-select-item-label">
+                    <input class="companies-select-item-checkbox" type="checkbox" name="<%= company.company_name %>" id="<%= company.company_name %>" <%= params[:company] && params[:company].downcase.include?(company.company_name.downcase) ? "checked" : "" %> data-action="change->select-by-company#searchByCompany" data-select-by-company-target="company">
+                    <%= company.company_name %>
+                    </label><br>
+                  </div>
+                <% end %>
               <% end %>
             </div>
           </ul>
