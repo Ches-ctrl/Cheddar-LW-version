@@ -18,6 +18,11 @@
       <i class="fa-brands fa-github"></i>
     <% end %>
   </h1>
+  <h2>
+    <%= link_to current_user.website_url, target: "_blank" do %>
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    <% end %>
+  </h2>
 </div>
 
 <div id="profile-scroll-boxes">
@@ -31,8 +36,8 @@
     <div id="contact-info">
       <h5>Contact Information</h5>
       <h6>Address</h6>
-      <p><%= current_user.address_first %>, <%= current_user.address_second if current_user.address_second %>, <%= current_user.city %></p>
-      <p><%= current_user.post_code %></p>
+      <p><%= current_user.address_first %>, <%= "#{current_user.address_second}" %></p>
+      <p><%= current_user.city %>, <%= current_user.post_code %></p>
       <h6>Email</h6>
       <p><%= current_user.email %></p>
       <h6>Phone</h6>
@@ -47,7 +52,9 @@
       </h5>
       <% current_user.educations.each do |education| %>
         <div class="education-card">
-          <%= image_tag("https://logo.clearbit.com/#{education.university}.com?size=60", onerror: "this.src='https://cdn-icons-png.flaticon.com/512/1656/1656819.png'") %>
+          <% university_hash = Education::UNIVERSITIES.find { |hash| hash.key?(education.university) } %>
+          <% university_domain = university_hash[education.university].strip %>
+          <%= image_tag("https://logo.clearbit.com/#{university_domain}?size=60", onerror: "this.src='https://cdn-icons-png.flaticon.com/512/1656/1656819.png'") %>
           <div class="" id="education-details">
             <h6><%= education.university %></h6>
             <p style="color:black"><%= education.degree %> in <%= education.field_study %></p>
