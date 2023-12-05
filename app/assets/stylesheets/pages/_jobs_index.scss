@@ -1,0 +1,44 @@
+#jobs-index-second-section{
+  display: flex;
+  margin-top: 48px;
+}
+
+#jobs-index-left-section{
+  margin-top: 75px;
+  width: 400px;
+  justify-content: flex-start;
+}
+
+#jobs-index-right-section{
+  width: 900px;
+  justify-content: flex-end;
+}
+
+#companies-select {
+  height: 180px;
+  width: 300px;
+  overflow: scroll;
+  padding: 16px 8px;
+  box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
+  border-radius: 20px;
+}
+
+.companies-select-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  padding-bottom: 0;
+}
+
+.companies-select-item-label {
+  margin: 0;
+  display: flex;
+  align-content: center;
+}
+
+.companies-select-item-checkbox {
+  width: 1em;
+  height: 1em;
+  padding-right: 6px;
+  margin-right: 6px;
+}

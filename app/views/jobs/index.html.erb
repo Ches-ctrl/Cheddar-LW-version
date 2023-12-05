@@ -1,32 +1,135 @@
-<div class="container">
+<div class="container" data-controller="select-by-company">
   <div class="row">
     <div class="col-sm-12">
-
       <%= render 'search' %>
+      <div id="jobs-index-second-section" class="container" data-controller="job-index-toggle">
 
-      <% if params[:query].present? %>
-        <h3>Your Jobs Search</h3>
-      <% else %>
-        <h3>All Jobs</h3>
-      <% end %>
+        <div id="jobs-index-left-section" data-job-index-toggle-target="search">
+          <h3 id="jobs-index-left-section-title"><%= @jobs.count %> Jobs</h3>
 
-        <%= render 'jobs_header' %>
+          <h6 class="my-4">Search by Company</h6>
 
-        <% if params[:query].present? %>
-          <% @results.each do | result | %>
-            <% if result.searchable.is_a? Job %>
-              <%= render 'job_card', job: Job.find(result.searchable_id) %>
+          <ul id="companies-select">
+            <button class="btn mb-2 d-none" data-select-by-company-target="button" data-action="click->select-by-company#revealCompanies">Show all</button>
+            <div data-select-by-company-target="index">
+
+              <% Company.all.each do |company| %>
+                <% if Job.where(company: company).any? %>
+                  <div class="companies-select-item">
+                    <label for="<%= company.company_name %>" class="companies-select-item-label">
+                    <input class="companies-select-item-checkbox" type="checkbox" name="<%= company.company_name %>" id="<%= company.company_name %>" <%= params[:company] && params[:company].downcase.include?(company.company_name.downcase) ? "checked" : "" %> data-action="change->select-by-company#searchByCompany" data-select-by-company-target="company">
+                    <%= company.company_name %>
+                    </label><br>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </ul>
+
+          <h6 class="my-4 d-none">Search by Salary Range</h6>
+
+          <ul id="salary-range" class="d-none" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
+            <label for="35000">
+              <input type="radio" name="35000" id="35000"> < 35,000
+            </label><br>
+            <label for="50000">
+              <input type="radio" name="50000" id="50000"> 36,000 < 50,000
+            </label><br>
+            <label for="65000">
+              <input type="radio" name="65000" id="65000"> 51,000 < 65,000
+            </label><br>
+            <label for="80000">
+              <input type="radio" name="80000" id="80000"> 66,000 < 80,000
+            </label><br>
+            <label for="99000">
+              <input type="radio" name="99000" id="99000"> 81,000 < 99,000
+            </label><br>
+            <label for="500000">
+              <input type="radio" name="500000" id="500000"> > 100,000
+            </label><br>
+          </ul>
+
+        </div>
+
+        <div id="jobs-index-right-section">
+          <div class="d-flex justify-content-between">
+            <button id="hide-lhs-button" class="btn btn-cheddar-secondary" data-job-index-toggle-target="button" data-action="click->job-index-toggle#toggleSearch">Hide Filters</button>
+            <%= form_tag apply_jobs_path, method: :post do %>
+              <div>
+                <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>
+              </div>
+          </div>
+
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="card job-list-header">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">Company</div>
+                      <div class="col">Role</div>
+                      <div class="col">Est. Salary</div>
+                      <div class="col">Status</div>
+                      <div class="col">Deadline</div>
+                      <div class="col">CV</div>
+                      <div class="col">Cover Letter</div>
+                      <div class="col">Job Details</div>
+                      <div class="col">Saved Jobs</div>
+                      <div class="col">Select Job</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% @jobs.each do |job| %>
+              <div class="row mb-3" data-select-by-company-target="companyRow">
+                <div class="col-12">
+                  <div class="card job-card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col companyName"><%= job.company.company_name %></div>
+                        <div class="col role"><%= link_to job.job_title, job_path(job) %></div>
+                        <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
+                        <div class="col">
+                          <% if (Time.now.next_day(7)) >= job.application_deadline %>
+                            <button class="btn btn-closing-soon">CLOSING SOON</button>
+                          <% elsif Time.now < job.application_deadline %>
+                            <button class="btn btn-status">OPEN</button>
+                          <% else %>
+                            <button class="btn btn-closed">CLOSED</button>
+                          <% end %>
+                        </div>
+                        <div class="col"><%= job.application_deadline %></div>
+                        <div class="col text-center"><input type="checkbox"></div>
+                        <div class="col text-center"><input type="checkbox"></div>
+                        <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
+                        <div class="col text-center">
+                          <% if SavedJob.where(job_id: job.id).present? %>
+                            <i class="fa-solid fa-heart saved-job-heart-icon"></i>
+                          <% else %>
+                            <%= link_to job_saved_jobs_path(job), data: {turbo_method: :post} do %>
+                              <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <div class="col text-center">
+                          <%= check_box_tag "job_ids[]", job.id %>
+                        </div>
+                        <%# <div class="col text-center submit"><input type="checkbox"></div> %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <% end %>
           <% end %>
-
-        <% else %>
-            <%= render 'job_card' %>
-        <% end %>
-
-        <div data-controller="new-job-form">
-          <button id="btn-add-job" data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
-          <%= render 'form', job: @job %>
         </div>
+      </div>
+
+      <div data-controller="new-job-form">
+        <button id="btn-add-job" class="d-none" data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
+        <%= render 'form', job: @job %>
+      </div>
     </div>
   </div>
 </div>

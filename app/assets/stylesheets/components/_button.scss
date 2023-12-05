@@ -4,23 +4,37 @@
   border-radius: 8px;
   padding: 10px 20px;
   text-decoration: none;
-  margin-left: 24px;
+  // margin-left: 24px;
 }
 
-#clear-search-button, #search-button {
-  background-color: $main-color;
-  opacity: 0.7;
+.btn-cheddar-secondary {
+  background-color: $quinary-color;
   color: white;
-  font-weight: 500;
+  border-radius: 8px;
+  padding: 10px 20px;
   text-decoration: none;
-  border: 1px solid black;
+  // margin-left: 24px;
+}
 
+#search-button {
+  background-color: $main-color;
+  color: white;
+  // font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
 }
 
 #clear-search-button {
-  padding: 6px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background-color: grey;
+  opacity: 0.5;
+  color: white;
+  // font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
 }
 
 .btn-add-info, #btn-add-job {

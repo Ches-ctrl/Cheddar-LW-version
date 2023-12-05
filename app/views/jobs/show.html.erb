@@ -4,9 +4,8 @@
     <%= link_to 'Apply to this job', job_job_applications_path(@job), data: {turbo_method: :post}, class: "btn-apply" %>
     <div class="icon-save-job">
       <%= simple_form_for [@job, @saved_job] do |f| %>
-        <%# <%= f.submit 'Save this Job!' %>
         <%= button_tag type: 'submit' do %>
-          <i class="fa-regular fa-bookmark"></i>
+          <i class="fa-regular fa-heart"></i>
         <% end %>
       <% end %>
     </div>
@@ -15,6 +14,6 @@
   <p>Company: <%= @job.company.company_name %></p>
   <p>Job title: <%= @job.job_title %></p>
   <p>Job description: <%= @job.job_description %></p>
-  <p>Salary: <%= @job.salary %></p>
+  <p>Salary: £<%= number_with_delimiter(@job.salary, :delimiter => ',') %></p>
 
 </div>
