@@ -17,16 +17,25 @@ export default class extends Controller {
     // console.log(checkedTypes)
     // console.log(this.jobRowTargets)
 
-    this.jobRowTargets.forEach((jobRow) => {
-      const jobTitle = jobRow.querySelector(".role").innerText.toLowerCase().replace('-', ' ')
-      // console.log(jobTitle.split(' '))
+    const patternStrings = []
 
-      if ( jobTitle.split(' ').some((word) => checkedTypes.includes(word) ) ) {
-        console.log('matched something')
-        // jobRow.classList.remove('d-none')
+    checkedTypes.forEach((query) => {
+      const regexd_query = '(' + query.replace(' ', '(-| )?') + ')'
+      console.log(regexd_query)
+      patternStrings.push(regexd_query)
+    })
+
+    const pattern = new RegExp(patternStrings.join('|'), 'i');
+
+    this.jobRowTargets.forEach((jobRow) => {
+      const jobTitle = jobRow.querySelector(".role").innerText
+
+      // console.log(jobTitle.split(' '))
+      if (pattern.test(jobTitle)) {
+        jobRow.classList.remove('d-none')
       } else {
-        console.log('did not match anything')
-        // jobRow.classList.add('d-none')
+        // reject
+        jobRow.classList.add('d-none')
       }
 
 

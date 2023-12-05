@@ -1,4 +1,4 @@
-<div class="container" data-controller="select-by-company select-by-job-type">
+<div class="container" data-controller="select-by-company select-by-job-type styling-selected-job">
   <div class="row">
     <div class="col-sm-12">
       <%= render 'search' %>
@@ -26,7 +26,7 @@
             </div>
           </ul>
 
-          <h6 class="my-4">Search by Job Type</h5>
+          <h6 class="my-4">Search by Job Type</h6>
 
           <ul id="job-types-select">
             <div class="job-types-select-item">
@@ -50,7 +50,7 @@
             </div>
           </ul>
 
-          <h6 class="my-4 d-none">Search by Salary Range</h5>
+          <h6 class="my-4 d-none">Search by Salary Range</h6>
 
           <ul id="salary-range" class="d-none" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
             <label for="35000">
@@ -105,7 +105,7 @@
             </div>
 
             <% @jobs.each do |job| %>
-              <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow">
+              <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow" data-styling-selected-job-target="jobCard">
                 <div class="col-12">
                   <div class="card job-card">
                     <div class="card-body">
@@ -131,7 +131,6 @@
                             NO
                           <% end %>
                         </div>
-
 
                         <%# <div class="col text-center"><input type="checkbox"></div> %>
 
