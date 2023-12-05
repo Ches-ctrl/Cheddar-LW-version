@@ -25,7 +25,6 @@ export default class extends Controller {
       this.companyRowTargets.forEach((companyRow) => {
         companyRow.classList.remove('d-none')})
     }
-
   }
 
   revealCompanies(event) {
