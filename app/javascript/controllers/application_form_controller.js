@@ -8,12 +8,12 @@ export default class extends Controller {
   }
 
   submitForm(event) {
-    console.log("reading")
     event.preventDefault();
+    console.log("reading");
     const formData = new FormData(this.formTarget);
 
     fetch(this.formTarget.action, {
-      method: 'POST',
+      method: this.formTarget.method,
       body: formData
     }).then(response => {
       // Handle response

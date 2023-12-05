@@ -17,6 +17,10 @@ module Ats::Greenhouse
       interaction: :input,
       locators: 'phone'
     },
+    resume: {
+      interaction: :upload,
+      locators: 'button[aria-describedby="resume-allowable-file-types"'
+    },
     city: {
       interaction: :input,
       locators: 'job_application[location]'
@@ -24,10 +28,6 @@ module Ats::Greenhouse
     location_click: {
       interaction: :listbox,
       locators: 'ul#location_autocomplete-items-popup'
-    },
-    resume: {
-      interaction: :upload,
-      locators: 'button[aria-describedby="resume-allowable-file-types"'
     },
     linkedin_profile: {
       interaction: :input,
@@ -44,6 +44,6 @@ module Ats::Greenhouse
     require_visa?: {
       interaction: :input,
       locators: 'textarea[autocomplete="custom-question-would-you-need-sponsorship-to-work-in-the-uk-"]'
-    }
+    },
   }
 end
