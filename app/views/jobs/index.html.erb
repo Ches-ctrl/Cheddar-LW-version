@@ -1,4 +1,4 @@
-<div class="container" data-controller="select-by-company">
+<div class="container" data-controller="select-by-company select-by-job-type">
   <div class="row">
     <div class="col-sm-12">
       <%= render 'search' %>
@@ -26,7 +26,32 @@
             </div>
           </ul>
 
+          <h6 class="my-4">Search by Job Type</h5>
+
+          <ul id="job-types-select">
+            <div class="job-types-select-item">
+
+              <label for="Full Stack" class="job-types-select-item-label">
+              <input class="job-types-select-item-checkbox" type="checkbox" name="Full Stack" id="full stack" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
+              Full Stack
+              </label><br>
+
+              <label for="Back End" class="job-types-select-item-label">
+              <input class="job-types-select-item-checkbox" type="checkbox" name="Back End" id="back end" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
+              Back End
+              </label><br>
+
+              <label for="Front End" class="job-types-select-item-label">
+              <input class="job-types-select-item-checkbox" type="checkbox" name="Front End" id="front end" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
+              Front End
+              </label><br>
+
+
+            </div>
+          </ul>
+
           <h6 class="my-4 d-none">Search by Salary Range</h6>
+
 
           <ul id="salary-range" class="d-none" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
             <label for="35000">
@@ -60,7 +85,7 @@
               </div>
           </div>
 
-            <div class="row mb-4">
+            <div class="row">
               <div class="col-12">
                 <div class="card job-list-header">
                   <div class="card-body">
@@ -70,8 +95,7 @@
                       <div class="col">Est. Salary</div>
                       <div class="col">Status</div>
                       <div class="col">Deadline</div>
-                      <div class="col">CV</div>
-                      <div class="col">Cover Letter</div>
+                      <div class="col">CV Required</div>
                       <div class="col">Job Details</div>
                       <div class="col">Saved Jobs</div>
                       <div class="col">Select Job</div>
@@ -82,7 +106,7 @@
             </div>
 
             <% @jobs.each do |job| %>
-              <div class="row mb-3" data-select-by-company-target="companyRow">
+              <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow">
                 <div class="col-12">
                   <div class="card job-card">
                     <div class="card-body">
@@ -100,10 +124,20 @@
                           <% end %>
                         </div>
                         <div class="col"><%= job.application_deadline %></div>
-                        <div class="col text-center"><input type="checkbox"></div>
-                        <div class="col text-center"><input type="checkbox"></div>
-                        <div class="col text-center"><a href="https://external-link.com" target="_blank">Details</a></div>
-                        <div class="col text-center">
+
+                        <div class="col ">
+                          <% if job.application_criteria["resume"].any? %>
+                            YES
+                          <% else %>
+                            NO
+                          <% end %>
+                        </div>
+
+
+                        <%# <div class="col text-center"><input type="checkbox"></div> %>
+
+                        <div class="col "><a href="https://external-link.com" target="_blank">Details</a></div>
+                        <div class="col ">
                           <% if SavedJob.where(job_id: job.id).present? %>
                             <i class="fa-solid fa-heart saved-job-heart-icon"></i>
                           <% else %>
@@ -112,7 +146,7 @@
                             <% end %>
                           <% end %>
                         </div>
-                        <div class="col text-center">
+                        <div class="col">
                           <%= check_box_tag "job_ids[]", job.id %>
                         </div>
                         <%# <div class="col text-center submit"><input type="checkbox"></div> %>
