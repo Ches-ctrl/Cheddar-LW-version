@@ -9,5 +9,6 @@ export default class extends Controller {
 
   toggleLhs() {
     this.Target.classList.toggle('d-none');
+    console.log(thi.Target)
   }
 }
