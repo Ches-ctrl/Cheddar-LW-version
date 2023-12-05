@@ -4,16 +4,15 @@
   border-radius: 8px;
   padding: 10px 20px;
   text-decoration: none;
-  // margin-left: 24px;
 }
 
 .btn-cheddar-secondary {
-  background-color: $quinary-color;
+  background-color: grey;
+  opacity: 0.5;
   color: white;
   border-radius: 8px;
-  padding: 10px 20px;
+  padding: 12px 20px;
   text-decoration: none;
-  // margin-left: 24px;
 }
 
 #search-button {
@@ -24,9 +23,11 @@
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
+  margin-right: 6px;
+  margin-left: 6px;
 }
 
-#clear-search-button {
+.clear-search-button {
   background-color: grey;
   opacity: 0.5;
   color: white;
@@ -35,6 +36,11 @@
   border: none;
   border-radius: 8px;
   padding: 12px 20px;
+}
+
+.clear-search-button:hover {
+  text-decoration: none;
+
 }
 
 .btn-add-info, #btn-add-job {
