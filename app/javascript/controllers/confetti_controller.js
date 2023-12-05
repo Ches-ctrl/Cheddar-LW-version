@@ -6,3 +6,8 @@ export default class extends Controller {
     console.log("Hello, Stimulus Confetti!")
   }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const btn = document.getElementById("confetti-btn");
+  btn.addEventListener("click", makeConfetti);
+});

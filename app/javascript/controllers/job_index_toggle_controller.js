@@ -4,10 +4,11 @@ export default class extends Controller {
   static targets = ["index", "company", "salary", "lhsSection"];
 
   connect() {
-    console.log("Hello, Stimulus Toggle!")
+    console.log("confetti");
   }
 
   toggleLhs() {
     this.Target.classList.toggle('d-none');
+    // TODO: toggle the classes of the RHS table to be full-width
   }
 }
