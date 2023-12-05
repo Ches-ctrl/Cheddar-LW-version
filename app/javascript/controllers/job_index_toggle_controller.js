@@ -1,14 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["index", "company", "salary", "lhsSection"];
+  static targets = ["search", "button"];
 
   connect() {
     console.log("confetti");
   }
 
-  toggleLhs() {
-    this.Target.classList.toggle('d-none');
+  toggleSearch() {
+    this.searchTarget.classList.toggle('d-none');
     // TODO: toggle the classes of the RHS table to be full-width
+
   }
 }
