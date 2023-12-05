@@ -1,83 +1,77 @@
-<div class="container">
-  <div class="align-items-center">
-    <div id="profile-main-section">
-      <div class="col-md-6" >
-        <% if current_user.photo.key %>
-          <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
-        <% else %>
-          <%= image_tag "avatar_default.png", class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
-        <% end %>
-      </div>
-      <div class="col">
-        <div class="text-md-9 w-70">
-          <div class="d-flex align-items-center mb-3">
-            <h2 class="m-0"><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
-            <div class="m-2"> <!-- Apply margin as needed -->
-              <%= link_to current_user.linkedin_profile do %>
-                <i class="fab fa-linkedin fa-2xl" style="color: #0077b5;"></i>
-              <% end %>
-            </div>
-            <%= link_to edit_user_registration_path(current_user), data: {turbo_method: :post}, id: "btn-edit-info" do %>
-              <i class="fa-regular fa-pen-to-square"></i>
-            <% end %>
-          </div>
-          <% if current_user.email.present? %>
-            <p>My email: <%= current_user.email %></p>
-          <% end %>
-          <% if current_user.phone_number.present? %>
-            <p>My phone number: <%= current_user.phone_number %></p>
-          <% end %>
-          <% if current_user.address_second.present? %>
-            <p>My address:
-            <%= current_user.address_first %>,
-            <%= current_user.address_second %>,
-            <%= current_user.city %> <%= current_user.post_code %></p>
-          <% else %>
-            <p>My address:
-            <%= current_user.address_first %>,
-            <%= current_user.city %> <%= current_user.post_code %></p>
-          <% end %>
-        </div>
-      </div>
-    </div>
+<div id="profile-info">
+  <% if current_user.photo.key %>
+    <%= image_tag current_user.photo, class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+  <% else %>
+    <%= image_tag "avatar_default.png", class: "img-thumbnail rounded-circle", width: '200', height: '200' %>
+  <% end %>
+  <div class="name-status">
+    <h2><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
+    <h2 style="color: rgba(0, 0, 0, 0.5);">He/Him</h2>
   </div>
+  <h1>
+    <%= link_to current_user.linkedin_profile, target: "_blank", style: "color: #0a66c2" do %>
+      <i class="fa-brands fa-linkedin"></i>
+    <% end %>
+  </h1>
+  <h1>
+    <%= link_to current_user.github_profile_url, target: "_blank", style: "color: black" do %>
+      <i class="fa-brands fa-github"></i>
+    <% end %>
+  </h1>
 </div>
 
-
-<div class="container" id="profile-second-section">
-  <div class="col-md-6">
-    <div id="profile-second-section-sub-left" class="m-2 p-4 shadow">
-      <div id="education-info-title">
-        <h5>My Education Information</h5>
-        <%= link_to new_education_path(current_user), data: {turbo_method: :post}, id: "btn-add-educ" do %>
+<div id="profile-scroll-boxes">
+  <div class="scroll-box">
+    <h3 class="text-center">
+      My Details
+      <%= link_to edit_user_registration_path(current_user), data: {turbo_method: :post} do %>
+          <i class="fa-regular fa-pen-to-square"></i>
+      <% end %>
+    </h3>
+    <div id="contact-info">
+      <h5>Contact Information</h5>
+      <h6>Address</h6>
+      <p><%= current_user.address_first %>, <%= current_user.address_second if current_user.address_second %>, <%= current_user.city %></p>
+      <p><%= current_user.post_code %></p>
+      <h6>Email</h6>
+      <p><%= current_user.email %></p>
+      <h6>Phone</h6>
+      <p><%= current_user.phone_number %></p>
+    </div>
+    <div id="education">
+      <h5>
+        Education
+        <%= link_to new_education_path(current_user), data: {turbo_method: :post} do %>
           <i class="fa-solid fa-plus"></i>
         <% end %>
-      </div>
-      <% if current_user.educations.present? %>
-        <p><%= current_user.educations.first.degree %> from <%= current_user.educations.first.university %></p>
-      <% end %>
-      <%# <h5>My Documents</h5> %>
-    </div>
-
-  </div>
-
-  <div class="col-md-6">
-    <div id="profile-second-section-sub-right" class="m-2 p-4 shadow">
-      <h5>My Active Applications</h5>
-      <% @job_applications.each do |application| %>
-        <div>
-          <div class= "border p-1 my-3 ">
-          Status: <%= application.status %> |
-          <% if application.job.company.company_website_url.present? %> <!-- If the company website url is present, then display the company name as a link -->
-
-            <%= application.job.job_title %> at <a href="<%= application.job.company.company_website_url %>" target="_blank"><%= application.job.company.company_name %></a>
-          <% else %>
-            <%= application.job.job_title %> at <%= application.job.company.company_name %>
-          <% end %>
-
+      </h5>
+      <% current_user.educations.each do |education| %>
+        <div class="education-card">
+          <%= image_tag("https://logo.clearbit.com/#{education.university}.com?size=60", onerror: "this.src='https://cdn-icons-png.flaticon.com/512/1656/1656819.png'") %>
+          <div class="" id="education-details">
+            <h6><%= education.university %></h6>
+            <p style="color:black"><%= education.degree %> in <%= education.field_study %></p>
+            <p>Graduation Year: <%= education.graduation_year %></p>
           </div>
         </div>
       <% end %>
     </div>
+    <div id="documents">
+      <h5>Documents</h5>
+      <%= link_to "Resume", current_user.resume.url, class: "btn-apply", target: "_blank" %>
+    </div>
+  </div>
+  <div class="scroll-box">
+    <h3 class="text-center"><%= link_to "My Applications", job_applications_path, style: "color: black;" %></h3>
+    <% current_user.job_applications.each do |application| %>
+      <div class="application-card-small">
+      <%= image_tag("https://logo.clearbit.com/#{application.job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %>
+        <div class="profile-application-details">
+          <p><strong><%= application.job.job_title %></strong></p>
+          <p><%= application.job.company.company_name %><p>
+        </div>
+        <div class="semi-donut" style="--percentage: 100; --fill:#6007C6">Applied</div>
+      </div>
+    <% end %>
   </div>
 </div>

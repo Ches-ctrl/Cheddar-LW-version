@@ -5,6 +5,7 @@
         <li><strong>Position:</strong> <%= application.job.job_title %> at <a href="<%=application.job.company.company_website_url %> " target="_blank"> <%= application.job.company.company_name %> </a></li>
         <li><strong>Description:</strong> <%= application.job.job_description %></li>
         <li><strong>Applications Close:</strong> <%= application.job.application_deadline.strftime('%d %B %Y') %></li>
+        <li><strong>Date Applied:</strong> <%= application.updated_at.strftime('%d %B %Y') %></li>
         <li><strong>Application Status:</strong> <%= application.status %></li>
       </ul>
     </div>
