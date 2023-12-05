@@ -72,6 +72,9 @@ class JobApplicationsController < ApplicationController
     redirect_to job_applications_path, notice: 'Your applications have been submitted.'
   end
 
+  def success
+  end
+
   private
 
   # TODO: Update job_application_params to include the user inputs
