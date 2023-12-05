@@ -18,26 +18,28 @@ class ScrapeJob < ApplicationJob
   def perform
     Capybara.default_max_wait_time = 10
 
-    url = [ENV['SCRAPE_URL_1'], ENV['SCRAPE_URL_2'], ENV['SCRAPE_URL_3'], ENV['SCRAPE_URL_4'], ENV['SCRAPE_URL_5'], ENV['SCRAPE_URL_6']]
-    search_criteria = ['London Developer', 'London Full Stack', 'London Product Management', 'London Data Science', 'London Data Engineering', 'London Design']
+    url = "https://lit-savannah-16798-1c35736be6e4.herokuapp.com/pages/contact"
 
-    p "URL Options: #{url}"
-    p "Search Criteria Options: #{search_criteria}"
-    p "Which URL and search criteria would you like to scrape?"
+    # url = [ENV['SCRAPE_URL_1'], ENV['SCRAPE_URL_2'], ENV['SCRAPE_URL_3'], ENV['SCRAPE_URL_4'], ENV['SCRAPE_URL_5'], ENV['SCRAPE_URL_6']]
+    # search_criteria = ['London Developer', 'London Full Stack', 'London Product Management', 'London Data Science', 'London Data Engineering', 'London Design']
 
-    url.each_with_index do |u, index|
-      p "#{index + 1}. #{u} - #{search_criteria[index]}"
-    end
+    # p "URL Options: #{url}"
+    # p "Search Criteria Options: #{search_criteria}"
+    # p "Which URL and search criteria would you like to scrape?"
 
-    user_input = gets.chomp.to_i
+    # url.each_with_index do |u, index|
+    #   p "#{index + 1}. #{u} - #{search_criteria[index]}"
+    # end
 
-    if user_input.between?(1, url.length)
-      url = url[user_input - 1]
-      search_criteria = search_criteria[user_input - 1]
-    else
-      puts "Invalid input. Please try again."
-      return
-    end
+    # user_input = gets.chomp.to_i
+
+    # if user_input.between?(1, url.length)
+    #   url = url[user_input - 1]
+    #   search_criteria = search_criteria[user_input - 1]
+    # else
+    #   puts "Invalid input. Please try again."
+    #   return
+    # end
 
     # TODO: Show user potential inputs and ask user to select url and search criteria (in console for now)
     # TODO: Update either background job status or required console input given inability to run in the background with console input
