@@ -34,6 +34,9 @@ class ScrapeJob < ApplicationJob
     fill_search_criteria(search_criteria)
 
     job_cards = all('.card-body')
+
+    p job_cards
+
     job_cards.each do |card|
       job_details = extract_job_details(card)
       create_or_update_job(job_details)
@@ -61,7 +64,7 @@ class ScrapeJob < ApplicationJob
   end
 
   def create_or_update_job(details)
-    # Create or update job in the database
+     # Create or update job in the database
     # Be sure to check for uniqueness to avoid duplicates
     company = Company.find_or_create_by(name: details[:company])
     job = Job.find_or_initialize_by(title: details[:title], company: company)
