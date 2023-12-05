@@ -144,8 +144,8 @@
                             <% end %>
                           <% end %>
                         </div>
-                        <div class="col">
-                          <%= check_box_tag "job_ids[]", job.id %>
+                        <div class="col selectBox">
+                          <%= check_box_tag "job_ids[]", job.id, data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
                         </div>
                         <%# <div class="col text-center submit"><input type="checkbox"></div> %>
                       </div>

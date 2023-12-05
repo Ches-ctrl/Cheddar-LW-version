@@ -7,7 +7,7 @@ export default class extends Controller {
   connect() {
   }
 
-  searchByCompany(e) {
+  searchByCompany() {
     const checkedCompanies = this.companyTargets.filter(company => company.checked)
       .map(company => company.attributes.id.value)
 
