@@ -17,6 +17,10 @@
   padding: 16px;
   overflow: auto;
 
+  a {
+    text-decoration: none;
+  }
+
   p {
     color: rgba(0, 0, 0, 0.5);
     margin: 0;
@@ -25,21 +29,28 @@
 
   h5, h6 {
     margin: 0;
-    margin-bottom: 8px;
-    margin-top: 8px;
+    margin-bottom: 16px;
+    margin-top: 16px;
   }
 
   h6 {
     margin-left: 16px;
+    margin-bottom: 8px;
+    margin-top: 8px;
   }
 
   .education-card {
     display: flex;
-    flex-direction: column;
-    margin: 0 16px;
-    justify-content: center;
-    gap: 5px;
-    margin-left: 0;
+    margin: 16px auto;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+    width: 95%;
+    height: 115px;
+    padding: 16px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e3e6f0;
   }
 
   .education-card h6 {
@@ -54,33 +65,63 @@
 
 .application-card-small {
   display: flex;
-  width: 90%;
+  width: 95%;
+  height: 115px;
   align-items: center;
   justify-content: space-between;
+  margin: 16px auto;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e3e6f0;
 
-  .progress-container {
-    position: relative;
+  .profile-application-details {
+    width: 60%
+  }
+
+  .semi-donut {
     width: 100px;
     height: 50px;
-  }
+    position: relative;
+    font-size: 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-sizing: border-box;
+    --percentage: 0;
+    --fill: #00f;
+    object-fit: contain;
 
-  .progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-    background-color: #3498db; /* Change the color as needed */
+    &:after {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      border: 20px solid;
+      border-color: #f4f4f4 #f4f4f4 var(--fill) var(--fill);
+      border-radius: 50%;
+      transform: rotate( calc(1deg * (-45 + var(--percentage) * 1.8 )));
+    }
   }
+}
 
-  .progress-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #333; /* Change the color as needed */
-    font-size: 16px;
-    font-weight: bold;
-  }
+.education-card img {
+  object-fit: contain;
+  width: 60px;
+  height: 60px;
+}
+
+.application-card-small img {
+    object-fit: contain;
+    width: 60px;
+    height: 60px;
+}
+
+.application-card-small strong {
+  color: black;
 }

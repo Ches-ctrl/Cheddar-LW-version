@@ -23,7 +23,7 @@
 <div id="profile-scroll-boxes">
   <div class="scroll-box">
     <h3 class="text-center">
-      Your Details
+      My Details
       <%= link_to edit_user_registration_path(current_user), data: {turbo_method: :post} do %>
           <i class="fa-regular fa-pen-to-square"></i>
       <% end %>
@@ -47,9 +47,12 @@
       </h5>
       <% current_user.educations.each do |education| %>
         <div class="education-card">
-          <h6><%= education.university %></h6>
-          <p style="color:black"><%= education.degree %> in <%= education.field_study %></p>
-          <p>Achieved in: <%= education.graduation_year %></p>
+          <%= image_tag("https://logo.clearbit.com/#{education.university}.com?size=60", onerror: "this.src='https://cdn-icons-png.flaticon.com/512/1656/1656819.png'") %>
+          <div class="" id="education-details">
+            <h6><%= education.university %></h6>
+            <p style="color:black"><%= education.degree %> in <%= education.field_study %></p>
+            <p>Graduation Year: <%= education.graduation_year %></p>
+          </div>
         </div>
       <% end %>
     </div>
@@ -59,17 +62,15 @@
     </div>
   </div>
   <div class="scroll-box">
-    <h3 class="text-center">Your Applications</h3>
+    <h3 class="text-center"><%= link_to "My Applications", job_applications_path, style: "color: black;" %></h3>
     <% current_user.job_applications.each do |application| %>
       <div class="application-card-small">
+      <%= image_tag("https://logo.clearbit.com/#{application.job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %>
         <div class="profile-application-details">
-          <h5><%= application.job.job_title %></h5>
-          <h6><%= application.job.company.company_name %></h6>
+          <p><strong><%= application.job.job_title %></strong></p>
+          <p><%= application.job.company.company_name %><p>
         </div>
-        <div class="progress-container">
-          <div class="progress-bar" data-progress="75"></div>
-          <div class="progress-label">75%</div>
-        </div>
+        <div class="semi-donut" style="--percentage: 100; --fill:#6007C6">Applied</div>
       </div>
     <% end %>
   </div>
