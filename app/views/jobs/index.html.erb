@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-sm-12">
       <%= render 'search' %>
-      <div id="jobs-index-second-section" class="container">
+      <div id="jobs-index-second-section" class="container" data-controller="job-index-toggle">
 
-        <div id="jobs-index-left-section" data-controller="job-index-toggle">
+        <div id="jobs-index-left-section" data-job-index-toggle-target="search">
           <h3 id="jobs-index-left-section-title"><%= @jobs.count %> Jobs</h3>
 
-          <h6 class="my-4">Search by Company</h5>
+          <h6 class="my-4">Search by Company</h6>
 
           <ul id="companies-select">
             <button class="btn mb-2" data-select-by-company-target="button" data-action="click->select-by-company#revealCompanies">Show all</button>
@@ -21,7 +21,7 @@
             </div>
           </ul>
 
-          <h6 class="my-4 d-none">Search by Salary Range</h5>
+          <h6 class="my-4 d-none">Search by Salary Range</h6>
 
           <ul id="salary-range" class="d-none" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
             <label for="35000">
@@ -48,7 +48,7 @@
 
         <div id="jobs-index-right-section">
           <div class="d-flex justify-content-between">
-            <button id="hide-lhs-button" class="btn btn-cheddar-secondary" data-action="click->job-index-toggle#toggleLhs">Hide Filters</button>
+            <button id="hide-lhs-button" class="btn btn-cheddar-secondary" data-job-index-toggle-target="button" data-action="click->job-index-toggle#toggleSearch">Hide Filters</button>
             <%= form_tag apply_jobs_path, method: :post do %>
               <div>
                 <%= submit_tag "Apply to [X] Jobs", class: "btn btn-apply" %>

@@ -7,7 +7,7 @@ export default class extends Controller {
   }
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const btn = document.getElementById("confetti-btn");
-  btn.addEventListener("click", makeConfetti);
-});
+// document.addEventListener('DOMContentLoaded', (event) => {
+//   const btn = document.getElementById("confetti-btn");
+//   btn.addEventListener("click", makeConfetti);
+// });
