@@ -19,9 +19,11 @@
 
   .my-applications-screenshot {
     width: 50%;
+    height: 90%;
     margin-right: 32px;
     border: 1px solid #e3e6f0;
     border-radius: 20px;
+    overflow: hidden;
   }
 
   ul {
@@ -37,4 +39,11 @@
   ul li{
     margin-bottom: 10px;
   }
+}
+
+application-title-bg {
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
 }

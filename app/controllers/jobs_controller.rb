@@ -34,10 +34,12 @@ class JobsController < ApplicationController
   def apply_to_selected_jobs
     # Fetch the selected job IDs from the parameters
     selected_job_ids = params[:job_ids]
+    p cookies[:selected_job_ids]
+    p selected_job_ids
 
     # Instead of directly creating job applications, store the selected jobs in the session or another temporary store
-    session[:selected_job_ids] = selected_job_ids
-
+    cookies[:selected_job_ids] = selected_job_ids
+    # raise
     # Redirect to a new action that will display the staging page
     redirect_to new_job_application_path
   end

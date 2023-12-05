@@ -8,7 +8,8 @@ class JobApplicationsController < ApplicationController
 
   def new
     # Retrieve the selected job IDs from the session
-    @selected_jobs = Job.find(session[:selected_job_ids])
+    # raise
+    @selected_jobs = Job.find(cookies[:selected_job_ids].split("&"))
 
     @job_applications = @selected_jobs.map do |job|
       job_application = JobApplication.new(user: current_user, status: "Pre-application")
@@ -20,11 +21,11 @@ class JobApplicationsController < ApplicationController
         application_response.interaction = details["interaction"]
         application_response.field_option = details["option"]
         # TODO: Check with TA if this is the correct approach
-        if field == "resume" && current_user.resume.attached?
-          application_response.field_value = rails_blob_url(current_user.resume, only_path: true)
-        else
-          application_response.field_value = current_user.try(field) || ""
-        end
+        # if field == "resume" && current_user.resume.attached?
+        # application_response.field_value = rails_service_blob_proxy_url(current_user.resume, only_path: true)
+        # else
+        application_response.field_value = current_user.try(field) || ""
+        # end
       end
 
       [job, job_application]
@@ -43,38 +44,42 @@ class JobApplicationsController < ApplicationController
     user_input = params[:user_input]
 
     # Process each selected job
-    session[:selected_job_ids].each do |job_id|
-      job = Job.find(job_id)
+    job = Job.find(params[:job_id])
 
-      # update the job/ application criteria
+    # update the job/ application criteria
 
-      # Create a job application with the user's input
-      @job_application = JobApplication.new(job_application_params)
-      @job_application.user = current_user
-      @job_application.job = job
-      @job_application.status = "Application pending"
+    # Create a job application with the user's input
+    @job_application = JobApplication.new(job_application_params)
+    @job_application.user = current_user
+    @job_application.job = job
+    @job_application.status = "Application pending"
 
-      # find out what issue is and if there is one, create or append the validation errors and render new
+    # find out what issue is and if there is one, create or append the validation errors and render new
 
-      if !@job_application.save
-        render :new
-      end
-
-      # @job_application = JobApplication.new(job: job, user_id: current_user.id, status: "Pre-application")
-
+    if @job_application.save
       # Perform the job application process
-      ApplyJob.perform_now(@job_application.id, current_user.id)
+      # ApplyJob.perform_now(@job_application.id, current_user.id)
       @job_application.update(status: "Applied")
 
       # Optional: Add a notification for each application
       # flash[:notice] = "You applied to #{Job.find(job_id).job_title}!"
+
+      # Remove the submitted job IDs from the session
+      # raise
+      ids = cookies[:selected_job_ids].split("&")
+      p ids
+      ids.delete("#{job.id}")
+      p ids
+      cookies[:selected_job_ids] = ids
+
+      # Redirect to the job applications index page or another appropriate page
+      redirect_to job_applications_path, notice: 'Your applications have been submitted.'
+    else
+      render :new
     end
 
-    # Clear the selected job IDs from the session
-    session[:selected_job_ids] = nil
+    # @job_application = JobApplication.new(job: job, user_id: current_user.id, status: "Pre-application")
 
-    # Redirect to the job applications index page or another appropriate page
-    redirect_to job_applications_path, notice: 'Your applications have been submitted.'
   end
 
   def success
@@ -85,7 +90,7 @@ class JobApplicationsController < ApplicationController
   # TODO: Update job_application_params to include the user inputs
 
   def job_application_params
-    params.require(:job_application).permit(:first_name, :last_name, :email, :phone_number, :city, :location_click, :resume, :linkedin_profile, :personal_website, :heard_from, :right_to_work, :require_visa?)
+    params.require(:job_application).permit(application_responses_attributes: [:field_name, :field_value, :field_locator, :interaction, :field_option])
   end
 end
 
