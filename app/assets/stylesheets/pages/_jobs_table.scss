@@ -191,6 +191,12 @@ input[type="checkbox"] {
   height: 60px;
 }
 
+
+#jobs-index-right-section {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
 .already-applied-tick {
   color: $main-color;
   font-size: 22px;

@@ -13,3 +13,7 @@
 @import "components/my_applications_card";
 @import "components/profile_info";
 @import "components/profile_scroll_boxes";
+
+::-webkit-scrollbar {
+  display: none;
+}
