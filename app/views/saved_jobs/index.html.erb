@@ -29,6 +29,7 @@
 
     <div class="job-cards-container pt-0" data-controller="load-more">
       <% @initial_jobs.each do |saved_job| %>
+      
         <%= render 'jobs/row', job: saved_job.job %>
       <% end %>
       <div data-load-more-target="remaining" class="d-none">
