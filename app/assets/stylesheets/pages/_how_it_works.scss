@@ -1,27 +1,28 @@
 /* custom font from google fonts */
 
 /* Basic styling and positioning of elements */
-body {color:#444;font-size:16px;}
+// body {color:#444;font-size:16px;}
 
 .how-works-container{
   display: flex;
   margin: 24px auto;
   width: 50%;
   flex-direction: column;
-  // align-items: center;
+  font-size: 24px ;
   justify-content: center;
 }
 
 .how-it-works-object {
   width: fit-content;
+  // height: fit-content;
 }
 
 .how-works-text{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: purple;
-  width: 300px;
+  color: #490596;
+  width: 500px;
 }
 // #some-box {background:#fff;padding:40px 0px 80px;font-family:'Helvetica', sans-serif;}
 // #some-box h1 {text-align:center;}
