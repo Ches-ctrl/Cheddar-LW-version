@@ -13,9 +13,11 @@ export default class extends Controller {
 
     console.log(checkedCompanies)
     this.companyRowTargets.forEach((companyRow) => {
-      console.log(companyRow.querySelector(".companyName").innerText)
-      console.log(checkedCompanies.includes(companyRow.querySelector(".companyName").innerText))
-      if (checkedCompanies.includes(companyRow.querySelector(".companyName").innerText)) {
+      console.log(companyRow);
+      console.log(companyRow.querySelector(".companyname"));
+      console.log(companyRow.querySelector(".companyname").dataset.name);
+      console.log(checkedCompanies.includes(companyRow.querySelector(".companyname").dataset.name));
+      if (checkedCompanies.includes(companyRow.querySelector(".companyname").dataset.name)) {
         // console.log(checkedCompanies)
 
         companyRow.classList.remove('d-none')
