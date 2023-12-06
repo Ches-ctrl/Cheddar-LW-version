@@ -22,8 +22,12 @@ export default class extends Controller {
     const pattern = new RegExp(patternStrings.join('|'), 'i');
 
     this.jobRowTargets.forEach((jobRow) => {
-      const jobTitle = jobRow.querySelector(".role").innerText
-
+      const jobTitle = jobRow.querySelector(".role").dataset.role;
+      console.log(jobRow.querySelector(".role"))
+      console.log(jobRow.querySelector(".role").dataset)
+      console.log(jobTitle);
+      console.log(pattern)
+      console.log(pattern.test(jobTitle))
       if (pattern.test(jobTitle)) {
         jobRow.classList.remove('d-none')
       } else {

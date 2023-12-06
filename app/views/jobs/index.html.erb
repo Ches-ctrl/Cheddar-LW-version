@@ -37,21 +37,21 @@
           <div class="job-types-select-item">
 
             <label for="Full Stack" class="job-types-select-item-label">
-            <input class="job-types-select-item-checkbox" type="checkbox" name="Full Stack" id="full-stack" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
+            <input class="job-types-select-item-checkbox" type="checkbox" name="Full Stack" id="full stack" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
             Full Stack
             </label>
 
             <br>
 
             <label for="Back End" class="job-types-select-item-label">
-            <input class="job-types-select-item-checkbox" type="checkbox" name="Back End" id="back-end" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
+            <input class="job-types-select-item-checkbox" type="checkbox" name="Back End" id="back end" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
             Back-end
             </label>
 
             <br>
 
             <label for="Front End" class="job-types-select-item-label">
-            <input class="job-types-select-item-checkbox" type="checkbox" name="Front End" id="front-end" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
+            <input class="job-types-select-item-checkbox" type="checkbox" name="Front End" id="front end" data-action="change->select-by-job-type#searchByJobType" data-select-by-job-type-target="type">
             Front-end
             </label>
 
@@ -89,11 +89,11 @@
         <div class="sticky-top bg-white">
           <%= form_tag apply_jobs_path, method: :post do %>
             <div class="d-flex justify-content-between align-items-center pt-1">
-              <div class="d-flex align-items-center" data-action="click->job-index-toggle#toggleView" data-job-index-toggle-target="toggleButton1">
+              <div class="d-flex align-items-center cursor-pointer" data-action="click->job-index-toggle#toggleView" data-job-index-toggle-target="toggleButton1">
                 <i class="fa-solid fa-circle-left"></i>
                 <p class="my-0 ms-1">Hide Categories</p>
               </div>
-              <div class="d-flex align-items-center d-none" data-action="click->job-index-toggle#toggleView" data-job-index-toggle-target="toggleButton2">
+              <div class="d-flex align-items-center d-none cursor-pointer" data-action="click->job-index-toggle#toggleView" data-job-index-toggle-target="toggleButton2">
                 <i class="fa-solid fa-circle-right"></i>
                 <p class="my-0 ms-1">Show Categories</p>
               </div>
@@ -128,111 +128,12 @@
             <%# RHS Section - Job Table %>
             <div class="job-cards-container pt-0" data-controller="load-more">
               <% @initial_jobs.each do |job| %>
-                <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow" data-styling-selected-job-target="jobCard">
-                  <div class="col-12">
-                    <div class="card job-card">
-                      <div class="card-body">
-                        <div class="row text-center">
-                          <div class="col card-logo companyName"><%= image_tag("https://logo.clearbit.com/#{job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %><p class="d-none"><%= job.company.company_name%></p></div>
-                          <div class="col role"><%= link_to job.job_title.truncate(30), job_path(job) %></div>
-                          <div class="col-2 d-none job-description-small" data-job-index-toggle-target="newColumn2"><%= job.job_description.truncate(90) %></div>
-                          <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
-                          <div class="col">
-                            <% if (Time.now.next_day(7)) >= job.application_deadline %>
-                              <button class="btn btn-closing-soon">CLOSING SOON</button>
-                            <% elsif Time.now < job.application_deadline %>
-                              <button class="btn btn-status">OPEN</button>
-                            <% else %>
-                              <button class="btn btn-closed">CLOSED</button>
-                            <% end %>
-                          </div>
-                          <div class="col"><%= job.application_deadline.strftime("%d/%m") %></div>
-                          <div class="col ">
-                            <% if job.application_criteria["resume"].any? %>
-                              YES
-                            <% else %>
-                              NO
-                            <% end %>
-                          </div>
-                          <div class="col">
-                            <%= link_to job.job_posting_url, target: "_blank" do %>
-                              <i class="fa-solid fa-external-link-alt"></i>
-                            <% end %>
-                          </div>
-                          <div class="col ">
-                            <% if SavedJob.where(job_id: job.id).present? %>
-                              <i class="fa-solid fa-heart saved-job-heart-icon"></i>
-                            <% else %>
-                              <%= link_to job_saved_jobs_path(job), data: {turbo_method: :post} do %>
-                                <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
-                              <% end %>
-                            <% end %>
-                          </div>
-                          <div class="col">
-                            <label class="custom-checkbox">
-                              <%= check_box_tag "job_ids[]", job.id, false, id: "job_#{job.id}" %>
-                              <span class="checkmark"></span>
-                            </label>
-                          </div>
-                          <%# <div class="col text-center submit"><input type="checkbox"></div> %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <%= render 'row', job: job %>
               <% end %>
             <% end %>
             <div data-load-more-target="remaining" class="d-none">
               <% @remaining_jobs.each do |job| %>
-                <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow">
-                  <div class="col-12">
-                    <div class="card job-card">
-                      <div class="card-body">
-                        <div class="row text-center">
-                          <div class="col card-logo"><%= image_tag("https://logo.clearbit.com/#{job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %></div>
-                            <div class="col role"><%= link_to job.job_title.truncate(30), job_path(job) %></div>
-                          <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
-                          <div class="col">
-                            <% if (Time.now.next_day(7)) >= job.application_deadline %>
-                              <button class="btn btn-closing-soon">CLOSING SOON</button>
-                            <% elsif Time.now < job.application_deadline %>
-                              <button class="btn btn-status">OPEN</button>
-                            <% else %>
-                              <button class="btn btn-closed">CLOSED</button>
-                            <% end %>
-                          </div>
-                          <div class="col"><%= job.application_deadline.strftime("%d/%m") %></div>
-                          <div class="col ">
-                            <% if job.application_criteria["resume"].any? %>
-                              YES
-                            <% else %>
-                              NO
-                            <% end %>
-                          </div>
-                          <div class="col">
-                            <%= link_to job.job_posting_url, target: "_blank" do %>
-                              <i class="fa-solid fa-external-link-alt"></i>
-                            <% end %>
-                          </div>
-                          <div class="col ">
-                            <% if SavedJob.where(job_id: job.id).present? %>
-                              <i class="fa-solid fa-heart saved-job-heart-icon"></i>
-                            <% else %>
-                              <%= link_to job_saved_jobs_path(job), data: {turbo_method: :post} do %>
-                                <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
-                              <% end %>
-                            <% end %>
-                          </div>
-                          <% @jobs.each do |job| %>
-                            <div class="col">
-                              <%= check_box_tag "job_ids[]", job.id, false, class: "job-checkbox", "data-action": "change->job-index-toggle#updateButton", "data-target": "job-index-toggle.jobCheckbox" %>
-                            </div>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <%= render 'row', job: job %>
               <% end %>
             </div>
             <div class="d-flex justify-content-start">
