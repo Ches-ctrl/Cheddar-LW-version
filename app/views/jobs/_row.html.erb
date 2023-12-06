@@ -41,13 +41,19 @@
               <% end %>
             <% end %>
           </div>
-          <div class="col selectBox">
-            <label class="custom-checkbox" data-job-index-toggle-target="jobCheckbox" data-action="click->job-index-toggle#updateApplyButton">
-              <%= check_box_tag "job_ids[]", job.id, id: "job_id", class: 'select-job-box', data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
-              <span class="checkmark"></span>
-            </label>
-          </div>
-          <%# <div class="col text-center submit"><input type="checkbox"></div> %>
+
+          <% if JobApplication.where(job_id: job.id).present? %>
+            <div class="col already-applied-tick">
+              <i class="fa-solid fa-check"></i>
+            </div>
+          <% else %>
+            <div class="col selectBox">
+              <label class="custom-checkbox" data-job-index-toggle-target="jobCheckbox" data-action="click->job-index-toggle#updateApplyButton">
+                <%= check_box_tag "job_ids[]", job.id, id: "job_id", class: 'select-job-box', data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
