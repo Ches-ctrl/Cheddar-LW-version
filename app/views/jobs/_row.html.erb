@@ -3,7 +3,7 @@
     <div class="card job-card">
       <div class="card-body">
         <div class="row text-center">
-          <div class="col card-logo companyName"><%= image_tag("https://logo.clearbit.com/#{job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %><p class="d-none"><%= job.company.company_name%></p></div>
+          <div class="col card-logo companyname" data-name="<%= job.company.company_name %>"><%= image_tag("https://logo.clearbit.com/#{job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %><p class="d-none"><%= job.company.company_name%></p></div>
           <div class="col role" data-role="<%= job.job_title %>"><%= link_to job.job_title.truncate(25), job_path(job) %></div>
           <div class="col-2 d-none job-description-small" data-job-index-toggle-target="newColumn2"><%= job.job_description.truncate(90) %></div>
           <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>

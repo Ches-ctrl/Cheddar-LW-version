@@ -86,8 +86,8 @@
 
       <%# RHS Section Divider %>
       <div class="col-sm-9 p-0" id="jobs-index-right-section" data-job-index-toggle-target="rightSection">
-          <%= form_tag apply_jobs_path, method: :post do %>
-        <div class="sticky-top bg-white">
+        <%= form_tag apply_jobs_path, method: :post do %>
+          <div class="sticky-top bg-white">
             <div class="d-flex justify-content-between align-items-center pt-1">
               <div class="d-flex align-items-center cursor-pointer" data-action="click->job-index-toggle#toggleView" data-job-index-toggle-target="toggleButton1">
                 <i class="fa-solid fa-circle-left"></i>
@@ -103,33 +103,32 @@
             </div>
 
             <%# RHS Section - Job Table Headers %>
-              <div class="row">
-                <div class="col-12">
-                  <div class="card job-list-header">
-                    <div class="card-body">
-                      <div class="row text-center">
-                        <div class="col">Company</div>
-                        <div class="col">Role</div>
-                        <div class="col-2 d-none" data-job-index-toggle-target="newColumn1">Description</div>
-                        <div class="col">Salary</div>
-                        <div class="col">Status</div>
-                        <div class="col">Deadline</div>
-                        <div class="col">CV</div>
-                        <div class="col">Details</div>
-                        <div class="col">Save</div>
-                        <div class="col">Select</div>
-                      </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card job-list-header">
+                  <div class="card-body">
+                    <div class="row text-center">
+                      <div class="col">Company</div>
+                      <div class="col">Role</div>
+                      <div class="col-2 d-none" data-job-index-toggle-target="newColumn1">Description</div>
+                      <div class="col">Salary</div>
+                      <div class="col">Status</div>
+                      <div class="col">Deadline</div>
+                      <div class="col">CV</div>
+                      <div class="col">Details</div>
+                      <div class="col">Save</div>
+                      <div class="col">Select</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <%# RHS Section - Job Table %>
-            <div class="job-cards-container pt-0" data-controller="load-more">
-              <% @initial_jobs.each do |job| %>
-                <%= render 'row', job: job %>
-              <% end %>
+          <%# RHS Section - Job Table %>
+          <div class="job-cards-container pt-0" data-controller="load-more">
+            <% @initial_jobs.each do |job| %>
+              <%= render 'row', job: job %>
             <% end %>
             <div data-load-more-target="remaining" class="d-none">
               <% @remaining_jobs.each do |job| %>
@@ -140,6 +139,7 @@
               <button data-action="click->load-more#showMore" data-load-more-target="button" class="btn btn-cheddar-secondary">Show More</button>
             </div>
           </div>
+        <% end %>
 
       <div data-controller="new-job-form">
         <button id="btn-add-job" class="d-none" data-action="click->new-job-form#displayForm" data-new-job-form-target="button">Add a Job</button>
