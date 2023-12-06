@@ -1,6 +1,6 @@
 #jobs-index-second-section{
-  display: flex;
-  margin-top: 48px;
+  // display: flex;
+  margin-top: 20px;
 }
 
 #jobs-index-left-section{
@@ -10,13 +10,14 @@
 }
 
 #jobs-index-left-section-title{
-  margin-bottom: 48px;
+  margin-top: 10px;
+  margin-bottom: 25px;
 }
 
 #jobs-index-right-section{
-  width: 1000px;
+  // width: 1000px;
   justify-content: flex-end;
-  margin-right: 0;
+  // margin-right: 0;
 }
 
 #companies-select {
@@ -24,17 +25,22 @@
   width: 250px;
   overflow: scroll;
   padding: 16px 8px;
-  box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
-  border-radius: 20px;
+  // box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
+  // border-radius: 20px;
+  margin-bottom: 20px;
+  // border-bottom: 1px solid #e3e6f0;
+  border-top: 1px solid #e3e6f0;
 }
 
 #job-types-select {
-  height: 110px;
+  border-top: 1px solid #e3e6f0;
+  height: 180px;
   width: 250px;
   overflow: scroll;
   padding: 16px 8px;
-  box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
-  border-radius: 20px;
+  // margin-bottom: 20px;
+  // box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
+  // border-radius: 20px;
 }
 
 .companies-select-item {
@@ -51,9 +57,9 @@
   align-content: center;
 }
 
-.job-types-select-item-label {
-  margin-bottom: 6px;
-}
+// .job-types-select-item-label {
+//   margin-bottom: 6px;
+// }
 
 .companies-select-item-checkbox, .job-types-select-item-checkbox {
   width: 1em;

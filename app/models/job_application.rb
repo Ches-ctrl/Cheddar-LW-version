@@ -1,7 +1,9 @@
 class JobApplication < ApplicationRecord
+
   # -----------------------------
-# Core Application Criteria:
-# -----------------------------
+  # Core Application Criteria:
+  # -----------------------------
+
   CORE_APPLICATION_CRITERIA = {
     first_name: {
       interaction: :input,
