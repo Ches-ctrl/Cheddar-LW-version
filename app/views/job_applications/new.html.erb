@@ -57,7 +57,7 @@
                       <p>TODO: Add a div with the user's resume. Using your current resume</p>
                     <% end %>
 
-                    <%= ff.input :field_value, label_html: { class: "d-none"}, input_html: { class: "rounded-pill", data: { label: response.field_name, response_input_target: "input", action: "keyup->response-input#handleChange change->response-input#handleChange"}, value: current_user.resume.attached? ? current_user.resume.key : nil } %>
+                    <%= ff.input :field_value, label_html: { class: "d-none"}, input_html: { class: "rounded-pill", data: { label: response.field_name, response_input_target: "input", action: "keyup->response-input#handleChange change->response-input#handleChange"}, value: current_user.resume.attached? ? current_user.resume.filename : nil } %>
                   </div>
                 <% when "combobox" %>
                   <div class="col-sm-10 mr-2">

@@ -184,3 +184,9 @@ input[type="checkbox"] {
   height: 12px;
   background-size: cover;
 }
+
+.job-card img {
+  object-fit: contain;
+  width: 60px;
+  height: 60px;
+}
