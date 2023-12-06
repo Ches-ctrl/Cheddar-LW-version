@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_06_004255) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_06_080345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_004255) do
     t.string "option"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "required"
     t.index ["applicant_tracking_system_id"], name: "index_ats_formats_on_applicant_tracking_system_id"
   end
 
@@ -117,6 +118,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_004255) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "applicant_tracking_system_id"
+    t.integer "ats_format_id"
+    t.text "application_details"
+    t.text "description_long"
+    t.text "responsibilities"
+    t.text "requirements"
+    t.text "benefits"
+    t.text "application_process"
+    t.boolean "captcha"
     t.index ["company_id"], name: "index_jobs_on_company_id"
   end
 
@@ -185,6 +195,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_004255) do
   add_foreign_key "educations", "users"
   add_foreign_key "job_applications", "jobs"
   add_foreign_key "job_applications", "users"
+  add_foreign_key "jobs", "applicant_tracking_systems"
+  add_foreign_key "jobs", "ats_formats"
   add_foreign_key "jobs", "companies"
   add_foreign_key "playlist_jobs", "job_playlists"
   add_foreign_key "playlist_jobs", "jobs"
