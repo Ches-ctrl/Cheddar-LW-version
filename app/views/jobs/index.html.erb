@@ -1,4 +1,4 @@
-<div class="container" data-controller="select-by-company select-by-job-type">
+<div class="container" data-controller="select-by-company select-by-job-type styling-selected-job">
   <div class="search-container d-flex justify-content-center align-items-center">
     <%= render 'search' %>
   </div>
@@ -128,12 +128,12 @@
             <%# RHS Section - Job Table %>
             <div class="job-cards-container pt-0" data-controller="load-more">
               <% @initial_jobs.each do |job| %>
-                <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow">
+                <div class="row mb-3" data-select-by-company-target="companyRow" data-select-by-job-type-target="jobRow" data-styling-selected-job-target="jobCard">
                   <div class="col-12">
                     <div class="card job-card">
                       <div class="card-body">
                         <div class="row text-center">
-                          <div class="col card-logo"><%= image_tag("https://logo.clearbit.com/#{job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %></div>
+                          <div class="col card-logo companyName"><%= image_tag("https://logo.clearbit.com/#{job.company.company_website_url}?size=60", onerror: "this.src='https://i.pinimg.com/736x/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg'") %><p class="d-none"><%= job.company.company_name%></p></div>
                           <div class="col role"><%= link_to job.job_title.truncate(30), job_path(job) %></div>
                           <div class="col-2 d-none job-description-small" data-job-index-toggle-target="newColumn2"><%= job.job_description.truncate(90) %></div>
                           <div class="col salaryBudget">£<%= number_with_delimiter(job.salary, :delimiter => ',') %></div>
