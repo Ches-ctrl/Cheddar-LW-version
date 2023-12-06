@@ -31,7 +31,10 @@
           </div>
           <div class="col ">
             <% if SavedJob.where(job_id: job.id).present? %>
-              <i class="fa-solid fa-heart saved-job-heart-icon"></i>
+
+              <%= link_to saved_job_path(job.saved_job_ids), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this job from your list?"} do %>
+                <i class="fa-solid fa-heart saved-job-heart-icon"></i>
+              <% end %>
             <% else %>
               <%= link_to job_saved_jobs_path(job), data: {turbo_method: :post} do %>
                 <i class="fa-regular fa-heart not-saved-job-heart-icon"></i>
