@@ -4,7 +4,14 @@
         params[:query],
         class: 'form-control',
         placeholder: 'Search for any job, company or role... ', style: 'font-style: italic;', id: 'search-jobs' %>
+
+    <%= link_to jobs_path, class: 'clear-search-icon' do %>
+      <i class="fa-solid fa-x"></i>
+    <% end %>
+
     <%= submit_tag 'Search', id: 'search-button' %>
   <% end %>
-  <%= link_to 'Clear', jobs_path, class: 'btn clear-search-button' %>
+
+
+
 </div>

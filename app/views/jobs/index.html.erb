@@ -9,7 +9,14 @@
 
         <%# LHS Section - Title and Search  %>
         <div class="d-flex justify-content-between">
-          <h6 id="jobs-index-left-section-title"><%= (@jobs.count - @job_applications.count) %> Jobs</h6>
+          <h6 id="jobs-index-left-section-title">
+            <% if params[:query].present? %>
+              <%= @jobs.count %>
+            <% else %>
+              <%= @jobs.count - @job_applications.count %>
+            <% end %>
+            Jobs
+          </h6>
         </div>
 
         <%# TODO: Add icons %>

@@ -24,25 +24,11 @@
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
-  margin-right: 6px;
+  // margin-right: 6px;
   margin-left: 6px;
 }
 
-.clear-search-button {
-  background-color: rgba(154, 145, 145, 0.454);
-  opacity: 0.8;
-  color: white;
-  // font-weight: 500;
-  text-decoration: none;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 20px;
-}
 
-.clear-search-button:hover {
-  text-decoration: none;
-
-}
 
 .btn-add-info, #btn-add-job {
   background-color: $main-color;
