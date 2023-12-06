@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   devise_for :users
 
   root to: "pages#home"
@@ -31,8 +35,4 @@ Rails.application.routes.draw do
   resources :saved_jobs, only: [:index, :show, :destroy]
   resources :educations, only: [:new, :create]
 
-  require "sidekiq/web"
-  authenticate :user, ->(user) { user.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
 end

@@ -27,7 +27,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
+# gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -58,7 +58,7 @@ gem "faker"
 gem "capybara"
 gem "selenium-webdriver", "4.0"
 gem "watir"
-gem "sidekiq", "~> 6"
+gem 'sidekiq', '~> 6.5.5'
 gem "sidekiq-failures", "~> 1.0"
 
 # Additional Gems for API and Scrape features

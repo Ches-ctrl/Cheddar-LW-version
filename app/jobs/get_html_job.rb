@@ -1,4 +1,4 @@
-require 'nokogiri'
+# require 'nokogiri'
 
 class GetHtmlJob < ApplicationJob
   include Capybara::DSL
