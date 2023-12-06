@@ -58,7 +58,7 @@ class JobApplicationsController < ApplicationController
 
     if @job_application.save
       # Perform the job application process
-      # ApplyJob.perform_now(@job_application.id, current_user.id)
+      ApplyJob.perform_now(@job_application.id, current_user.id)
       @job_application.update(status: "Applied")
 
       # Optional: Add a notification for each application
