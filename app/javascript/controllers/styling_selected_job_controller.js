@@ -14,9 +14,9 @@ export default class extends Controller {
 
       if (checkBox.checked) {
         // console.log(checkBox)
-        checkBox.parentElement.parentElement.parentElement.parentElement.classList.add('selected-job-card')
+        checkBox.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add('selected-job-card')
       } else {
-        checkBox.parentElement.parentElement.parentElement.parentElement.classList.remove('selected-job-card')
+        checkBox.parentElement.parentElement.parentElement.parentElement.parentElement.classList.remove('selected-job-card')
       }
     })
   }
