@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :address_first, :address_second, :city, :post_code, :phone_number, :github_profile_url, :website_url, :cover_letter_template_url, :photo, :resume, :linkedin_profile])
   end
+
+  def user_root_path
+    profile_url
+  end
 end

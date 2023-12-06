@@ -7,7 +7,8 @@ export default class extends Controller {
   connect() {
   }
 
-  showMore() {
+  showMore(event) {
+    event.preventDefault();
     this.remainingTarget.classList.remove('d-none');
     this.buttonTarget.classList.add('d-none');
   }

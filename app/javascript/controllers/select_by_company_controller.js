@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="select-by-company"
 export default class extends Controller {
-  static targets = [ "company", "companyRow", "salary", "index", "button"]
+  static targets = [ "company", "companyRow", "index", "button"]
 
   connect() {
   }
@@ -12,8 +12,7 @@ export default class extends Controller {
       .map(company => company.attributes.id.value)
 
     this.companyRowTargets.forEach((companyRow) => {
-
-      if (checkedCompanies.includes(companyRow.querySelector(".companyName").innerText)) {
+      if (checkedCompanies.includes(companyRow.querySelector(".companyname").dataset.name)) {
         companyRow.classList.remove('d-none')
       } else {
         companyRow.classList.add('d-none')
