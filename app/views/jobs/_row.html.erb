@@ -38,9 +38,9 @@
               <% end %>
             <% end %>
           </div>
-          <div class="col">
+          <div class="col selectBox">
             <label class="custom-checkbox" data-job-index-toggle-target="jobCheckbox" data-action="click->job-index-toggle#updateApplyButton">
-              <%= check_box_tag "job_ids[]", job.id, false, id: "job_#{job.id}" %>
+              <%= check_box_tag "job_ids[]", job.id, false, id: "job_#{job.id}", class: 'select-job-box', data: { styling_selected_job_target: "checkBox", action: 'change->styling-selected-job#styleCard' } %>
               <span class="checkmark"></span>
             </label>
           </div>
