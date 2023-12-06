@@ -8,21 +8,27 @@
     <h2><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
     <h2 style="color: rgba(0, 0, 0, 0.5);">He/Him</h2>
   </div>
+  <% if current_user.linkedin_profile.present? %>
   <h1>
     <%= link_to current_user.linkedin_profile, target: "_blank", style: "color: #0a66c2" do %>
       <i class="fa-brands fa-linkedin"></i>
     <% end %>
   </h1>
+  <% end %>
+  <% if current_user.github_profile_url.present? %>
   <h1>
     <%= link_to current_user.github_profile_url, target: "_blank", style: "color: black" do %>
       <i class="fa-brands fa-github"></i>
     <% end %>
   </h1>
+  <% end %>
+  <% if current_user.website_url.present? %>
   <h2>
     <%= link_to current_user.website_url, target: "_blank" do %>
       <i class="fa-solid fa-arrow-up-right-from-square"></i>
     <% end %>
   </h2>
+  <% end %>
 </div>
 
 <div id="profile-scroll-boxes">
@@ -35,13 +41,17 @@
     </h3>
     <div id="contact-info">
       <h5>Contact Information</h5>
-      <h6>Address</h6>
-      <p><%= current_user.address_first %>, <%= "#{current_user.address_second}" %></p>
-      <p><%= current_user.city %>, <%= current_user.post_code %></p>
+      <% if current_user.address_first.present?|| current_user.address_second.present? || current_user.city.present? || current_user.post_code.present? %>
+        <h6>Address</h6>
+        <p><%= "#{current_user.address_first}" if current_user.address_first.present? %><%=", #{current_user.address_second}" if current_user.address_second.present? %><%= ", #{current_user.city}" if current_user.city.present? %></p>
+        <p><%= current_user.post_code if current_user.post_code.present? %></p>
+      <% end %>
       <h6>Email</h6>
       <p><%= current_user.email %></p>
-      <h6>Phone</h6>
-      <p><%= current_user.phone_number %></p>
+      <% if current_user.phone_number.present? %>
+        <h6>Phone</h6>
+        <p><%= current_user.phone_number %></p>
+      <% end %>
     </div>
     <div id="education">
       <h5>
@@ -64,8 +74,10 @@
       <% end %>
     </div>
     <div id="documents">
-      <h5>Documents</h5>
-      <%= link_to "Resume", current_user.resume.url, class: "btn-apply", target: "_blank" %>
+      <% if current_user.resume.url.present? %>
+        <h5>Documents</h5>
+        <%= link_to "Resume", current_user.resume.url, class: "btn-apply", target: "_blank" %>
+      <% end %>
     </div>
   </div>
   <div class="scroll-box">
