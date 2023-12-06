@@ -6,5 +6,11 @@
         placeholder: 'Search for any job, company or role... ', style: 'font-style: italic;', id: 'search-jobs' %>
     <%= submit_tag 'Search', id: 'search-button' %>
   <% end %>
-  <%= link_to 'Clear', jobs_path, class: 'btn clear-search-button' %>
+
+  <%= link_to jobs_path do %>
+    <i class="fa-solid fa-x"></i>
+  <% end %>
+
+
+  <%# <%= link_to 'Clear', jobs_path, class: 'btn clear-search-button' %>
 </div>
