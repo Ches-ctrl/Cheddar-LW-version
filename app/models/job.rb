@@ -14,10 +14,8 @@ class Job < ApplicationRecord
   validates :job_title, :job_description, :application_deadline, presence: true
   validates :job_posting_url, uniqueness: true
 
-  # Commented out as not required - converts symbols to strings in the JSONB object
-  # def application_criteria
-  #   super.transform_keys(&:to_sym)
-  # end
+  # TODO: Add validations to job model
+  # validates :applicant_tracking_system_id, :ats_format_id, presence: true
 
   include PgSearch::Model
 
@@ -40,9 +38,13 @@ class Job < ApplicationRecord
     end
   end
 
-  # TODO: Add validations to job model
-
+  # Enables access to application_criteria via strings or symbols
   def application_criteria
     read_attribute(:application_criteria).with_indifferent_access
   end
 end
+
+# Commented out as not required - converts symbols to strings in the JSONB object
+# def application_criteria
+#   super.transform_keys(&:to_sym)
+# end
