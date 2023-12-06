@@ -1,6 +1,8 @@
 class SavedJobsController < ApplicationController
   def index
     @saved_jobs = SavedJob.where(user_id: current_user.id)
+    @initial_jobs = @saved_jobs.limit(5)
+    @remaining_jobs = @saved_jobs.offset(5)
   end
 
   def new
