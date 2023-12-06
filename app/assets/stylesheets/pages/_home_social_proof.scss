@@ -11,6 +11,7 @@ body, html {
 .container .slider {
   animation: slidein 30s linear infinite;
   white-space: nowrap;
+
 }
 
 .container .slider .logos {
@@ -18,15 +19,17 @@ body, html {
   margin-right: calc(2rem * 5);
 }
 
-.container .slider .logos .logo {
+.container .slider .logos .logo{
   aspect-ratio: 1/1;
   height: auto;
-  width: calc(100% / 5); /* Evenly space out images */
-  margin-left: 2rem;
+  width: calc(80% / 5); /* Evenly space out images */
+  margin-left: 4rem;
   animation: fade-in 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
   filter: saturate(0);
   opacity: 0.5;
-}
+  // animation-play-state: paused;
+  }
+
 
 
 @keyframes slidein {
@@ -51,4 +54,4 @@ body, html {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-}
+  }
