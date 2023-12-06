@@ -118,7 +118,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_080345) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "saved", default: false, null: false
     t.integer "applicant_tracking_system_id"
     t.integer "ats_format_id"
     t.text "application_details"

@@ -6,7 +6,15 @@
   <% end %>
   <div class="name-status">
     <h2><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
-    <h2 style="color: rgba(0, 0, 0, 0.5);">He/Him</h2>
+    <% if current_user.preferred_pronoun_select.present? || current_user.preferred_pronoun_text.present? %>
+      <h2 style="color: rgba(0, 0, 0, 0.5);">
+        <% if current_user.preferred_pronoun_select != "Prefer not to say" && current_user.preferred_pronoun_select != "Other" %>
+          <%= current_user.preferred_pronoun_select %>
+        <% elsif current_user.preferred_pronoun_select == "Other" && current_user.preferred_pronoun_text != "N/A" %>
+          <%= current_user.preferred_pronoun_text %>
+        <% end %>
+      </h2>
+    <% end %>
   </div>
   <% if current_user.linkedin_profile.present? %>
   <h1>
