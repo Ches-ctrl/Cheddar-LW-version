@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class FormFiller
   include Capybara::DSL
 
@@ -59,6 +61,13 @@ class FormFiller
     # Return a screenshot of the submitted form
     take_screenshot_and_store(job_application_id)
     close_session
+    fields.each do |field|
+      field = field[1]
+      if field['interaction'] == 'upload'
+        file_path = Rails.root.join('tmp', "#{field['value'].filename}")
+        File.delete(file_path)
+      end
+    end
   end
 
   private
@@ -102,13 +111,18 @@ class FormFiller
   end
 
   def upload_file(upload_locator, file)
+    file_path = Rails.root.join('tmp', "#{file.filename}")
+    File.open(file_path, 'wb') do |temp_file|
+      temp_file.write(URI.open(file.url).read)
+    end
     begin
-      find(upload_locator).attach_file(file)
+      find(upload_locator).attach_file(file_path)
     rescue Capybara::ElementNotFound
-      page.attach_file(file) do
+      page.attach_file(file_path) do
         page.find(upload_locator).click
       end
     end
+    # File.delete(file_path)
   end
 
   # TODO: Decide whether to include screenshot. Auto-email from the company may be sufficient evidence
@@ -130,6 +144,11 @@ class FormFiller
     # Clean up temporary screenshot file
     File.delete(screenshot_path)
   end
+
+  # def resume_formatting(file)
+  #   pdf_path = Rails.root.join('tmp', "#{file}")
+  #   File.open(pdf_path)
+  # end
 
 
   # ------------
