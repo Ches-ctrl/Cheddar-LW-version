@@ -14,6 +14,7 @@ class JobsController < ApplicationController
     @job = Job.new
     @saved_job = SavedJob.new
     @saved_jobs = SavedJob.all
+    @job_applications = JobApplication.where(user_id: current_user.id)
   end
 
   def show
