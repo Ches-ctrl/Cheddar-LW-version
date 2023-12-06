@@ -39,7 +39,7 @@
             <% end %>
           </div>
           <div class="col">
-            <label class="custom-checkbox">
+            <label class="custom-checkbox" data-job-index-toggle-target="jobCheckbox" data-action="click->job-index-toggle#updateApplyButton">
               <%= check_box_tag "job_ids[]", job.id, false, id: "job_#{job.id}" %>
               <span class="checkmark"></span>
             </label>

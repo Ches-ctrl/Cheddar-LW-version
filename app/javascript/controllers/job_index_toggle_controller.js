@@ -4,7 +4,8 @@ export default class extends Controller {
   static targets = ["toggleButton1", "toggleButton2", "newColumn1", "newColumn2", "leftSection", "rightSection", "jobCheckbox", "applyButton"];
 
   connect() {
-    console.log("confetti");
+    console.log("connected to job index toggle controller");
+    console.log(this.applyButtonTarget);
   }
 
   toggleView() {
@@ -33,10 +34,10 @@ export default class extends Controller {
     this.toggleButton2Target.classList.toggle('d-none');
   }
 
-  updateButton() {
-    const selectedCount = this.jobCheckboxTargets.filter(checkbox => checkbox.checked).length;
+  updateApplyButton() {
+    const selectedCount = this.jobCheckboxTargets.filter(checkbox => checkbox.querySelector("input").checked).length;
     console.log(selectedCount);
     console.log(this.applyButtonTarget)
-    this.applyButtonTarget.value = `Apply to ${selectedCount} Jobs`;
+    this.applyButtonTarget.value = `Apply to ${selectedCount} Job${selectedCount > 1 ? "s" : ""}`;
   }
 }
