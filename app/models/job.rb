@@ -3,8 +3,8 @@ class Job < ApplicationRecord
   include Ats::Workable
   serialize :application_criteria, JSON
   belongs_to :company
-  belongs_to :applicant_tracking_system
-  belongs_to :ats_format
+  belongs_to :applicant_tracking_system, optional: true
+  belongs_to :ats_format, optional: true
   has_many :job_applications, dependent: :destroy
   has_many :saved_jobs, dependent: :destroy
   has_many :playlist_jobs
@@ -12,7 +12,7 @@ class Job < ApplicationRecord
   before_create :set_application_criteria
 
   validates :job_title, :job_description, :application_deadline, presence: true
-  validates :job_posting_url, uniqueness: true
+  # validates :job_posting_url, uniqueness: true
 
   # TODO: Add validations to job model
   # validates :applicant_tracking_system_id, :ats_format_id, presence: true

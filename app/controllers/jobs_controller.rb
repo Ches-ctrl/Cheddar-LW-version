@@ -37,6 +37,7 @@ class JobsController < ApplicationController
 
   def apply_to_selected_jobs
     # Fetch the selected job IDs from the parameters
+    p params
     selected_job_ids = params[:job_ids]
     p cookies[:selected_job_ids]
     p selected_job_ids
