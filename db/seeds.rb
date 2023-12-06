@@ -3,6 +3,8 @@ puts "Deleting previous users, jobs and companies..."
 User.destroy_all
 Job.destroy_all
 Company.destroy_all
+# AtsFormat.destroy_all
+# ApplicantTrackingSystem.destroy_all
 
 puts "Creating 20 new companies..."
 
@@ -363,20 +365,18 @@ date_created_1 = Date.today - rand(1..14).days
 date_created_2 = Date.today - rand(1..14).days
 date_created_3 = Date.today - rand(1..14).days
 date_created_4 = Date.today - rand(1..14).days
+date_created = [date_created_1, date_created_2, date_created_3, date_created_4,]
 
 # Deadline variables
 deadline_1 = Date.today.next_week(:friday) + rand(1..7).days
 deadline_2 = Date.today.next_week(:friday) + rand(1..7).days
 deadline_3 = Date.today.next_week(:friday) + rand(1..7).days
 deadline_4 = Date.today.next_week(:friday) + rand(1..7).days
-deadlines = [
-  deadline_1,
-  deadline_2,
-  deadline_3,
-  deadline_4,
-]
+
+deadlines = [deadline_1, deadline_2, deadline_3, deadline_4,]
+
 # -----------------
-# Workable
+# Workable ATS
 # -----------------
 
 # 1. 9fin
@@ -384,12 +384,12 @@ Job.create!(
   job_title: "Software Engineer (Backend-Web Platforms)",
   job_description: "Technology has revolutionized equity markets with electronic trading, quant algos and instantaneous news. However, in debt capital markets, the picture is completely different. It still behaves like it's in the 1980s; trillions of dollars of trades are placed over the phone, news is slow, and corporate credit information is imperfect and scattered.",
   # salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://apply.workable.com/9fin/j/437E57E57C/",
   company_id: Company.find_by(company_name: '9fin').id,
-  # applicant_tracking_system_id: 1, # based on URL
-  # ats_format_id: 1, # based on structure of application
+  # applicant_tracking_system_id: ApplicantTrackingSystem.find_by(name: 'Workable').id,
+  # ats_format_id: AtsFormat.find_by(name: 'Workable_1').id,
   captcha: false, # found in meta tag
   # Description, Responsibilities (Things You'll Work On), Backend Stack, Requirements, Benefits, Equal Opportunity Employer
 )
@@ -401,7 +401,7 @@ Job.create!(
   job_title: "Full Stack Software Engineer - React/Node",
   job_description: "We're on a mission to make app building so easy everyone can do it - regardless of their background, tech knowledge or budget. We've already helped thousands of entrepreneurs, small businesses and even global brands, like the BBC, Makro and Pepsi achieve their software goals and we've only just started.",
   # salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://apply.workable.com/builderai/j/DD834B7F18/",
   company_id: Company.find_by(company_name: 'Builder.ai').id,
@@ -418,7 +418,7 @@ Job.create!(
   job_title: "Software Engineer (Frontend) @ Reliance Health",
   job_description: "As a Software Engineer at Reliance Health, you will play a pivotal role in developing, maintaining and optimizing the software used by our customers, our staff and our healthcare partners",
   # salary: 33000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   application_criteria: {
     first_name: {
@@ -488,7 +488,7 @@ Job.create!(
   job_title: "Frontend Engineer",
   job_description: "Blink is the world's first workplace tool designed for frontline employees. Our award-winning platform transforms the working lives of society's most relied-on members.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://apply.workable.com/joinblink/j/C75195FF87/",
   company_id: Company.find_by(company_name: 'Blink').id,
@@ -504,7 +504,7 @@ Job.create!(
   job_title: "Software Engineer-Full stack (Junior Level)",
   job_description: "Kroo has a big vision. To be the first bank that is both trusted and loved by its customers.We'’'re helping people take control of their financial future and achieve their goals, whilst making a positive impact on the planet. Here at Kroo, doing what is right is in our DNA. We act with integrity, transparency and honesty. We think big, dream big, and relentlessly pursue our goals. We like to be bold, break new ground, and we never stop learning. But most importantly, we are on this journey together.",
   salary: 30000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   application_criteria: {
     first_name: {
@@ -571,7 +571,7 @@ Job.create!(
   job_title: "Front End Engineer",
   job_description: "At Quantexa we believe that people and organizations make better decisions when those decisions are put in context - we call this Contextual Decision Intelligence. Contextual Decision Intelligence is the new approach to data analysis that shows the relationships between people, places and organizations - all in one place - so you gain the context you need to make more accurate decisions, faster.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://apply.workable.com/quantexa/j/BFDDA845A0",
   company_id: Company.find_by(company_name: 'Quantexa').id
@@ -596,7 +596,7 @@ Job.create!(
   job_title: "Software Engineer II - Full-Stack",
   job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivalled network to bring incredible convenience and selection to our customers.",
   salary: 31000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   application_criteria: {
     first_name: {
@@ -653,7 +653,7 @@ Job.create!(
   job_title: "Fullstack Engineer: Green-Tech Business",
   job_description: "Part of a new team, we are hiring software engineers to work in squads on developing applications for the company'’'s digital portfolio, built in the Azure ecosystem. You will play a key role in designing, developing, maintaining and improving business'’' key product, thus enabling customers to measure their climate impact.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   application_criteria: {
     first_name: {
@@ -718,7 +718,7 @@ Job.create!(
   job_title: "Software Engineer - Golang",
   job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivaled network to bring incredible convenience and selection to our customers.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5094403",
   company_id: Company.find_by(company_name: 'Deliveroo').id
@@ -730,7 +730,7 @@ Job.create!(
   job_title: "Backend Ruby Engineer",
   job_description: "Most people come to Cleo to do work that matters. Every day, we empower people to build a life beyond their next paycheck, building a beloved AI that enables you to forge your own path toward financial well-being.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://boards.greenhouse.io/cleoai/jobs/5033034002",
   company_id: Company.find_by(company_name: 'Cleo').id
@@ -742,7 +742,7 @@ Job.create!(
   job_title: "Educator, Web Developer",
   job_description: "BrainStation is a global leader in digital skills training and development, offering a 12-week bootcamp program in Web Development. BrainStation is currently hiring a Senior Web Developer to teach our program through online and in-person teaching. BrainStation Educators are given the unique opportunity to teach, research, and further develop their skills, while teaching in a dynamic, project-based setting.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://boards.greenhouse.io/brainstation/jobs/5802728003",
   company_id: Company.find_by(company_name: 'BrainStation').id
@@ -754,7 +754,7 @@ Job.create!(
   job_title: "Backend Ruby Engineer",
   job_description: "Most people come to Cleo to do work that matters. Every day, we empower people to build a life beyond their next paycheck, building a beloved AI that enables you to forge your own path toward financial well-being.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://boards.greenhouse.io/cleoai/jobs/5033034002",
   company_id: Company.find_by(company_name: 'Cleo').id)
@@ -763,7 +763,7 @@ Job.create!(
   job_title: "Software Engineer @ Deliveroo",
   job_description: "As a Software Engineer on the Ads team at Deliveroo, your individual work contributes to achieving goals in and across your team. While you will work with your team and you may lead projects, some of your work will contribute outside of your direct remit. You will report to managers and group leads and together deliver the results.",
   salary: 28500,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -831,7 +831,7 @@ Job.create!(
   job_title: "Senior Engineer - Java (Defi - DEX) @ OKX ",
   job_description: "We are looking for a Senior Engineer - Java (Defi - DEX) to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 34000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -897,7 +897,7 @@ Job.create!(
   job_title: "Senior Engineer @ Kubernetes Core Interfacesat CoreWeave ",
   job_description: "We are looking for a Senior Engineer - Java (Defi - DEX) to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 38000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -963,7 +963,7 @@ Job.create!(
   job_title: "Backend Payment Architech @ Forter",
   job_description: "Payment System Analysis: Conduct payment solution technical requirement deep dives with clients to understand their business goals",
   salary: 43000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1029,7 +1029,7 @@ Job.create!(
   job_title: "Webflow Developer @ Synthesia ",
   job_description: "Support full-stack engineering teams, Communicate across functions and drive engineering initiatives,Empathise with and help define product strategy for our target audience.",
   salary: 41000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1099,7 +1099,7 @@ Job.create!(
   job_title: "Software Engineer - Commodities @ DRW   ",
   job_description: "DRW are looking for a Software Engineer to join the Commodities trading group to build and support data pipelines for the ingestion, management, and analysis of datasets used by analysts and traders.",
   salary: 60000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1165,7 +1165,7 @@ Job.create!(
   job_title: "Senior Backend Engineer - Fraud @ Wise",
   job_description: "We'’'re looking for a Senior Backend Engineer to join our Fraud team in London. You'’'ll be working on building and improving our fraud detection systems, which are used to protect our customers and Wise from fraudsters. You'’'ll be working in a cross-functional team with other engineers, product managers, data scientists and analysts to build and improve our fraud detection systems.",
   salary: 55000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1231,7 +1231,7 @@ Job.create!(
   job_title: "Developer in Residence @ Elemental Excelerator ",
   job_description: "We are looking for a Developer in Residence to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 29000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1297,7 +1297,7 @@ Job.create!(
   job_title: "Manager, Tooling Engineering @ Relativity Space",
   job_description: "We are looking for a Manager, Tooling Engineering to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 60000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1363,7 +1363,7 @@ Job.create!(
   job_title: "Senior Infrastructure Deployment Engineer @ Zscaler ",
   job_description: "We are looking for a Senior Infrastructure Deployment Engineer to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 45000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1429,7 +1429,7 @@ Job.create!(
   job_title: "Staff Full Stack Software Engineer @ Mozilla",
   job_description: "We are looking for a Staff Full Stack Software Engineer to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 81000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1495,7 +1495,7 @@ Job.create!(
   job_title: "Web Engineer - Content @ Ably",
   job_description: "You will be responsible for helping shape the future of our content marketing and publishing platforms. You'’'ll draw on your broad range of expertise across the web stack to design, develop and deliver.",
   salary: 48000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1561,7 +1561,7 @@ Job.create!(
   job_title: "Principal Backend Engineer @ Forage",
   job_description: "We are looking for a Principal Backend Engineer to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 55000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1630,7 +1630,7 @@ Job.create!(
   job_title: "FPGA Engineer @ Jane Street",
   job_description: "We are looking for a FPGA Engineer to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application. ",
   salary: 43000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1696,7 +1696,7 @@ Job.create!(
   job_title: "Staff Emulation Methodology and Infrastructure Engineer @ Tenstorrent",
   job_description: "We are looking for a UI Developer to join our team and help us build the future of work. You will be working closely with our product and design teams to build and improve our web application",
   salary: 35000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
 
   # NB: THIS ALL CONVERTS TO STRING WHEN PARSED TO JSON IN THE DATABASE!
@@ -1762,7 +1762,7 @@ Job.create!(
   job_title: "Software Engineer - Golang",
   job_description: "We're building the definitive online food company, transforming the way the world eats by making hyper-local food more convenient and accessible. We obsess about building the future of food, whilst using our network as a force for good. We're at the forefront of an industry, powered by our market-leading technology and unrivaled network to bring incredible convenience and selection to our customers.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://boards.greenhouse.io/deliveroo/jobs/5094403",
   company_id: Company.find_by(company_name: 'Deliveroo').id
@@ -1774,7 +1774,7 @@ Job.create!(
   job_title: "Educator, Web Developer",
   job_description: "BrainStation is a global leader in digital skills training and development, offering a 12-week bootcamp program in Web Development. BrainStation is currently hiring a Senior Web Developer to teach our program through online and in-person teaching. BrainStation Educators are given the unique opportunity to teach, research, and further develop their skills, while teaching in a dynamic, project-based setting.",
   salary: 40000,
-  date_created: date_created_1,
+  date_created: date_created.sample,
   application_deadline: deadlines.sample,
   job_posting_url: "https://boards.greenhouse.io/brainstation/jobs/5802728003",
   company_id: Company.find_by(company_name: 'Brain Station').id
