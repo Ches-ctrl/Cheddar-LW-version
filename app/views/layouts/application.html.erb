@@ -13,12 +13,16 @@
   <body id="page-container">
     <div class="flex-grow-1">
       <div id="content-wrap">
-            <%= render "shared/navbar" %>
-            <%= render "shared/flashes" %>
+        <%= render "shared/navbar" %>
+        <%= render "shared/flashes" %>
 
-            <%= yield %>
+        <%= yield %>
+        <div type="button" class="CheddarGPTmodal" data-chatbot-toggle="modal" data-chatbot-target="#chatbotModal">
+          CheddarGPT
+        </div>
       </div>
     </div>
+
     <%= render "pages/footer" %>
     <%# <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script> %>
   </body>

@@ -24,6 +24,17 @@
   // width: 250px;
 }
 
+#punchline {
+  background-color: white;
+  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.2);
+}
+
+.bg-image {
+  background-image: white;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
 .btn-main:active,
 .btn-main:active:hover {
   outline: 0;
