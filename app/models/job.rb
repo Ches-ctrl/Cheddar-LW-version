@@ -3,11 +3,16 @@ class Job < ApplicationRecord
   include Ats::Workable
   serialize :application_criteria, JSON
   belongs_to :company
+  belongs_to :applicant_tracking_system
+  belongs_to :ats_format
   has_many :job_applications, dependent: :destroy
   has_many :saved_jobs, dependent: :destroy
+  has_many :playlist_jobs
+  has_many :job_playlists, through: :playlist_jobs
   before_create :set_application_criteria
 
   validates :job_title, :job_description, :application_deadline, presence: true
+  validates :job_posting_url, uniqueness: true
 
   # Commented out as not required - converts symbols to strings in the JSONB object
   # def application_criteria

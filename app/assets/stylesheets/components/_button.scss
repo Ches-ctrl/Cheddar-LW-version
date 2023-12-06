@@ -4,6 +4,7 @@
   border-radius: 8px;
   padding: 10px 20px;
   text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-cheddar-secondary {
@@ -28,8 +29,8 @@
 }
 
 .clear-search-button {
-  background-color: grey;
-  opacity: 0.5;
+  background-color: rgba(154, 145, 145, 0.454);
+  opacity: 0.8;
   color: white;
   // font-weight: 500;
   text-decoration: none;

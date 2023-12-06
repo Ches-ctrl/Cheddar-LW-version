@@ -68,6 +68,7 @@ class ScrapeJob < ApplicationJob
 
       job_cards.each do |job_card|
         job_url = job_card.first('div.fw-bold.mb-1 a.text-dark')&.[](:href)
+        job_url = job_url.split('?').first if job_url.include?('?')
         job_title = job_card.first('div.fw-bold.mb-1 a.text-dark')&.text&.strip
         company_attributes = {
           company_name: job_card.first('div.mb-2.align-items-baseline a.text-dark')&.text&.strip,
@@ -77,29 +78,38 @@ class ScrapeJob < ApplicationJob
 
         company = Company.find_or_initialize_by(name: company_attributes[:company_name])
         company.update(company_attributes)
-          # TODO: Add company build details here
-          # TODO: Add validations on company - if save and valid...
-          # TODO: Update company model to have industry
-          # new_company = Company.create(
-          #                         name: 'New Company',
-          #                         location: 'New Location',
-          #                         industry: 'New Industry')
 
-          # Check if the company was created successfully
-          # if new_company.persisted?
-          #   puts "New company created: #{new_company.name}"
-          # else
-          #   puts "Failed to create new company"
-          # end
+        if company.valid?
+          company.save
+          puts "New company created: #{company.name}"
+        else
+          puts "Failed to create new company"
         end
 
-        Job.find_or_create_by(job_posting_url:job_posting_url, job_title: job_title, company:company) do |job|
-          # TODO: Split by question mark for UTM
-          # TODO: Ask TA about how this creates a new job record and validating uniqueness
-          # TODO: Add uniqueness condition that checks combination of job_posting_url, job_title and company
-          # TODO: Add validations on job - if save and valid...
-          # TODO: Add job build details here
-          # p "Created job: #{job_title} at #{company_name} in #{job_location} posted #{time_since_posting} ago"
+        job = Job.find_or_initialize_by(job_posting_url: job_url, job_title: job_title, company: company)
+        if job.new_record?
+          job.update(job_posting_url: job_url, job_title: job_title, company: company)
+
+          # Pseudocode:
+          # Go to job page and work out its details (e.g. salary, job description, etc.)
+          # Save these to the job instance. Save this as is and queue a background job to query the job application form fields later
+          # Then use the scraper to find out which fields are required for the job application
+          # Do so by calling the ai_find_form_fields method and iterating through the potential ATS formats (order by frequency)
+          # If one of these works, then save the ATS format to the job instance
+          # If none of these work, then ask the AI to work out what the ATS format is and save this as a new instance of ATS format
+          # Then save the job application criteria
+          # Then save the job instance
+
+          # TODO: Implement the above logic
+          # TODO: Create a new find job details job
+
+          if job.save
+            puts "Created job: #{job_title} at #{company.name}"
+          else
+            puts "Failed to create job: #{job.errors.full_messages.join(", ")}"
+          end
+        else
+          puts "Job already exists: #{job_title} at #{company.name}"
         end
       end
 

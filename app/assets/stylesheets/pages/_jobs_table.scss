@@ -1,13 +1,18 @@
 .job-list-header {
-  // background-color: $quinary-color;
-  background-color: $main-color;
-  opacity: 0.4;
+  background-color: $tertiary-color;
+  // opacity: 0.4;
   color: white;
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  margin-top: 42px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.job-description-small {
+  display: flex;
+  text-align: left;
+  font-size: 14px;
 }
 
 .job-card {
@@ -16,24 +21,41 @@
   border: 1px solid #e3e6f0;
 
   .card-body {
-
+    padding: 10px;
     .col {
       display: flex;
       align-items: center;
-      // justify-content: center;
-      text-align: left;
-      height: 110px;
+      justify-content: center;
+      // text-align: left;
+      height: 70px;
       overflow-y: scroll;
       width: auto;
+      padding-bottom: 0px;
+      // padding-left: 2px;
+      // padding-right: 2px;
+      padding-top: 0px;
     }
+
+    .col-2 {
+      padding: 0px
+    }
+
+  .role {
+    text-align: left;
+  }
 
   }
 }
 
-.selected-job-card {
-  background: linear-gradient(to bottom right, rgba(255,198,90, 0.4), rgba(255,198,90, 1));
+.card-logo {
+  border-radius: 50%;
+  overflow: hidden;
 }
 
+.selected-job-card {
+  background: linear-gradient(to bottom right, rgba(255,198,90, 0.4), rgba(255,198,90, 1));
+  background-color: rgba(255,198,90, 0.4);
+}
 
 .btn-status {
   border: none;
@@ -127,3 +149,38 @@ input[type="checkbox"] {
 //     overflow-y: auto;
 //   }
 // }
+
+/* Hide the default checkbox */
+.custom-checkbox input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+}
+
+/* Create a custom box */
+.custom-checkbox .checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #eee; /* Background color */
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px; /* Optional: for rounded corners */
+  border: 1px solid #dcdcdc; /* Optional: for border */
+}
+
+/* When the checkbox is checked, change the background color */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background: $main-color; /* New background color when checked */
+}
+
+/* Optional: Add a checkmark icon or any other indicator */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-size: cover;
+}
