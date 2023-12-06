@@ -1,0 +1,22 @@
+<div class="modal fade" id="chatbotModal" tabindex="-1" aria-labelledby="chatbotModalLabel" aria-hidden="true" data-chatbot-target="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="chatbotModalLabel">CheddarGPT</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-action="click->chatbot#close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="chat-messages" style="height: 300px; overflow-y: auto;" data-chatbot-target="messages">
+          <!-- Chat interface goes here -->
+        </div>
+        <div class="modal-footer">
+          <!-- Interaction elements like send button and input field -->
+          <div class="d-flex flex-grow form-group">
+            <input type="text" id="chat-input" placeholder="Ask something..." data-chatbot-target="input">
+            <div type="button" class="btn btn-apply" data-action="click->chatbot#chat">Chat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
