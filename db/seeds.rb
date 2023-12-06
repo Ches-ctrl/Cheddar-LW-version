@@ -388,10 +388,8 @@ Job.create!(
   application_deadline: deadlines.sample,
   job_posting_url: "https://apply.workable.com/9fin/j/437E57E57C/",
   company_id: Company.find_by(company_name: '9fin').id,
-  applicant_tracking_system_id: ApplicantTrackingSystem.find_by(name: 'Workable').id,
-  ats_format_id: AtsFormat.find_by(name: 'Workable_1').id,
-  # applicant_tracking_system_id: 1, # based on URL
-  # ats_format_id: 1, # based on structure of application
+  # applicant_tracking_system_id: ApplicantTrackingSystem.find_by(name: 'Workable').id,
+  # ats_format_id: AtsFormat.find_by(name: 'Workable_1').id,
   captcha: false, # found in meta tag
   # Description, Responsibilities (Things You'll Work On), Backend Stack, Requirements, Benefits, Equal Opportunity Employer
 )
