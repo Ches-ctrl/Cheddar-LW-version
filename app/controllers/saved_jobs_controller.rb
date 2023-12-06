@@ -23,7 +23,7 @@ class SavedJobsController < ApplicationController
   def destroy
     @saved_job = SavedJob.find(params[:id])
     if @saved_job.destroy
-      redirect_to saved_jobs_path, notice: 'Successfully removed from your saved jobs'
+      redirect_to jobs_path, notice: 'Successfully removed from your saved jobs'
     else
       render saved_jobs_path, status: :unprocessable_entity
     end
