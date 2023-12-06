@@ -11,9 +11,13 @@ export default class extends Controller {
     const checkedCompanies = this.companyTargets.filter(company => company.checked)
       .map(company => company.attributes.id.value)
 
+    console.log(checkedCompanies)
     this.companyRowTargets.forEach((companyRow) => {
-
+      console.log(companyRow.querySelector(".companyName").innerText)
+      console.log(checkedCompanies.includes(companyRow.querySelector(".companyName").innerText))
       if (checkedCompanies.includes(companyRow.querySelector(".companyName").innerText)) {
+        // console.log(checkedCompanies)
+
         companyRow.classList.remove('d-none')
       } else {
         companyRow.classList.add('d-none')
