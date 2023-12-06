@@ -27,7 +27,8 @@
   padding: 16px 8px;
   // box-shadow: 1px 1px 1px rgba(125, 124, 124, 0.5);
   // border-radius: 20px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  margin-bottom: 50px;
   // border-bottom: 1px solid #e3e6f0;
   border-top: 1px solid #e3e6f0;
 }
@@ -57,9 +58,9 @@
   align-content: center;
 }
 
-// .job-types-select-item-label {
-//   margin-bottom: 6px;
-// }
+.job-types-select-item-label {
+  margin-bottom: 6px;
+}
 
 .companies-select-item-checkbox, .job-types-select-item-checkbox {
   width: 1em;
