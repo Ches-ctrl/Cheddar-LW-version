@@ -144,27 +144,4 @@ class FormFiller
     # Clean up temporary screenshot file
     File.delete(screenshot_path)
   end
-
-  # def resume_formatting(file)
-  #   pdf_path = Rails.root.join('tmp', "#{file}")
-  #   File.open(pdf_path)
-  # end
-
-
-  # ------------
-  # New method for taking screenshots - saves screenshot in memory rather than to disk
-  # ------------
-
-  # def take_screenshot_and_store(job_application_id)
-  #   # Capture screenshot directly into memory
-  #   screenshot = StringIO.new(page.screenshot(full: true))
-
-  #   # Find the job application record
-  #   job_app = JobApplication.find(job_application_id) # Replace with your actual job_app using the id from the initialize method
-
-  #   # Attach the screenshot directly from memory
-  #   job_app.screenshot.attach(io: screenshot, filename: "screenshot-#{job_application_id}.png", content_type: 'image/png')
-
-  #   # No need to clean up temporary files since we didn't create any
-  # end
 end
