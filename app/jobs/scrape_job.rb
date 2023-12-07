@@ -12,7 +12,7 @@ class ScrapeJob < ApplicationJob
   # Later: Generalise away from a single jobs board (low priority)
 
 
-  def perform(url, search_criteria)
+  def perform
     Capybara.default_max_wait_time = 10
 
     url = [ENV['SCRAPE_URL_1'], ENV['SCRAPE_URL_2'], ENV['SCRAPE_URL_3'], ENV['SCRAPE_URL_4'], ENV['SCRAPE_URL_5'], ENV['SCRAPE_URL_6']]
@@ -59,41 +59,40 @@ class ScrapeJob < ApplicationJob
           industry: "Tech"
         }
 
-        company = Company.find_or_initialize_by(name: company_attributes[:company_name])
+        company = Company.find_or_create_by(company_name: company_attributes[:company_name])
         company.update(company_attributes)
 
-        if company.valid?
-          company.save
-          puts "New company created: #{company.name}"
+        if company.save
+          puts "New company created: #{company.company_name}"
+          job = Job.find_or_create_by(job_posting_url: job_url, job_title: job_title, company_id: company.id)
+          if job.new_record?
+            job.update(job_posting_url: job_url, job_title: job_title, company: company)
+
+            # Pseudocode:
+            # Go to job page and work out its details (e.g. salary, job description, etc.)
+            # Save these to the job instance. Save this as is and queue a background job to query the job application form fields later
+            # Then use the scraper to find out which fields are required for the job application
+            # Do so by calling the ai_find_form_fields method and iterating through the potential ATS formats (order by frequency)
+            # If one of these works, then save the ATS format to the job instance
+            # If none of these work, then ask the AI to work out what the ATS format is and save this as a new instance of ATS format
+            # Then save the job application criteria
+            # Then save the job instance
+
+            # TODO: Implement the above logic
+            # TODO: Create a new find job details job
+
+            if job.save
+              puts "Created job: #{job_title} at #{company.company_name}"
+            else
+              puts "Failed to create job: #{job.errors.full_messages.join(", ")}"
+            end
+          else
+            puts "Job already exists: #{job_title} at #{company.company_name}"
+          end
         else
           puts "Failed to create new company"
         end
 
-        job = Job.find_or_initialize_by(job_posting_url: job_url, job_title: job_title, company: company)
-        if job.new_record?
-          job.update(job_posting_url: job_url, job_title: job_title, company: company)
-
-          # Pseudocode:
-          # Go to job page and work out its details (e.g. salary, job description, etc.)
-          # Save these to the job instance. Save this as is and queue a background job to query the job application form fields later
-          # Then use the scraper to find out which fields are required for the job application
-          # Do so by calling the ai_find_form_fields method and iterating through the potential ATS formats (order by frequency)
-          # If one of these works, then save the ATS format to the job instance
-          # If none of these work, then ask the AI to work out what the ATS format is and save this as a new instance of ATS format
-          # Then save the job application criteria
-          # Then save the job instance
-
-          # TODO: Implement the above logic
-          # TODO: Create a new find job details job
-
-          if job.save
-            puts "Created job: #{job_title} at #{company.name}"
-          else
-            puts "Failed to create job: #{job.errors.full_messages.join(", ")}"
-          end
-        else
-          puts "Job already exists: #{job_title} at #{company.name}"
-        end
       end
 
     rescue Capybara::ElementNotFound => e
@@ -116,8 +115,10 @@ class ScrapeJob < ApplicationJob
 
     fill_in 'username', with: scrape_emails[random_index]
     fill_in 'password', with: scrape_passwords[random_index]
-    find_button('Continue', class: 'c320322a4').click
-  end
+    find_button('Continue', class: ['c5fa977b5','cf576c2dc'] ).click
+    # cb8dcbc41 c5fa977b5 c3419c4cf cf576c2dc cdb91ebae
+
+ end
 
   def click_show_more(times: 3)
     times.times do

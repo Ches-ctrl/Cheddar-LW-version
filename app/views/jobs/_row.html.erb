@@ -16,9 +16,9 @@
               <button class="btn btn-closed">CLOSED</button>
             <% end %>
           </div>
-          <div class="col"><%= job.application_deadline.strftime("%d/%m/%y") %></div>
-          <div class="col d-none">
-            <% if job.application_criteria["resume"].any? %>
+          <div class="col"><%= job.application_deadline.strftime("%d/%m") %></div>
+          <div class="col ">
+            <% if job.application_criteria.instance_of?(Hash) && job.application_criteria["resume"].any? %>
               YES
             <% else %>
               NO
