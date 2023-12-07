@@ -18,7 +18,7 @@
           </div>
           <div class="col"><%= job.application_deadline.strftime("%d/%m") %></div>
           <div class="col ">
-            <% if job.application_criteria["resume"].any? %>
+            <% if job.application_criteria.instance_of?(Hash) && job.application_criteria["resume"].any? %>
               YES
             <% else %>
               NO

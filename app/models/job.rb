@@ -11,7 +11,7 @@ class Job < ApplicationRecord
   has_many :job_playlists, through: :playlist_jobs
   before_create :set_application_criteria
 
-  validates :job_title, :job_description, :application_deadline, presence: true
+  validates :job_title, presence: true
   # validates :job_posting_url, uniqueness: true
 
   # TODO: Add validations to job model
