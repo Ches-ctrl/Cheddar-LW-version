@@ -1,4 +1,4 @@
-<div class="container" data-controller="select-by-company select-by-job-type styling-selected-job">
+<div class="container" data-controller="select-by-job-type styling-selected-job">
   <div class="search-container d-flex justify-content-center align-items-center">
     <%= render 'search' %>
   </div>
@@ -22,7 +22,7 @@
         <%# TODO: Add icons %>
         <h5 class="mt-4 mb-3"><i class="fa-solid fa-building-user"></i> Companies</h5>
         <ul id="companies-select">
-          <div data-select-by-company-target="index">
+          <div>
             <% Company.all.each do |company| %>
               <% if Job.where(company: company).any? %>
                 <div class="companies-select-item">
@@ -60,28 +60,6 @@
           </div>
         </ul>
 
-        <%# LHS Section - Search by Salary Range %>
-        <%# <h5 class="mt-4 mb-3"><i class="fa-solid fa-money-bill-trend-up"></i> Salary Bands</h5>
-        <ul id="salary-range" data-select-by-company-target="salary" data-action="click->select-by-company#searchBySalary">
-          <label for="35000">
-            <input type="radio" name="35000" id="35000"> < 35,000
-          </label><br>
-          <label for="50000">
-            <input type="radio" name="50000" id="50000"> 36,000 < 50,000
-          </label><br>
-          <label for="65000">
-            <input type="radio" name="65000" id="65000"> 51,000 < 65,000
-          </label><br>
-          <label for="80000">
-            <input type="radio" name="80000" id="80000"> 66,000 < 80,000
-          </label><br>
-          <label for="99000">
-            <input type="radio" name="99000" id="99000"> 81,000 < 99,000
-          </label><br>
-          <label for="500000">
-            <input type="radio" name="500000" id="500000"> > 100,000
-          </label><br>
-        </ul> %>
       </div>
 
       <%# RHS Section Divider %>
