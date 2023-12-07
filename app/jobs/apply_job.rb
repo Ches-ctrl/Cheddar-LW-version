@@ -88,7 +88,7 @@ class ApplyJob < ApplicationJob
     # Going to URL and filling out form
     form_filler.fill_out_form(job.job_posting_url, fields_to_fill, job_application_id)
 
-    # Ending Capbybara session (But bad practice!)
+    # Ending Capbybara session
     Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
 
     sleep 3
@@ -112,7 +112,7 @@ class ApplyJob < ApplicationJob
         p "Using DEFAULT value instead"
         application_criteria[key]['value'] = DEFAULTS.dig(key, 'value')
       else
-        p "Warning: DEFAULTS does not have a method or attribute '#{key}'"
+        p "Warning: Defaults does not have a method or attribute '#{key}'"
         p "Using NIL value instead"
         application_criteria[key]['value'] = nil
       end
