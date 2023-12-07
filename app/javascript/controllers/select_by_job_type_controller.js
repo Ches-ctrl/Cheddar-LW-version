@@ -29,7 +29,7 @@ export default class extends Controller {
       // console.log(jobRow.querySelector(".role"))
       // console.log(jobRow.querySelector(".role").dataset)
       // console.log(pattern);
-      console.log(checkedCompanies);
+      // console.log(checkedCompanies);
       if (pattern.test(jobTitle)) {
         if (checkedCompanies.length > 0) {
           if (checkedCompanies.includes(jobRow.querySelector(".companyname").dataset.name)) {
