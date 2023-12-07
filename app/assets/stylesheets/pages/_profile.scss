@@ -25,3 +25,12 @@
   margin: 16px;
   border-radius: 20px;
 }
+
+.arrow-right {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  margin: 7px;
+  margin-right: 0;
+  // margin on the right hand side in the profile info is due to profile info gap
+}

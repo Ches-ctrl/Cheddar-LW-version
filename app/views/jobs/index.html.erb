@@ -20,7 +20,7 @@
         </div>
 
         <%# TODO: Add icons %>
-        <h5 class="mt-4 mb-3"><i class="fa-solid fa-building-user"></i> Companies</h5>
+        <h5 class="mt-4 mb-3", style="color: #6007C6;"><i class="fa-solid fa-building-user"></i> Companies</h5>
         <ul id="companies-select">
           <div>
             <% Company.all.each do |company| %>
@@ -38,7 +38,7 @@
 
         <%# TODO: Add icons %>
         <%# LHS Section - Search by Job Type %>
-        <h5 class="mt-4 mb-3"><i class="fa-solid fa-person-chalkboard"></i> Job Roles</h5>
+        <h5 class="mt-4 mb-3", style="color: #6007C6;"><i class="fa-solid fa-person-chalkboard"></i> Job Roles</h5>
         <ul id="job-types-select">
           <div class="job-types-select-item">
 
@@ -116,7 +116,7 @@
               <% end %>
             </div>
             <div class="d-flex justify-content-start">
-              <%= link_to "Show More", "#", data: { action: "click->load-more#showMore" }, class: "btn btn-cheddar-secondary", "data-load-more-target": "button" %>
+              <%= link_to "Show More", "#", data: { action: "click->load-more#showMore" }, class: "btn btn-apply", "data-load-more-target": "button" %>
             </div>
           </div>
         <% end %>
