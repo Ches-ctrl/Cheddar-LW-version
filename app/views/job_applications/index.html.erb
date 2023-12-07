@@ -1,35 +1,3 @@
-<div class="d-none">
-  <% @job_applications.each do |application| %>
-    <div class="my-applications-card">
-      <div class="my-applications-details">
-        <div class="application-title-bg">
-          <h2 class="application-title"><%= application.job.company.company_name %> - <%= application.job.job_title %></h2>
-        </div>
-        <p><%= application.job.job_description %></p>
-        <div class="application-meta d-flex flex-row justify-content-between">
-          <span class="meta-info">Applications Close: <%= application.job.application_deadline.strftime('%d %B %Y') %></span>
-          <span class="meta-info">Date Applied: <%= application.updated_at.strftime('%d %B %Y') %></span>
-          <span class="meta-info application-status"><%= application.status %></span>
-        </div>
-      </div>
-      <div class="my-applications-screenshot">
-        <% if application.screenshot.attached? %>
-          <div class="image-overlay">
-            <%= image_tag(cl_image_path application.screenshot.key) %>
-            <div class="overlay-text">
-              <p>No image available - here's a happy doggo instead</p>
-            </div>
-          </div>
-        <% else %>
-          <%= image_tag("job_app_complete_default.jpg") %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-
-
 <div class="container">
   <h3 class="my-applications">My Applications</h3>
   <% @job_applications.each do |application| %>
