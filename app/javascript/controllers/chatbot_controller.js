@@ -56,11 +56,12 @@ export default class extends Controller {
     console.log(text)
 
     let messageElement = document.createElement("div");
+    console.log('---------');
+    messageElement.innerHTML = `<p>${text}</p>`;
+    console.log(messageElement)
+    sender === "User" ? messageElement.classList.add('message-card', 'self') : messageElement.classList.add('message-card');
     console.log(messageElement)
 
-    messageElement.innerHTML = `<p>${text}</p>`;
-
-    messageElement.classList.add("message-card", sender === "User" ? "self" : "");
 
     // messageElement.classList.add("message-card", sender === "User" ? "self" : "");
 
