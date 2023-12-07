@@ -74,7 +74,7 @@ class AiFindFormFieldsJob < ApplicationJob
     puts "Application Criteria:"
     puts application_criteria["application_criteria"]
 
-    Job.create(
+    job = Job.create(
       job_title: "Software Engineer-Full stack (Junior Level)",
       job_description: "Kroo has a big vision. To be the first bank that is both trusted and loved by its customers.We’re helping people take control of their financial future and achieve their goals, whilst making a positive impact on the planet. Here at Kroo, doing what is right is in our DNA. We act with integrity, transparency and honesty. We think big, dream big, and relentlessly pursue our goals. We like to be bold, break new ground, and we never stop learning. But most importantly, we are on this journey together.",
       salary: 30000,
@@ -84,14 +84,14 @@ class AiFindFormFieldsJob < ApplicationJob
       job_posting_url: "https://apply.workable.com/kroo/j/C51C29B6C0",
       company_id: Company.first.id)
 
-    JobApplication.create(
+    job_app = JobApplication.create(
       status: "Pre-test",
       user_id: User.first.id,
       job_id: Job.last.id
     )
     puts "Created job application for #{User.first.first_name} for #{Job.first.job_title}"
 
-    ApplyJob.perform_now(JobApplication.last.id, User.first.id)
+    ApplyJob.perform_later(JobApplication.last.id, User.first.id)
   end
 
   private

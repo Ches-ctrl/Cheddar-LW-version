@@ -54,10 +54,11 @@ class JobApplicationsController < ApplicationController
     @job_application.status = "Application pending"
 
     # find out what issue is and if there is one, create or append the validation errors and render new
-
+    p @job_application
     if @job_application.save
       # Perform the job application process
-      ApplyJob.perform_now(@job_application.id, current_user.id)
+      p "sending job to Applyjob: #{@job_application.id}"
+      ApplyJob.perform_later(@job_application.id, current_user.id)
       @job_application.update(status: "Applied")
 
       # Optional: Add a notification for each application

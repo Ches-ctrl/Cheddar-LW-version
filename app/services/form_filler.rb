@@ -69,13 +69,14 @@ class FormFiller
         end
       end
       # Return a screenshot of the submitted form
-      close_session(job_application_id)
+      take_screenshot_and_store(job_application_id)
+      # close_session(job_application_id)
     end
     fields.each do |field|
       field = field[1]
       if field['interaction'] == 'upload'
         file_path = Rails.root.join('tmp', "#{field['value'].filename}")
-        File.delete(file_path)
+        File.delete(file_path) if File.exists?(file_path)
       end
     end
   end
@@ -83,8 +84,7 @@ class FormFiller
   private
 
   def close_session(job_application_id)
-    take_screenshot_and_store(job_application_id)
-    current_scope.session.quit
+    # take_screenshot_and_store(job_application_id)
     # Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
   end
 
