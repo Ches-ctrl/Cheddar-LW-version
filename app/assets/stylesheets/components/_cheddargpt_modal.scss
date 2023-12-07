@@ -48,6 +48,7 @@
   min-height: 350px; /* Adjust for desired height */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a shadow for depth */
+  transition: transform .3s ease;
 }
 
 /* Adjusting header and footer */
@@ -123,4 +124,8 @@
   background-color: white; /* Light background for chatbot messages */
   text-align: left; /* Align chatbot messages to the left */
   border-bottom-left-radius: 0; /* Makes it look like a speech bubble */
+}
+
+.modal-slide-up {
+  transition: transform 0.3s ease-out;
 }
