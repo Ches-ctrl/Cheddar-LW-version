@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.1].define(version: 2023_12_07_073903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,7 +120,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_073903) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "saved", default: false, null: false
     t.integer "applicant_tracking_system_id"
     t.integer "ats_format_id"
     t.text "application_details"
@@ -132,6 +130,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_073903) do
     t.text "application_process"
     t.boolean "captcha"
     t.index ["company_id"], name: "index_jobs_on_company_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.boolean "self"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
