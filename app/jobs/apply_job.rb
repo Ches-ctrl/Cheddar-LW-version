@@ -89,9 +89,9 @@ class ApplyJob < ApplicationJob
     form_filler.fill_out_form(job.job_posting_url, fields_to_fill, job_application_id)
 
     # Ending Capbybara session
-    Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
+    # Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
 
-    sleep 3
+    # sleep 3
     p "You applied to #{job.job_title}!"
   end
 
