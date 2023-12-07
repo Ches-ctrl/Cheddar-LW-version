@@ -35,6 +35,7 @@
 
 #chatbotModal .modal-dialog {
   position: fixed;
+  background-color: white;
   right: 30px; /* Adjust as needed, should be aligned with your button */
   bottom: 120px; /* Adjust based on the height of your button */
   width: 280px; /* Adjust for desired width */
@@ -51,18 +52,21 @@
 
 /* Adjusting header and footer */
 #chatbotModal .modal-header, #chatbotModal .modal-footer {
-  padding: 10px; /* Less padding for more space efficiency */
+  padding: 5px; /* Less padding for more space efficiency */
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between !important;
+  flex: 1;
 }
 
 .modal-footer .form-group {
   width: 100%;
-  display: flex;
-  align-items: stretch; /* Aligns items vertically */
 }
 
 #chat-input {
   flex-grow: 1; /* Allows input to fill space */
-  width: 60%;
   margin-right: 10px; /* Adds some space between input and button */
   padding: 6px 12px; /* Padding for better text visibility */
   border: none; /* Border to match Bootstrap's style */
@@ -90,6 +94,7 @@
 /* Adjusting the modal body */
 #chatbotModal .modal-body {
   overflow-y: auto; /* Adds scroll for overflow content */
+  padding: 5px;
 }
 
 /* Ensures the modal appears above the button */
@@ -98,16 +103,16 @@
 }
 
 .message-card {
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 2px;
+  padding: 2px;
   border-radius: 8px;
   color: #333;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 /* Style for user messages */
 .message-card.self {
-  background-color: #007bff; /* Blue background for user messages */
+  background-color: $main-color; /* Blue background for user messages */
   color: white; /* White text for user messages */
   text-align: right; /* Align user messages to the right */
   border-bottom-right-radius: 0; /* Makes it look like a speech bubble */
@@ -115,7 +120,7 @@
 
 /* Style for chatbot messages */
 .message-card {
-  background-color: #f1f1f1; /* Light background for chatbot messages */
+  background-color: white; /* Light background for chatbot messages */
   text-align: left; /* Align chatbot messages to the left */
   border-bottom-left-radius: 0; /* Makes it look like a speech bubble */
 }
