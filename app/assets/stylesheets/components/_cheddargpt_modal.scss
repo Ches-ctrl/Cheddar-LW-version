@@ -87,9 +87,11 @@
 // }
 
 /* Adjusting the style when the button is hovered */
+
 .btn-apply:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background-color: $tertiary-color;
+  // font-weight: 700;
+  color: white;
 }
 
 .chedBot {
