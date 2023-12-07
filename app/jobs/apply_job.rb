@@ -1,5 +1,70 @@
 class ApplyJob < ApplicationJob
   queue_as :default
+  DEFAULTS = {
+    'first_name' => {
+      'value' => "UserMissingFirst"
+    },
+    'last_name' => {
+      'value' => "UserMissingLast"
+    },
+    'email' => {
+      'value' => "usermissingemail@getcheddar.xyz"
+    },
+    'phone_number' => {
+      'value' => "+447555555555"
+    },
+    'address_first' => {
+      'value' => "99 Missing Drive"
+    },
+    'address_second' => {
+      'value' => "Missingham"
+    },
+    'post_code' => {
+      'value' => "M1 1MM"
+    },
+    'salary_expectation_text' => {
+      'value' => "£30,000 - £40,000"
+    },
+    'right_to_work' => {
+      'value' => /yes/i ## TODO
+    },
+    'salary_expectation_figure' => {
+      'value' => 30000
+    },
+    'notice_period' => {
+      'value' => 12
+    },
+    'preferred_pronoun_select' => {
+      'value' => /he\/him/i ## TODO
+    },
+    'preferred_pronoun_text' => {
+      'value' => 'N/A' ## TODO
+    },
+    'employee_referral' => {
+      'value' => "no"
+    },
+    'city' => {
+      'value' => 'London'
+    },
+    'address' => {
+      'value' => '8 Hawksmoor Mews, E1 0DG, London, United Kingdom'
+    },
+    'linkedin_profile' => {
+      'value' => "https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/"
+    },
+    'personal_website' => {
+      'value' => "https://www.ilya.com"
+    },
+    'require_visa?' => {
+      'value' => 'No',
+    },
+    'heard_of_company?' => {
+      'value' => /yes/i
+    },
+    'heard_from' => {
+      'value' => 'Cheddar'
+    }
+  }
 
   # TODO: Separate application criteria into separate DB table that is then called and we search through dynamically
   # TODO: Add a callback option so that the user inputs all the information required for the job before submitting
@@ -23,7 +88,7 @@ class ApplyJob < ApplicationJob
     # Going to URL and filling out form
     form_filler.fill_out_form(job.job_posting_url, fields_to_fill, job_application_id)
 
-    # Ending Capbybara session
+    # Ending Capbybara session (But bad practice!)
     Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
 
     sleep 3
@@ -42,12 +107,12 @@ class ApplyJob < ApplicationJob
         # Update the hash with the user's value for this attribute
         p "Using USER value for #{key}"
         application_criteria[key]['value'] = user.send(key)
-      elsif Defaults.key?(key) && Defaults[key].key?('value')
+      elsif DEFAULTS.key?(key) && DEFAULTS[key].key?('value')
         p "Warning: User does not have a method or attribute '#{key}'"
         p "Using DEFAULT value instead"
-        application_criteria[key]['value'] = Defaults.dig(key, 'value')
+        application_criteria[key]['value'] = DEFAULTS.dig(key, 'value')
       else
-        p "Warning: Defaults does not have a method or attribute '#{key}'"
+        p "Warning: DEFAULTS does not have a method or attribute '#{key}'"
         p "Using NIL value instead"
         application_criteria[key]['value'] = nil
       end
@@ -56,72 +121,3 @@ class ApplyJob < ApplicationJob
     return application_criteria
   end
 end
-
-# Defaults = {
-#   'first_name' => {
-#     'value' => "UserMissingFirst"
-#   },
-#   'last_name' => {
-#     'value' => "UserMissingLast"
-#   },
-#   'email' => {
-#     'value' => "usermissingemail@getcheddar.xyz"
-#   },
-#   'phone_number' => {
-#     'value' => "+447555555555"
-#   },
-#   'address_first' => {
-#     'value' => "99 Missing Drive"
-#   },
-#   'address_second' => {
-#     'value' => "Missingham"
-#   },
-#   'post_code' => {
-#     'value' => "M1 1MM"
-#   },
-#   'resume' => {
-#     'value' => 'public/Obretetskiy_cv.pdf'
-#   },
-#   'salary_expectation_text' => {
-#     'value' => "£30,000 - £40,000"
-#   },
-#   'right_to_work' => {
-#     'value' => /yes/i ## TODO
-#   },
-#   'salary_expectation_figure' => {
-#     'value' => 30000
-#   },
-#   'notice_period' => {
-#     'value' => 12
-#   },
-#   'preferred_pronoun_select' => {
-#     'value' => /he\/him/i ## TODO
-#   },
-#   'preferred_pronoun_text' => {
-#     'value' => 'N/A' ## TODO
-#   },
-#   'employee_referral' => {
-#     'value' => "no"
-#   },
-#   'city' => {
-#     'value' => 'London'
-#   },
-#   'address' => {
-#     'value' => '8 Hawksmoor Mews, E1 0DG, London, United Kingdom'
-#   },
-#   'linkedin_profile' => {
-#     'value' => "https://www.linkedin.com/in/ilya-obretetskiy-b5010b1b5/"
-#   },
-#   'personal_website' => {
-#     'value' => "https://www.ilya.com"
-#   },
-#   'require_visa?' => {
-#     'value' => 'No',
-#   },
-#   'heard_of_company?' => {
-#     'value' => /yes/i
-#   },
-#   'heard_from' => {
-#     'value' => 'Cheddar'
-#   }
-# }
