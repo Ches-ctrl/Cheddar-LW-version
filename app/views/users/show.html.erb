@@ -32,11 +32,18 @@
     </h1>
     <% end %>
     <% if current_user.website_url.present? %>
-    <h2>
-      <%= link_to current_user.website_url, target: "_blank" do %>
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      <% end %>
-    </h2>
+      <h1>
+        <%= link_to current_user.website_url, target: "_blank" do %>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        <% end %>
+      </h1>
+    <% end %>
+    <div class="d-flex ms-auto">
+      <h3>My Saved Jobs</h3>
+      <%= link_to saved_jobs_path do %>
+        <i class="arrow-right fa-solid fa-right-long"></i>
+    </div>
+
     <% end %>
   </div>
 
