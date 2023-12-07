@@ -40,9 +40,12 @@
       padding: 0px
     }
 
-  .role {
-    text-align: left;
-  }
+    .role {
+      text-align: left;
+      // vertical-align: middle !important;
+      display: flex;
+      align-items: center;
+    }
 
   }
 }
