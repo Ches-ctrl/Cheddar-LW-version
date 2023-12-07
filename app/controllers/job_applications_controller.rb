@@ -8,7 +8,6 @@ class JobApplicationsController < ApplicationController
 
   def new
     # Retrieve the selected job IDs from the session
-    # raise
     @selected_jobs = Job.find(cookies[:selected_job_ids].split("&"))
 
     @job_applications = @selected_jobs.map do |job|
