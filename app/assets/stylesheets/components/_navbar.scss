@@ -1,6 +1,6 @@
 .navbar-lewagon {
   // justify-content: space-between;
-  background: $tertiary-color;
+  background: $main-color;
   color: rgb(255, 255, 255);
   text-decoration: none;
   padding: 0;
@@ -18,9 +18,11 @@
 
   .dropdown-menu {
     background-color: $main-color;
+    border-radius: 20px;
 
     .dropdown-item {
     color: white;
+    border-radius: 20px;
 
       &:hover {
         color: white;
