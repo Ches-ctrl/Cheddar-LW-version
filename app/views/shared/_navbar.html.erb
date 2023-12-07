@@ -26,7 +26,10 @@
             <%= link_to "Find Jobs", jobs_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Dashboard", profile_path(current_user), class: "nav-link" %>
+            <%= link_to "Saved Jobs", saved_jobs_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "My Apps", job_applications_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

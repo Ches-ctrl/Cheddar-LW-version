@@ -19,15 +19,14 @@
   .dropdown-menu {
     background-color: $main-color;
     border-radius: 20px;
-
     .dropdown-item {
     color: white;
     border-radius: 20px;
 
       &:hover {
         color: white;
-        background-color: $main-color;
-        font-weight: bold;
+        background-color: $tertiary-color;
+        font-weight: 700;
       }
     }
   }
@@ -35,6 +34,9 @@
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px;
   // color: white;
 }
 
@@ -52,3 +54,7 @@
   width: 120px;
   height: 25px;
 }
+
+// .navbar-nav {
+//   width: 500px;
+// }
