@@ -13,54 +13,64 @@ class FormFiller
   # Could we implement caching for form inputs? So once you've done it once it becomes less intensive
 
   def fill_out_form(url, fields, job_application_id)
-    visit(url)
-    find_apply_button.click rescue nil
+    # SETUP Capybara
+    @errors = nil
+    Capybara.using_session("#{job_application_id} session") do
 
-    fields.each do |field|
-      field = field[1]
-      case field['interaction']
-      when 'input'
-        begin
-          fill_in(field['locators'], with: field['value'])
-        rescue Capybara::ElementNotFound
-          p "Field locator #{field['locators']} is not found"
-          find(field['locators']).set(field['value']) rescue nil
-        end
-      when 'combobox'
-        begin
-          select_option_from_combobox(field['locators'], field['option'], field['value'])
-        rescue Capybara::ElementNotFound
-          p "Field locator #{field['locators']} is not found"
-        end
-      when 'radiogroup'
-        begin
-          select_option_from_radiogroup(field['locators'], field['option'], field['value'])
-        rescue Capybara::ElementNotFound
-          p "Field locator #{field['locators']} is not found"
-        end
-      when 'listbox'
-        begin
-          select_option_from_listbox(field['locators'])
-        rescue NoMethodError
-          p "Field locator #{field['locators']} is not found"
-        end
-      when 'select'
-        begin
-          select_option_from_select(field['locators'], field['option'], field['value'])
-        rescue Capybara::ElementNotFound
-          p "Field locator #{field['locators']} is not found"
-        end
-      when 'upload'
-        begin
-          upload_file(field['locators'], field['value'])
-        rescue Capybara::ElementNotFound
-          p "Field locator #{field['locators']} is not found"
+      visit(url)
+      find_apply_button.click rescue nil
+
+      fields.each do |field|
+        field = field[1]
+        p field
+        case field['interaction']
+        when 'input'
+          begin
+            fill_in(field['locators'], with: field['value'])
+          rescue Capybara::ElementNotFound
+            p "Field locator #{field['locators']} is not found"
+            find(field['locators']).set(field['value']) rescue nil
+          end
+        when 'combobox'
+          begin
+            select_option_from_combobox(field['locators'], field['option'], field['value'])
+          rescue Capybara::ElementNotFound
+            p "Field locator #{field['locators']} is not found"
+            @errors = true
+          end
+        when 'radiogroup'
+          begin
+            select_option_from_radiogroup(field['locators'], field['option'], field['value'])
+          rescue Capybara::ElementNotFound
+            p "Field locator #{field['locators']} is not found"
+            @errors = true
+          end
+        when 'listbox'
+          begin
+            select_option_from_listbox(field['locators'])
+          rescue NoMethodError
+            p "Field locator #{field['locators']} is not found"
+            @errors = true
+          end
+        when 'select'
+          begin
+            select_option_from_select(field['locators'], field['option'], field['value'])
+          rescue Capybara::ElementNotFound
+            p "Field locator #{field['locators']} is not found"
+            @errors = true
+          end
+        when 'upload'
+          begin
+            upload_file(field['locators'], field['value'])
+          rescue Capybara::ElementNotFound
+            p "Field locator #{field['locators']} is not found"
+            @errors = true
+          end
         end
       end
+      # Return a screenshot of the submitted form
+      close_session(job_application_id)
     end
-    # Return a screenshot of the submitted form
-    take_screenshot_and_store(job_application_id)
-    close_session
     fields.each do |field|
       field = field[1]
       if field['interaction'] == 'upload'
@@ -72,8 +82,10 @@ class FormFiller
 
   private
 
-  def close_session
-    Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
+  def close_session(job_application_id)
+    take_screenshot_and_store(job_application_id)
+    current_scope.session.quit
+    # Capybara.send(:session_pool).each { |name, ses| ses.driver.quit }
   end
 
   def find_apply_button
@@ -144,27 +156,4 @@ class FormFiller
     # Clean up temporary screenshot file
     File.delete(screenshot_path)
   end
-
-  # def resume_formatting(file)
-  #   pdf_path = Rails.root.join('tmp', "#{file}")
-  #   File.open(pdf_path)
-  # end
-
-
-  # ------------
-  # New method for taking screenshots - saves screenshot in memory rather than to disk
-  # ------------
-
-  # def take_screenshot_and_store(job_application_id)
-  #   # Capture screenshot directly into memory
-  #   screenshot = StringIO.new(page.screenshot(full: true))
-
-  #   # Find the job application record
-  #   job_app = JobApplication.find(job_application_id) # Replace with your actual job_app using the id from the initialize method
-
-  #   # Attach the screenshot directly from memory
-  #   job_app.screenshot.attach(io: screenshot, filename: "screenshot-#{job_application_id}.png", content_type: 'image/png')
-
-  #   # No need to clean up temporary files since we didn't create any
-  # end
 end

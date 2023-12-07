@@ -2,18 +2,21 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="select-by-job-type"
 export default class extends Controller {
-  static targets = [ 'type', 'jobRow' ]
+  static targets = [ 'role', 'jobRow', 'company' ]
 
   connect() {
   }
 
-  searchByJobType() {
-    const checkedTypes = this.typeTargets.filter(type => type.checked)
-      .map(type => type.id)
+  combinedSearch() {
+    const checkedRoles = this.roleTargets.filter(role => role.checked)
+      .map(role => role.id)
+      console.log(checkedRoles);
+    const checkedCompanies = this.companyTargets.filter(company => company.checked)
+    .map(company => company.attributes.id.value)
 
     const patternStrings = []
 
-    checkedTypes.forEach((query) => {
+    checkedRoles.forEach((query) => {
       const regexd_query = '(' + query.replace(' ', '(-| )?') + ')'
       // console.log(regexd_query)
       patternStrings.push(regexd_query)
@@ -23,13 +26,20 @@ export default class extends Controller {
 
     this.jobRowTargets.forEach((jobRow) => {
       const jobTitle = jobRow.querySelector(".role").dataset.role;
-      console.log(jobRow.querySelector(".role"))
-      console.log(jobRow.querySelector(".role").dataset)
-      console.log(jobTitle);
-      console.log(pattern)
-      console.log(pattern.test(jobTitle))
+      // console.log(jobRow.querySelector(".role"))
+      // console.log(jobRow.querySelector(".role").dataset)
+      // console.log(pattern);
+      // console.log(checkedCompanies);
       if (pattern.test(jobTitle)) {
-        jobRow.classList.remove('d-none')
+        if (checkedCompanies.length > 0) {
+          if (checkedCompanies.includes(jobRow.querySelector(".companyname").dataset.name)) {
+            jobRow.classList.remove('d-none')
+          } else {
+            jobRow.classList.add('d-none')
+          }
+        } else {
+          jobRow.classList.remove('d-none')
+        }
       } else {
         jobRow.classList.add('d-none')
       }

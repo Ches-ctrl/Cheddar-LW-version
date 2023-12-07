@@ -1,8 +1,7 @@
 <%= provide(:title, 'New Job Applications') %>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12">
+<div class="container mt-5" data-controller="all-application-forms">
+  <div class="d-flex justify-content-between align-items-center">
       <div class="companies d-flex flex-column justify-content-start mb-4">
         <%# Dynamically load the company logos based on selected jobs %>
         <p class="mb-1">Current applications:</p>
@@ -15,15 +14,18 @@
           <% end %>
         </div>
       </div>
-    </div>
+      <div class="d-flex justify-content-end align-items-center me-3 pe-1 pt-3">
+        <h5 class="me-4 mb-0">Apply to all applications at once:</h5>
+        <button class="btn btn-apply" data-all-application-forms-target="button" data-action="click->all-application-forms#submitAllForms">Submit All</button>
+      </div>
   </div>
 
   <%# Iterate over each selected job %>
-  <div class="all-application-forms" data-controller="all-application-forms response-input">
+  <div class="all-application-forms" data-controller=" response-input">
     <% @job_applications.each_with_index do |job, index| %>
       <details class="application-form bg-body-secondary mb-3" open>
         <summary class="pb-1" style="display: block"><h2><%= index + 1 %>. <%= job.first.company.company_name %> - <%= job.first.job_title %></h2></summary>
-        <%= simple_form_for job, html: { class: 'needs-validation', 'data-controller': 'application-form', 'data-application-form-target': 'form', novalidate: true } do |f| %>
+        <%= simple_form_for job, html: { class: 'needs-validation', 'data-controller': 'application-form', 'data-application-form-target': 'form', 'data-action': 'submit->application-form#submitForm', 'data-all-application-forms-target': "form",  novalidate: true } do |f| %>
 
           <%# Dynamically create form elements based on application_criteria %>
           <%# Convert to simple_fields_for application_responses. Then use those to create the input fields below. %>
@@ -93,10 +95,6 @@
         <% end %>
         </details>
     <% end %>
-    <div class="d-flex justify-content-end align-items-center me-3 pe-1 pt-3">
-      <h5 class="me-4 mb-0">Apply to all applications at once:</h5>
-      <button class="btn btn-apply" data-action="click->all-application-forms#submitAllForms">Submit All</button>
-    </div>
   </div>
 </div>
 

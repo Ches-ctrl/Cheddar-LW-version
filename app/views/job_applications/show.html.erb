@@ -1,24 +1,31 @@
-<div class="confirmation-container">
+<div class="confirmation-container mt-3" data-controller="confetti">
   <div class="success-box">
     <div class="confirmation-header">
         <h1>🎉 Well done 🎉</h1>
-        <p>You just applied to <strong>[4]</strong> jobs at once!</p>
-        <p>Biscuit is really proud of you</p>
-        <p>Look in your inbox for confirmation emails from each company.</p>
+        <% @job_applications = JobApplication.all %>
+        <h4>You've now applied to <strong><%= @job_applications.where(user_id: current_user.id).all.count %> jobs</strong> with Cheddar, saving <strong>~<%= (@job_applications.where(user_id: current_user.id).all.count * 0.20).round %></strong> hours of your time</h4>
     </div>
-    <div class="confirmation-body">
-        <%# TODO: Add new dog on each refresh of the page from an online directory like amazon does with its 404 links %>
-        <%= image_tag 'happy_dog.jpeg', alt: 'Happy dog celebrating', class: 'confirmation-body-img' %>
+    <div class="confirmation-body mt-0 pb-3 d-flex align-items-center" data-action="click->confetti#click" style="cursor:pointer; max-height: 400px; overflow: hidden; border-radius: 10px; object-fit: cover;">
+        <% dog_names = ["Biscuit", "Cookie", "Muffin", "Brownie", "Cupcake", "Pretzel", "Waffle", "Pancake", "Donut"] %>
+        <%= link_to image_tag('https://source.unsplash.com/random/900%C3%97700/?dog', alt: 'Happy dog unsplash', class: 'confirmation-body-img') %>
     </div>
-    <div class="confirmation-actions d-flex flex-column align-items-center">
-      <p>Next steps:</p>
-      <%= link_to 'Apply to more jobs', new_job_application_path, class: "btn btn-apply" %>
-      <br>
-      <%= link_to 'Track Your Applications', job_applications_path, class: "btn btn-apply" %>
-      <br>
-      <%= link_to 'Tell a friend', '#', class: "btn btn-apply" %>
-      <br>
+    <div class="confirmation-actions pb-2">
+      <h4 class="pt-3">See how proud <%= dog_names.sample %> is of you</h4>
+      <h5>Next steps</h5>
+      <div class="mx-auto" style="text-align: left; width: 350px;">
+        <p class="text-left">1. Check your inbox for confirmation emails</p>
+        <p class="text-left">2. Apply to more jobs</p>
+        <p class="text-left">3. Tell a friend about Cheddar</p>
+      </div>
+      <div class="d-flex justify-content-between align-items-center" style="width: auto;">
+        <div>
+          <%= link_to 'Apply again', new_job_application_path, class: "btn btn-apply" %>
+        </div>
+        <button id="confetti-btn" data-action="click->confetti#click" class="btn btn-cheddar-secondary">More confetti!</button>
+        <div>
+          <%= link_to 'Tell a friend', '#', class: "btn btn-apply" %>
+        </div>
+      </div>
     </div>
-    <button id="confetti-btn" data-controller="confetti" data-action="click->confetti#click"class="btn btn-apply">Confetti</button>
   </div>
 </div>
