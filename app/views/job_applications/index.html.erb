@@ -25,9 +25,6 @@
           <% if application.screenshot.attached? %>
             <div class="image-overlay">
               <%= image_tag(cl_image_path application.screenshot.key) %>
-              <div class="overlay-text">
-                <p>No image available - here's a happy doggo instead</p>
-              </div>
             </div>
           <% else %>
             <%= image_tag("job_app_complete_default.jpg") %>

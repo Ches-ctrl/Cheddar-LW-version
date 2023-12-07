@@ -40,10 +40,26 @@ class JobApplicationsController < ApplicationController
   def create
     # Retrieve user inputs from the form
 
-    user_input = params[:user_input]
+    # user_input = params[:user_input]
 
     # Process each selected job
-    job = Job.find(params[:job_id])
+
+    if cookies[:job_app_no].to_i > 1
+      job = Job.find(cookies[:selected_job_ids].split("&").first)
+    else
+      job = Job.find(params[:job_id])
+    end
+
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p "&&&&&&&&&&&&&&&&&&&&&&&&"
+    p job
+
+    # job = Job.find(params[:job_id])
 
     # update the job/ application criteria
 
@@ -70,7 +86,7 @@ class JobApplicationsController < ApplicationController
       p ids
       ids.delete("#{job.id}")
       p ids
-      cookies[:selected_job_ids] = ids
+      cookies[:selected_job_ids] = ids.join("&")
 
       # Redirect to the job applications index page or another appropriate page
       redirect_to job_applications_path, notice: 'Your applications have been submitted.'
