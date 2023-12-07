@@ -1,7 +1,7 @@
 // Specific CSS for your home-page
 .btn-main {
   align-items: center;
-  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  background-image: linear-gradient(144deg, $main-color, $tertiary-color 50%, $quaternary-color);
   border: 0;
   border-radius: 8px;
   box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -22,6 +22,17 @@
   white-space: nowrap;
   cursor: pointer;
   // width: 250px;
+}
+
+#punchline {
+  background-color: white;
+  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.2);
+}
+
+.bg-image {
+  background-image: white;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
 }
 
 .btn-main:active,

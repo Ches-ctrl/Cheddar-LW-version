@@ -1,7 +1,7 @@
 <%= provide(:title, 'New Job Applications') %>
 
-<div class="container mt-5" data-controller="all-application-forms">
-  <div class="d-flex justify-content-between align-items-center">
+<div class="container mt-5 col-sm-6" data-controller="all-application-forms">
+  <div class="d-flex justify-content-between align-items-center ">
       <div class="companies d-flex flex-column justify-content-start mb-4">
         <%# Dynamically load the company logos based on selected jobs %>
         <p class="mb-1">Current applications:</p>
@@ -14,17 +14,16 @@
           <% end %>
         </div>
       </div>
-      <div class="d-flex justify-content-end align-items-center me-3 pe-1 pt-3">
-        <h5 class="me-4 mb-0">Apply to all applications at once:</h5>
-        <button class="btn btn-apply" data-all-application-forms-target="button" data-action="click->all-application-forms#submitAllForms">Submit All</button>
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="btn btn-apply mt-1" data-all-application-forms-target="button" data-action="click->all-application-forms#submitAllForms">Apply All</div>
       </div>
   </div>
 
   <%# Iterate over each selected job %>
-  <div class="all-application-forms" data-controller=" response-input">
+  <div class="all-application-forms m-auto" data-controller=" response-input">
     <% @job_applications.each_with_index do |job, index| %>
       <details class="application-form bg-body-secondary mb-3" open>
-        <summary class="pb-1" style="display: block"><h2><%= index + 1 %>. <%= job.first.company.company_name %> - <%= job.first.job_title %></h2></summary>
+        <summary class="pb-1" style="display: block"><h2><%= index + 1 %>. <%= job.first.job_title %></h2></summary>
         <%= simple_form_for job, html: { class: 'needs-validation', 'data-controller': 'application-form', 'data-application-form-target': 'form', 'data-action': 'submit->application-form#submitForm', 'data-all-application-forms-target': "form",  novalidate: true } do |f| %>
 
           <%# Dynamically create form elements based on application_criteria %>
@@ -38,31 +37,26 @@
 
             <%= f.simple_fields_for "application_responses", response do |ff| %>
               <div class="form-group row mb-3">
-                <label  class="apply-label col-sm-2 col-form-label text-center rounded-pill" for=""><%= response.field_name.humanize %></label>
+                <label  class="apply-label col-sm-3 col-form-label text-center rounded-pill" for=""><%= response.field_name.humanize %></label>
                 <% case ff.object.interaction %>
                 <% when "input" %>
-                  <div class="col-sm-10 mr-2">
-                    <%= ff.input :field_name, as: :hidden, input_html: { class: 'mb-0' }, wrapper_html: { class: 'wrapper-mb-0' }, label: false %>
+                  <div class="col-sm-9 mr-2">
+                    <%= ff.input :field_name, as: :hidden, input_html: { class: 'mb-0', style: "margin-bottom: 0px;"}, wrapper_html: { class: 'wrapper-mb-0' }, label: false %>
                     <%= ff.input :field_locator, as: :hidden, input_html: { class: 'mb-0' }, wrapper_html: { class: 'wrapper-mb-0' }, label: false %>
                     <%= ff.input :interaction, as: :hidden, input_html: { class: 'mb-0' }, wrapper_html: { class: 'wrapper-mb-0' }, label: false %>
                     <%= ff.input :field_option, as: :hidden, input_html: { class: 'mb-0' }, wrapper_html: { class: 'wrapper-mb-0' }, label: false %>
                     <%= ff.input :field_value , label: false, wrapper_html: { class: 'wrapper-mb-0' }, input_html: { class: "rounded-pill", data: { label: response.field_name, response_input_target: "input", action: "keyup->response-input#handleChange change->response-input#handleChange"} } %>
                   </div>
                 <% when "upload" %>
-                  <div class="col-sm-10 mr-2">
+                  <div class="col-sm-9 mr-2">
                     <%= ff.input :field_name, as: :hidden, wrapper_html: { class: 'wrapper-mb-0' } %>
                     <%= ff.input :field_locator, as: :hidden, wrapper_html: { class: 'wrapper-mb-0' } %>
                     <%= ff.input :interaction, as: :hidden, wrapper_html: { class: 'wrapper-mb-0' } %>
                     <%= ff.input :field_option, as: :hidden, wrapper_html: { class: 'wrapper-mb-0' } %>
-
-                    <% if current_user.resume.attached? %>
-                      <p>TODO: Add a div with the user's resume. Using your current resume</p>
-                    <% end %>
-
-                    <%= ff.input :field_value, label_html: { class: "d-none"}, input_html: { class: "rounded-pill", data: { label: response.field_name, response_input_target: "input", action: "keyup->response-input#handleChange change->response-input#handleChange"}, value: current_user.resume.attached? ? current_user.resume.filename : nil } %>
+                    <%= ff.input :field_value, label_html: { class: "d-none"}, input_html: { class: "rounded-pill", data: { label: response.field_name, response_input_target: "input", action: "keyup->response-input#handleChange change->response-input#handleChange"}, value: current_user.resume.attached? ? current_user.resume.filename : nil }, wrapper_html: { class: 'wrapper-mb-0' } %>
                   </div>
                 <% when "combobox" %>
-                  <div class="col-sm-10 mr-2">
+                  <div class="col-sm-9">
                     <%= ff.input :field_name, as: :hidden %>
                     <%= ff.input :field_locator, as: :hidden %>
                     <%= ff.input :interaction, as: :hidden %>
@@ -90,7 +84,7 @@
 
 
           <div class="d-flex justify-content-end align-items-end">
-            <%= f.submit 'Submit this application', class: 'btn btn-cheddar-secondary', 'data-action': 'click->application-form#submitForm' %>
+            <%= f.submit 'Submit this application', class: 'btn btn-apply', 'data-action': 'click->application-form#submitForm' %>
           </div>
         <% end %>
         </details>

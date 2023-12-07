@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "faqs" => "pages#faqs"
   get "howitworks" => "pages#how_it_works", as: :how_it_works
   get "success" => "pages#success", as: :success
+  post '/chatbot/chat', to: 'messages#chat'
 
   # Defines the root path route ("/")
   # root "posts#index"
